@@ -1,0 +1,166 @@
+Here is a practical experiment flow based on the proposal, organized from feasible baseline work to the full multimodal system.
+
+**Experiment Flow**
+
+**Phase 1: Dataset Setup**
+1. Select datasets for each modality:
+   - Drug-target interaction: `Davis`, `KIBA`, or `GalaxyDB`
+   - Molecular representation: SMILES/graphs from the same DTI dataset
+   - Protein structure: AlphaFold predicted structures or contact maps
+   - Phenotypic images: `BBBC021` or similar high-content microscopy dataset
+
+2. Create mappings:
+   - Drug ID to SMILES
+   - Protein ID to sequence / AlphaFold structure
+   - Compound ID to cellular image, if available
+
+3. If no single dataset contains all three modalities, proceed in paired stages:
+   - Molecule + protein for DTI
+   - Molecule + image for phenotypic activity / MoA
+   - Late fusion or transfer learning for final integration
+
+**Phase 2: Single-Modality Baselines**
+Run these first. They are essential for proving that multimodal fusion helps.
+
+1. **Molecule-only baseline**
+   - Input: SMILES or molecular graph
+   - Model: GCN, GAT, MPNN, ChemBERTa, or Morgan fingerprint + ML classifier
+   - Task: DTI/activity prediction
+
+2. **Protein-only baseline**
+   - Input: protein sequence, contact map, or AlphaFold-derived graph
+   - Model: CNN/Transformer/GNN over residues
+   - Task: target or interaction prediction
+
+3. **Image-only baseline**
+   - Input: cellular microscopy images
+   - Model: ResNet, EfficientNet, ViT, or self-supervised encoder
+   - Task: MoA classification or phenotypic activity prediction
+
+**Phase 3: Two-Modality Experiments**
+These are the most important intermediate experiments.
+
+1. **Molecule + Protein**
+   - Goal: standard drug-target interaction prediction
+   - Model:
+     - Molecule encoder: GNN
+     - Protein encoder: sequence encoder, contact-map CNN, or structure GNN
+     - Fusion: concatenation, attention, or gated fusion
+   - Compare against molecule-only and protein-only baselines
+
+2. **Molecule + Image**
+   - Goal: predict phenotypic response or mechanism of action
+   - Model:
+     - Molecule encoder: GNN or molecular image encoder
+     - Image encoder: CNN/ViT
+     - Fusion: late fusion or cross-attention
+   - This tests whether cellular images add biological activity signal beyond chemistry
+
+3. **Protein + Image**
+   - Goal: explore whether target structure helps explain image-level phenotypes
+   - This may be harder unless the dataset has target annotations, so treat it as optional or exploratory
+
+**Phase 4: Full Multimodal Model**
+Build the proposed final model.
+
+Inputs:
+- Molecular graph embedding
+- AlphaFold-derived protein structure embedding
+- Cellular image embedding
+
+Architecture:
+- Molecule encoder: GCN/GAT/MPNN
+- Protein encoder: structure-aware GNN or contact-map CNN
+- Image encoder: ResNet/ViT
+- Fusion block:
+  - Start with concatenation + MLP
+  - Then test gated fusion
+  - Then test attention-based fusion
+
+Prediction tasks:
+- Drug-target interaction
+- Compound activity
+- Mechanism-of-action class
+- Phenotypic response category
+
+**Phase 5: Evaluation Splits**
+Do not rely only on random splits.
+
+Run these splits:
+
+1. **Random split**
+   - Basic sanity check
+
+2. **Scaffold split**
+   - Tests generalization to unseen chemical scaffolds
+
+3. **Cold-target split**
+   - Tests generalization to unseen proteins
+
+4. **Cold-drug split**
+   - Tests generalization to unseen compounds
+
+5. **Cross-batch / cross-domain image split**
+   - Tests whether image model survives batch effects
+
+**Phase 6: Ablation Studies**
+These are necessary to support your research claims.
+
+Run:
+
+1. Molecule only  
+2. Protein only  
+3. Image only  
+4. Molecule + protein  
+5. Molecule + image  
+6. Protein + image  
+7. Molecule + protein + image  
+8. Full model without attention  
+9. Full model with attention/gated fusion  
+10. Full model with one modality masked during inference  
+
+This will show which modality contributes most.
+
+**Phase 7: Robustness Experiments**
+Test real-world reliability.
+
+1. Add noise to microscopy images
+2. Evaluate across different image batches
+3. Remove or mask one modality
+4. Test on unseen scaffolds
+5. Test on unseen protein families
+6. Compare performance drop across models
+
+**Phase 8: Interpretability**
+Add explanations for each modality.
+
+For molecule:
+- Atom/substructure importance
+- GNN attention maps
+- Integrated gradients
+
+For protein:
+- Important residues
+- Binding pocket contribution
+- Contact-map attention
+
+For image:
+- Grad-CAM
+- Attention heatmaps
+- Saliency maps
+
+Final interpretability goal:
+Show whether the model can connect:
+`protein region -> molecular substructure -> cellular phenotype pattern`
+
+**Recommended M.Tech Scope**
+A realistic version would be:
+
+1. Build molecule + protein DTI baseline  
+2. Add AlphaFold/contact-map protein structure features  
+3. Build molecule + image phenotypic model using BBBC021  
+4. Compare early fusion, late fusion, and attention fusion  
+5. Evaluate using random, scaffold, and cold-target splits  
+6. Add ablation and interpretability  
+
+The full three-modality model is ideal, but only feasible if you can align drugs, targets, and cellular images cleanly. Otherwise, present it as phased integration.

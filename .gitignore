@@ -1,0 +1,7 @@
+.venv/
+__pycache__/
+*.zip
+*.tar.gz
+biomolecules-14-00339-s001.zip
+multimodal_datapipeline/dataset_pipeline_output/
+*.pdb
