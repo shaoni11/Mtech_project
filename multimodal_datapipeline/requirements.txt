@@ -1,0 +1,18 @@
+# Core data pipeline
+beautifulsoup4>=4.12
+numpy>=1.26
+pandas>=2.2
+requests>=2.31
+
+# Molecule encoder: RDKit Morgan fingerprints
+rdkit>=2023.9
+
+# Protein/image encoders: ESM-2 and DINOv2 through Hugging Face
+torch>=2.2
+transformers>=4.40
+accelerate>=0.30
+safetensors>=0.4
+pillow>=10.0
+
+# Analysis and reporting
+matplotlib>=3.8

@@ -1,0 +1,20 @@
+{
+  "input_csv": "/Users/shaonichakravarty/Documents/IIIT_Dharwad/research_project/Mtech_project/multimodal_datapipeline/dataset_pipeline_output/chembl/activities_multitarget.csv",
+  "n_unique_smiles_checked": 52811,
+  "status_counts": {
+    "ok": 52811
+  },
+  "n_with_stereochemistry": 15532,
+  "n_with_unassigned_atom_stereo": 0,
+  "n_with_unassigned_bond_stereo": 0,
+  "encoder_smoke_test": {
+    "status": "ok",
+    "batch_size": 16,
+    "embedding_shape": [
+      16,
+      256
+    ],
+    "all_finite": true
+  },
+  "report_csv": "/Users/shaonichakravarty/Documents/IIIT_Dharwad/research_project/Mtech_project/multimodal_datapipeline/experiments/molecule_encoder_validation/smiles_validation_report.csv"
+}

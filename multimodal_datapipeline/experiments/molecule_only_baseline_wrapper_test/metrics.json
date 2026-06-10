@@ -1,0 +1,83 @@
+{
+  "task": "molecule_only_activity_classification",
+  "input_csv": "/Users/shaonichakravarty/Documents/IIIT_Dharwad/research_project/Mtech_project/multimodal_datapipeline/data/processed/chembl_molecule_curated.csv",
+  "input_type": "curated",
+  "target_filter": null,
+  "activity_threshold_pchembl": 6.0,
+  "feature": "hashed_smiles_char_ngrams_dim_2048",
+  "model": "logistic_regression_sgd",
+  "n_unique_smiles": 42033,
+  "n_active": 34024,
+  "n_inactive": 8009,
+  "splits": {
+    "train": {
+      "loss": 0.4802340865135193,
+      "accuracy": 0.8094687829249226,
+      "precision": 0.8094687829249226,
+      "recall": 1.0,
+      "f1": 0.8947032306536439,
+      "roc_auc": 0.7038637427605134,
+      "tp": 23817.0,
+      "tn": 0.0,
+      "fp": 5606.0,
+      "fn": 0.0,
+      "n_examples": 29423,
+      "n_active": 23817,
+      "n_inactive": 5606
+    },
+    "val": {
+      "loss": 0.4807821214199066,
+      "accuracy": 0.8094218415417559,
+      "precision": 0.8094218415417559,
+      "recall": 1.0,
+      "f1": 0.8946745562130178,
+      "roc_auc": 0.6872119726884605,
+      "tp": 3402.0,
+      "tn": 0.0,
+      "fp": 801.0,
+      "fn": 0.0,
+      "n_examples": 4203,
+      "n_active": 3402,
+      "n_inactive": 801
+    },
+    "test": {
+      "loss": 0.48035547137260437,
+      "accuracy": 0.8094445105269419,
+      "precision": 0.8094445105269419,
+      "recall": 1.0,
+      "f1": 0.8946884038916645,
+      "roc_auc": 0.7023109430625385,
+      "tp": 6805.0,
+      "tn": 0.0,
+      "fp": 1602.0,
+      "fn": 0.0,
+      "n_examples": 8407,
+      "n_active": 6805,
+      "n_inactive": 1602
+    }
+  },
+  "training_history": [
+    {
+      "epoch": 1.0,
+      "val_loss": 0.4807821214199066,
+      "val_accuracy": 0.8094218415417559,
+      "val_f1": 0.8946745562130178,
+      "val_roc_auc": 0.6872119726884605
+    }
+  ],
+  "args": {
+    "data": "/Users/shaonichakravarty/Documents/IIIT_Dharwad/research_project/Mtech_project/multimodal_datapipeline/data/processed/chembl_molecule_curated.csv",
+    "out_dir": "Mtech_project/multimodal_datapipeline/experiments/molecule_only_baseline_wrapper_test",
+    "target": null,
+    "activity_threshold": 6.0,
+    "feature_dim": 2048,
+    "epochs": 1,
+    "batch_size": 256,
+    "learning_rate": 0.2,
+    "l2": 0.0001,
+    "test_size": 0.2,
+    "val_size": 0.1,
+    "seed": 42,
+    "allow_inequality_relations": false
+  }
+}

@@ -1,0 +1,286 @@
+{
+  "task": "molecule_only_activity_classification",
+  "input_csv": "/Users/shaonichakravarty/Documents/IIIT_Dharwad/research_project/Mtech_project/multimodal_datapipeline/data/processed/chembl_molecule_curated.csv",
+  "input_type": "curated",
+  "target_filter": null,
+  "activity_threshold_pchembl": 6.0,
+  "feature": "hashed_smiles_char_ngrams_dim_2048",
+  "model": "logistic_regression_sgd",
+  "n_unique_smiles": 42033,
+  "n_active": 34024,
+  "n_inactive": 8009,
+  "splits": {
+    "train": {
+      "loss": 0.43627676367759705,
+      "accuracy": 0.8127315365530368,
+      "precision": 0.8126088589870565,
+      "recall": 0.9990343032287862,
+      "f1": 0.8962296131681042,
+      "roc_auc": 0.7399523399456353,
+      "tp": 23794.0,
+      "tn": 119.0,
+      "fp": 5487.0,
+      "fn": 23.0,
+      "n_examples": 29423,
+      "n_active": 23817,
+      "n_inactive": 5606
+    },
+    "val": {
+      "loss": 0.4447706639766693,
+      "accuracy": 0.8101356174161314,
+      "precision": 0.8113342898134863,
+      "recall": 0.9973544973544973,
+      "f1": 0.8947784810126581,
+      "roc_auc": 0.7134332378471648,
+      "tp": 3393.0,
+      "tn": 12.0,
+      "fp": 789.0,
+      "fn": 9.0,
+      "n_examples": 4203,
+      "n_active": 3402,
+      "n_inactive": 801
+    },
+    "test": {
+      "loss": 0.4358674883842468,
+      "accuracy": 0.8133698108718924,
+      "precision": 0.8131578947368421,
+      "recall": 0.9989713445995592,
+      "f1": 0.8965380811078141,
+      "roc_auc": 0.7405390579923515,
+      "tp": 6798.0,
+      "tn": 40.0,
+      "fp": 1562.0,
+      "fn": 7.0,
+      "n_examples": 8407,
+      "n_active": 6805,
+      "n_inactive": 1602
+    }
+  },
+  "training_history": [
+    {
+      "epoch": 1.0,
+      "val_loss": 0.4807821214199066,
+      "val_accuracy": 0.8094218415417559,
+      "val_f1": 0.8946745562130178,
+      "val_roc_auc": 0.6872119726884605
+    },
+    {
+      "epoch": 2.0,
+      "val_loss": 0.47716307640075684,
+      "val_accuracy": 0.8094218415417559,
+      "val_f1": 0.8946745562130178,
+      "val_roc_auc": 0.699352147264479
+    },
+    {
+      "epoch": 3.0,
+      "val_loss": 0.47420012950897217,
+      "val_accuracy": 0.8094218415417559,
+      "val_f1": 0.8946745562130178,
+      "val_roc_auc": 0.6964512319623986
+    },
+    {
+      "epoch": 4.0,
+      "val_loss": 0.47160154581069946,
+      "val_accuracy": 0.8094218415417559,
+      "val_f1": 0.8946745562130178,
+      "val_roc_auc": 0.6932706838380303
+    },
+    {
+      "epoch": 5.0,
+      "val_loss": 0.46932220458984375,
+      "val_accuracy": 0.8094218415417559,
+      "val_f1": 0.8946745562130178,
+      "val_roc_auc": 0.6912332541407309
+    },
+    {
+      "epoch": 6.0,
+      "val_loss": 0.46729496121406555,
+      "val_accuracy": 0.8094218415417559,
+      "val_f1": 0.8946745562130178,
+      "val_roc_auc": 0.6905712362779918
+    },
+    {
+      "epoch": 7.0,
+      "val_loss": 0.4655653238296509,
+      "val_accuracy": 0.8094218415417559,
+      "val_f1": 0.8946745562130178,
+      "val_roc_auc": 0.6899510532469334
+    },
+    {
+      "epoch": 8.0,
+      "val_loss": 0.46381986141204834,
+      "val_accuracy": 0.8094218415417559,
+      "val_f1": 0.8946745562130178,
+      "val_roc_auc": 0.6907418783545847
+    },
+    {
+      "epoch": 9.0,
+      "val_loss": 0.4623093903064728,
+      "val_accuracy": 0.8094218415417559,
+      "val_f1": 0.8946745562130178,
+      "val_roc_auc": 0.6914527035209516
+    },
+    {
+      "epoch": 10.0,
+      "val_loss": 0.4609439969062805,
+      "val_accuracy": 0.8094218415417559,
+      "val_f1": 0.8946745562130178,
+      "val_roc_auc": 0.6924967394519344
+    },
+    {
+      "epoch": 11.0,
+      "val_loss": 0.45962902903556824,
+      "val_accuracy": 0.8094218415417559,
+      "val_f1": 0.8946745562130178,
+      "val_roc_auc": 0.6932765553933539
+    },
+    {
+      "epoch": 12.0,
+      "val_loss": 0.4584302306175232,
+      "val_accuracy": 0.8094218415417559,
+      "val_f1": 0.8946745562130178,
+      "val_roc_auc": 0.6945183893443014
+    },
+    {
+      "epoch": 13.0,
+      "val_loss": 0.45733800530433655,
+      "val_accuracy": 0.8094218415417559,
+      "val_f1": 0.8946745562130178,
+      "val_roc_auc": 0.6954196730864785
+    },
+    {
+      "epoch": 14.0,
+      "val_loss": 0.45625248551368713,
+      "val_accuracy": 0.8094218415417559,
+      "val_f1": 0.8946745562130178,
+      "val_roc_auc": 0.6968824243064776
+    },
+    {
+      "epoch": 15.0,
+      "val_loss": 0.4552696943283081,
+      "val_accuracy": 0.8094218415417559,
+      "val_f1": 0.8946745562130178,
+      "val_roc_auc": 0.6981194876187247
+    },
+    {
+      "epoch": 16.0,
+      "val_loss": 0.45453014969825745,
+      "val_accuracy": 0.8094218415417559,
+      "val_f1": 0.8946745562130178,
+      "val_roc_auc": 0.6987194871783581
+    },
+    {
+      "epoch": 17.0,
+      "val_loss": 0.4534151554107666,
+      "val_accuracy": 0.8094218415417559,
+      "val_f1": 0.8946745562130178,
+      "val_roc_auc": 0.7003158162819697
+    },
+    {
+      "epoch": 18.0,
+      "val_loss": 0.4525613784790039,
+      "val_accuracy": 0.8096597668332144,
+      "val_f1": 0.8947922146238823,
+      "val_roc_auc": 0.7014347145433287
+    },
+    {
+      "epoch": 19.0,
+      "val_loss": 0.45176488161087036,
+      "val_accuracy": 0.8096597668332144,
+      "val_f1": 0.8947922146238823,
+      "val_roc_auc": 0.7024530624197707
+    },
+    {
+      "epoch": 20.0,
+      "val_loss": 0.45099249482154846,
+      "val_accuracy": 0.8098976921246729,
+      "val_f1": 0.894909903985269,
+      "val_roc_auc": 0.7037415018410995
+    },
+    {
+      "epoch": 21.0,
+      "val_loss": 0.45023033022880554,
+      "val_accuracy": 0.8098976921246729,
+      "val_f1": 0.894909903985269,
+      "val_roc_auc": 0.7047359965240393
+    },
+    {
+      "epoch": 22.0,
+      "val_loss": 0.44952288269996643,
+      "val_accuracy": 0.8101356174161314,
+      "val_f1": 0.8950276243093923,
+      "val_roc_auc": 0.7058306746196884
+    },
+    {
+      "epoch": 23.0,
+      "val_loss": 0.4488815665245056,
+      "val_accuracy": 0.8101356174161314,
+      "val_f1": 0.8949447077409163,
+      "val_roc_auc": 0.7066229676161706
+    },
+    {
+      "epoch": 24.0,
+      "val_loss": 0.4481816589832306,
+      "val_accuracy": 0.8101356174161314,
+      "val_f1": 0.8949447077409163,
+      "val_roc_auc": 0.7077932419866114
+    },
+    {
+      "epoch": 25.0,
+      "val_loss": 0.44755488634109497,
+      "val_accuracy": 0.8098976921246729,
+      "val_f1": 0.8947992100065834,
+      "val_roc_auc": 0.7087425990880006
+    },
+    {
+      "epoch": 26.0,
+      "val_loss": 0.44702643156051636,
+      "val_accuracy": 0.8101356174161314,
+      "val_f1": 0.8948616600790514,
+      "val_roc_auc": 0.7095139746686424
+    },
+    {
+      "epoch": 27.0,
+      "val_loss": 0.44637277722358704,
+      "val_accuracy": 0.8103735427075898,
+      "val_f1": 0.8949795757016736,
+      "val_roc_auc": 0.7105583775718329
+    },
+    {
+      "epoch": 28.0,
+      "val_loss": 0.44580262899398804,
+      "val_accuracy": 0.8103735427075898,
+      "val_f1": 0.8949795757016736,
+      "val_roc_auc": 0.7115726887539899
+    },
+    {
+      "epoch": 29.0,
+      "val_loss": 0.44525325298309326,
+      "val_accuracy": 0.8101356174161314,
+      "val_f1": 0.8947784810126581,
+      "val_roc_auc": 0.7124222294148775
+    },
+    {
+      "epoch": 30.0,
+      "val_loss": 0.4447706639766693,
+      "val_accuracy": 0.8101356174161314,
+      "val_f1": 0.8947784810126581,
+      "val_roc_auc": 0.7134332378471648
+    }
+  ],
+  "args": {
+    "data": "/Users/shaonichakravarty/Documents/IIIT_Dharwad/research_project/Mtech_project/multimodal_datapipeline/data/processed/chembl_molecule_curated.csv",
+    "out_dir": "/Users/shaonichakravarty/Documents/IIIT_Dharwad/research_project/Mtech_project/multimodal_datapipeline/experiments/molecule_only_baseline",
+    "target": null,
+    "activity_threshold": 6.0,
+    "feature_dim": 2048,
+    "epochs": 30,
+    "batch_size": 256,
+    "learning_rate": 0.2,
+    "l2": 0.0001,
+    "test_size": 0.2,
+    "val_size": 0.1,
+    "seed": 42,
+    "allow_inequality_relations": false
+  }
+}

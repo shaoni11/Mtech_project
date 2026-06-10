@@ -1,0 +1,34 @@
+{
+  "input": "/Users/shaonichakravarty/Documents/IIIT_Dharwad/research_project/Mtech_project/multimodal_datapipeline/dataset_pipeline_output/chembl/activities_multitarget.csv",
+  "output": "/Users/shaonichakravarty/Documents/IIIT_Dharwad/research_project/Mtech_project/multimodal_datapipeline/data/processed/chembl_molecule_curated.csv",
+  "activity_threshold": 6.0,
+  "filters": {
+    "exact_ic50_nm_only": true,
+    "min_heavy_atoms": 6,
+    "max_heavy_atoms": 100,
+    "max_molecular_weight": 900.0,
+    "max_logp": 8.0,
+    "max_hbd": 10,
+    "max_hba": 15,
+    "remove_metals": true,
+    "require_carbon": true
+  },
+  "counts": {
+    "raw_rows": 96188,
+    "kept_activity_rows": 72023,
+    "dropped_activity_quality": 23018,
+    "rows_with_fragment_removed": 1084,
+    "dropped_logp_high": 474,
+    "dropped_molecular_weight_high": 509,
+    "dropped_missing_smiles_or_pchembl": 51,
+    "dropped_non_organic": 1,
+    "dropped_hba_high": 41,
+    "dropped_too_many_heavy_atoms": 27,
+    "dropped_hbd_high": 44
+  },
+  "aggregated_molecule_target_rows": 46915,
+  "unique_curated_smiles": 42033,
+  "unique_targets": 12,
+  "active_rows": 37261,
+  "inactive_rows": 9654
+}
