@@ -1,0 +1,6 @@
+{
+  "output": "/Users/shaonichakravarty/Documents/IIIT_Dharwad/research_project/Mtech_project/multimodal_datapipeline/data/processed/baseline_5_molecule_image.csv",
+  "rows": 300,
+  "unique_compounds": 6,
+  "unique_moa": 3
+}

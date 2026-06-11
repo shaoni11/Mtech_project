@@ -33,3 +33,11 @@ train_molecule_image_baseline.py
 
 This baseline should use BBBC021 compound metadata and image paths. It should not depend on ChEMBL target labels unless a reliable compound alignment exists.
 
+Commands:
+
+```bash
+python scripts/baselines/baseline_3_image_only/curate_data.py
+python scripts/baselines/baseline_5_molecule_image/curate_data.py
+python scripts/baselines/baseline_5_molecule_image/validate_inputs.py
+python scripts/baselines/baseline_5_molecule_image/train.py
+```

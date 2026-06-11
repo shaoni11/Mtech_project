@@ -1,0 +1,8 @@
+{
+  "output": "/Users/shaonichakravarty/Documents/IIIT_Dharwad/research_project/Mtech_project/multimodal_datapipeline/data/processed/baseline_3_image_only.csv",
+  "rows": 516,
+  "unique_compounds": 8,
+  "unique_moa": 5,
+  "missing_image_rows": 3332,
+  "missing_moa_rows": 9352
+}

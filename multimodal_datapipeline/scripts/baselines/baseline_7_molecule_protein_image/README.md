@@ -33,3 +33,10 @@ BBBC021 compound -> SMILES -> ChEMBL molecule/activity -> target -> protein sequ
 
 Do not treat this as the main runnable model until the molecule-image-protein alignment is strong enough.
 
+Commands:
+
+```bash
+python scripts/baselines/baseline_7_molecule_protein_image/curate_data.py
+python scripts/baselines/baseline_7_molecule_protein_image/validate_inputs.py
+python scripts/baselines/baseline_7_molecule_protein_image/train.py
+```

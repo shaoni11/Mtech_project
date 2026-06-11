@@ -29,3 +29,10 @@ train_image_only_baseline.py
 
 The image encoder uses pretrained DINOv2 embeddings by default.
 
+Commands:
+
+```bash
+python scripts/baselines/baseline_3_image_only/curate_data.py
+python scripts/baselines/baseline_3_image_only/validate_inputs.py
+python scripts/baselines/baseline_3_image_only/train.py
+```

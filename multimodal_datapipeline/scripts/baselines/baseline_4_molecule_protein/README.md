@@ -33,3 +33,11 @@ Recommended next script:
 train_molecule_protein_baseline.py
 ```
 
+Commands:
+
+```bash
+python scripts/baselines/baseline_2_protein_only/curate_data.py
+python scripts/baselines/baseline_4_molecule_protein/curate_data.py
+python scripts/baselines/baseline_4_molecule_protein/validate_inputs.py
+python scripts/baselines/baseline_4_molecule_protein/train.py
+```

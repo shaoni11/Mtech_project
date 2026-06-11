@@ -1,6 +1,7 @@
 # Baseline Experiment Scripts
 
-Each folder contains one baseline experiment family.
+Each folder contains one baseline experiment family. Keep baseline-specific
+curation, validation, training, and wrapper scripts inside that baseline folder.
 
 Current layout:
 
@@ -12,3 +13,5 @@ Current layout:
 - `baseline_6_protein_image/`: protein + image fusion
 - `baseline_7_molecule_protein_image/`: full proposed multimodal model
 
+Baseline 1 is currently the only runnable baseline. The remaining folders define
+the planned structure for the next experiments.

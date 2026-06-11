@@ -22,11 +22,27 @@ alphafold_pdb_path
 label / activity value
 ```
 
-Recommended next script:
+Training task:
 
 ```text
-train_protein_only_baseline.py
+protein_sequence -> ESM-2 -> MLP -> active_fraction
 ```
 
-For now, the protein encoder uses ESM-2 sequence embeddings. AlphaFold structure paths can be added later as structure-derived features or contact-map inputs.
+The current target-level binary labels are all active, so `train.py` uses
+`active_fraction` regression by default. AlphaFold structure paths are retained
+in the table for later structure/contact-map experiments.
 
+Commands:
+
+```bash
+python scripts/baselines/baseline_2_protein_only/curate_data.py
+python scripts/baselines/baseline_2_protein_only/validate_inputs.py
+python scripts/baselines/baseline_2_protein_only/train.py
+```
+
+Outputs:
+
+```text
+experiments/baseline_2_protein_only/metrics.json
+experiments/baseline_2_protein_only/test_predictions.csv
+```

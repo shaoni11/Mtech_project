@@ -1,0 +1,7 @@
+{
+  "output": "/Users/shaonichakravarty/Documents/IIIT_Dharwad/research_project/Mtech_project/multimodal_datapipeline/data/processed/baseline_4_molecule_protein.csv",
+  "rows": 46915,
+  "skipped_without_protein": 0,
+  "unique_targets": 12,
+  "unique_molecules": 42033
+}

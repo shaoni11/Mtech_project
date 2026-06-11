@@ -1,0 +1,8 @@
+{
+  "status": "blocked",
+  "molecule_protein_smiles": 42033,
+  "molecule_image_smiles": 6,
+  "exact_smiles_overlap": 0,
+  "reason": "No exact SMILES overlap between molecule-protein and molecule-image processed tables.",
+  "required_output": "data/processed/baseline_7_molecule_protein_image.csv"
+}

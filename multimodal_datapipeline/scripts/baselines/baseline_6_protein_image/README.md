@@ -24,3 +24,10 @@ train_protein_image_baseline.py
 
 This is exploratory until image records can be mapped to targets or target-like labels. Keep it optional unless the dataset alignment supports it.
 
+Commands:
+
+```bash
+python scripts/baselines/baseline_6_protein_image/curate_data.py
+python scripts/baselines/baseline_6_protein_image/validate_inputs.py
+python scripts/baselines/baseline_6_protein_image/train.py
+```

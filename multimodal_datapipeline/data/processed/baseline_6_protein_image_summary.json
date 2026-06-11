@@ -1,0 +1,10 @@
+{
+  "status": "blocked",
+  "reason": "BBBC021 image rows do not currently contain target/protein annotations.",
+  "required_alignment": [
+    "image row -> compound",
+    "compound -> known target",
+    "target -> UniProt/protein sequence"
+  ],
+  "recommended_action": "Treat Baseline 6 as exploratory until compound-target labels are curated."
+}
