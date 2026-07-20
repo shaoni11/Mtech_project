@@ -50,10 +50,15 @@ deep_learning_project/
     experiment_plan.md
     usecase_design.md
   experiments/
+    experiment_1_molecule_only_mlp.py
+    experiment_2_protein_only_esm2.py
+    experiment_3_molecule_protein_fusion.py
+    deep_learning_utils/
+    experiment_1_molecule_only_mlp/
+    experiment_2_protein_only_esm2/
+    experiment_3_molecule_protein_fusion/
     .gitkeep
   reports/
-    .gitkeep
-  src/
     .gitkeep
 ```
 
@@ -80,7 +85,7 @@ Recommended first implementation:
 Experiment 1:
 
 ```bash
-python scripts/experiment_1_molecule_only_mlp.py
+python experiments/experiment_1_molecule_only_mlp.py
 ```
 
 This trains:
@@ -99,7 +104,7 @@ experiments/experiment_1_molecule_only_mlp/test_predictions.csv
 Experiment 2:
 
 ```bash
-python scripts/experiment_2_protein_only_esm2.py
+python experiments/experiment_2_protein_only_esm2.py
 ```
 
 This trains:
@@ -115,6 +120,35 @@ Outputs:
 ```text
 experiments/experiment_2_protein_only_esm2/metrics.json
 experiments/experiment_2_protein_only_esm2/test_predictions.csv
+```
+
+Experiment 3:
+
+```bash
+python experiments/experiment_3_molecule_protein_fusion.py
+```
+
+This trains two models on the same molecule-target rows:
+
+```text
+Morgan fingerprint -> MLP -> active/inactive
+Morgan fingerprint + protein k-mer features -> fusion MLP -> active/inactive
+```
+
+Default split:
+
+```text
+scaffold
+```
+
+The key output is a direct comparison answering whether protein/target context improves activity prediction.
+
+Outputs:
+
+```text
+experiments/experiment_3_molecule_protein_fusion/metrics.json
+experiments/experiment_3_molecule_protein_fusion/test_predictions.csv
+experiments/experiment_3_molecule_protein_fusion/comparison_report.md
 ```
 
 ## Secondary Extensions

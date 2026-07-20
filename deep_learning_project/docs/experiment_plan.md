@@ -85,6 +85,30 @@ Purpose:
 
 Measure whether target context improves molecule-only prediction.
 
+Implementation status:
+
+```text
+experiments/experiment_3_molecule_protein_fusion.py
+```
+
+The implemented version deliberately avoids importing experiment/model code from
+`multimodal_datapipeline`. It uses the same processed data table but owns its
+feature extraction and model definitions inside `deep_learning_project/experiments`.
+
+Implemented comparison:
+
+1. row-level molecule-only MLP
+2. row-level molecule + protein k-mer fusion MLP
+
+Default split:
+
+```text
+scaffold
+```
+
+This gives a stronger drug-discovery insight than a random split because it
+tests generalization to unseen molecular scaffolds.
+
 ### Experiment 4: AlphaFold Contact-Map Fusion
 
 Task:
@@ -207,4 +231,3 @@ For a strong deep-learning project, focus the main work on:
 6. interpretability using molecular substructure importance and protein contact/residue importance
 
 The image experiments can be included as an extension, but the current data alignment does not yet support a strong full molecule-protein-image model.
-

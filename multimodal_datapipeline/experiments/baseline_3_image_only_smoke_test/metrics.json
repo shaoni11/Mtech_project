@@ -1,0 +1,79 @@
+{
+  "task": "image_only_moa_classification",
+  "input_csv": "/Users/shaonichakravarty/Documents/IIIT_Dharwad/research_project/Mtech_project/multimodal_datapipeline/data/processed/baseline_3_image_only.csv",
+  "model": "small_microscopy_cnn",
+  "channels": [
+    "dapi_path",
+    "tubulin_path",
+    "actin_path"
+  ],
+  "image_size": 32,
+  "device": "cpu",
+  "n_rows": 516,
+  "labels": {
+    "0": "Actin disruptors",
+    "1": "Aurora kinase inhibitors",
+    "2": "DMSO",
+    "3": "Microtubule destabilizers",
+    "4": "Microtubule stabilizers"
+  },
+  "class_counts": {
+    "Actin disruptors": 48,
+    "Aurora kinase inhibitors": 72,
+    "Microtubule destabilizers": 36,
+    "Microtubule stabilizers": 216,
+    "DMSO": 144
+  },
+  "split_sizes": {
+    "train": 361,
+    "val": 52,
+    "test": 103
+  },
+  "train": {
+    "accuracy": 0.06925207756232687,
+    "macro_precision": 0.013850415512465375,
+    "macro_recall": 0.2,
+    "macro_f1": 0.02590673575129534,
+    "loss": 1.6032654841740925
+  },
+  "val": {
+    "accuracy": 0.07692307692307693,
+    "macro_precision": 0.015384615384615385,
+    "macro_recall": 0.2,
+    "macro_f1": 0.028571428571428574,
+    "loss": 1.5972782373428345
+  },
+  "test": {
+    "accuracy": 0.06796116504854369,
+    "macro_precision": 0.013592233009708738,
+    "macro_recall": 0.2,
+    "macro_f1": 0.025454545454545452,
+    "loss": 1.5990897417068481
+  },
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 1.1125914355119069,
+      "val_accuracy": 0.07692307692307693,
+      "val_macro_precision": 0.015384615384615385,
+      "val_macro_recall": 0.2,
+      "val_macro_f1": 0.028571428571428574,
+      "val_loss": 1.5972782373428345
+    }
+  ],
+  "args": {
+    "data": "/Users/shaonichakravarty/Documents/IIIT_Dharwad/research_project/Mtech_project/multimodal_datapipeline/data/processed/baseline_3_image_only.csv",
+    "out_dir": "Mtech_project/multimodal_datapipeline/experiments/baseline_3_image_only_smoke_test",
+    "image_size": 32,
+    "epochs": 1,
+    "batch_size": 64,
+    "learning_rate": 0.001,
+    "weight_decay": 0.0001,
+    "dropout": 0.25,
+    "test_size": 0.2,
+    "val_size": 0.1,
+    "seed": 42,
+    "num_workers": 0,
+    "device": "cpu"
+  }
+}

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Experiment 1: molecule-only neural baseline.
-
+Goal: Can molecule structure alone predict whether a compound is active?
 Task:
     SMILES -> Morgan fingerprint -> MLP -> active / inactive
 
@@ -9,6 +9,9 @@ into one molecule-level example, trains a PyTorch MLP, and writes:
 
 - metrics.json
 - test_predictions.csv
+
+
+Interpretation: Molecular structure alone contains strong activity signal.
 """
 
 from __future__ import annotations
@@ -19,7 +22,6 @@ import json
 import math
 import random
 import sys
-from collections import defaultdict
 from pathlib import Path
 
 import numpy as np
@@ -30,18 +32,13 @@ from torch.utils.data import DataLoader, Dataset
 
 PROJECT_DIR = Path(__file__).resolve().parents[1]
 REPO_PROJECT_DIR = PROJECT_DIR.parent
-SRC_DIR = PROJECT_DIR / "src"
-MULTIMODAL_SRC_DIR = REPO_PROJECT_DIR / "multimodal_datapipeline" / "src"
-for path in (SRC_DIR, MULTIMODAL_SRC_DIR):
-    if str(path) not in sys.path:
-        sys.path.insert(0, str(path))
+EXPERIMENTS_DIR = PROJECT_DIR / "experiments"
+if str(EXPERIMENTS_DIR) not in sys.path:
+    sys.path.insert(0, str(EXPERIMENTS_DIR))
 
-from deep_learning_project.metrics import binary_classification_metrics 
-from deep_learning_project.splits import stratified_indices
-from multimodal_datapipeline.models.molecule_encoder import ( 
-    MorganFingerprintConfig,
-    MorganFingerprintFeaturizer,
-)
+from deep_learning_utils.featurizers import MorganFingerprintConfig, MorganFingerprintFeaturizer
+from deep_learning_utils.metrics import binary_classification_metrics
+from deep_learning_utils.splits import stratified_indices
 
 
 DEFAULT_DATA = REPO_PROJECT_DIR / "multimodal_datapipeline" / "data" / "processed" / "chembl_molecule_curated.csv"
@@ -169,13 +166,6 @@ def select_device(name: str) -> torch.device:
 
 
 def featurize_examples(examples: list[dict[str, object]], n_bits: int, radius: int) -> np.ndarray:
-    try:
-        from rdkit import RDLogger
-
-        RDLogger.DisableLog("rdApp.warning")
-    except ModuleNotFoundError:
-        pass
-
     featurizer = MorganFingerprintFeaturizer(
         MorganFingerprintConfig(radius=radius, n_bits=n_bits, use_chirality=True)
     )

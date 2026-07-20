@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Experiment 2: protein-only sanity baseline.
+goal: Can protein sequence alone predict target-level active_fraction?
 
 Task:
     protein sequence -> frozen ESM-2 embedding -> MLP -> active_fraction
@@ -7,6 +8,8 @@ Task:
 This is intentionally a sanity experiment. The available processed table has
 only 12 target-level rows, so the output should not be treated as a strong
 standalone deep-learning result.
+
+Interpretation: This is only a sanity check. The dataset has just 12 protein-level rows, so the metric is unstable and not thesis-strong by itself.
 """
 
 from __future__ import annotations
@@ -25,15 +28,12 @@ from torch.utils.data import DataLoader, Dataset
 
 PROJECT_DIR = Path(__file__).resolve().parents[1]
 REPO_PROJECT_DIR = PROJECT_DIR.parent
-SRC_DIR = PROJECT_DIR / "src"
-MULTIMODAL_SRC_DIR = REPO_PROJECT_DIR / "multimodal_datapipeline" / "src"
-for path in (SRC_DIR, MULTIMODAL_SRC_DIR):
-    if str(path) not in sys.path:
-        sys.path.insert(0, str(path))
+EXPERIMENTS_DIR = PROJECT_DIR / "experiments"
+if str(EXPERIMENTS_DIR) not in sys.path:
+    sys.path.insert(0, str(EXPERIMENTS_DIR))
 
-from deep_learning_project.metrics import regression_metrics  # noqa: E402
-from deep_learning_project.splits import random_row_splits  # noqa: E402
-from multimodal_datapipeline.models.protein_encoder import ESM2ProteinEncoder  # noqa: E402
+from deep_learning_utils.metrics import regression_metrics  # noqa: E402
+from deep_learning_utils.splits import random_row_splits  # noqa: E402
 
 
 DEFAULT_DATA = REPO_PROJECT_DIR / "multimodal_datapipeline" / "data" / "processed" / "baseline_2_protein_only.csv"
@@ -111,12 +111,21 @@ class ProteinOnlyRegressor(nn.Module):
         fine_tune_backbone: bool,
     ) -> None:
         super().__init__()
-        self.encoder = ESM2ProteinEncoder(
-            model_name=model_name,
-            embedding_dim=embedding_dim,
-            freeze_backbone=not fine_tune_backbone,
-            max_length=max_length,
-        )
+        try:
+            from transformers import AutoModel, AutoTokenizer
+        except ModuleNotFoundError as exc:
+            raise ModuleNotFoundError(
+                "Install transformers before using ESM-2: pip install transformers"
+            ) from exc
+
+        self.max_length = max_length
+        self.tokenizer = AutoTokenizer.from_pretrained(model_name)
+        self.backbone = AutoModel.from_pretrained(model_name)
+        hidden_size = int(self.backbone.config.hidden_size)
+        self.projection = nn.Linear(hidden_size, embedding_dim)
+        if not fine_tune_backbone:
+            for parameter in self.backbone.parameters():
+                parameter.requires_grad = False
         self.head = nn.Sequential(
             nn.Linear(embedding_dim, hidden_dim),
             nn.ReLU(),
@@ -128,7 +137,22 @@ class ProteinOnlyRegressor(nn.Module):
         )
 
     def forward(self, sequences: list[str]) -> torch.Tensor:
-        embeddings = self.encoder(sequences)
+        device = next(self.parameters()).device
+        tokens = self.tokenizer(
+            sequences,
+            return_tensors="pt",
+            padding=True,
+            truncation=True,
+            max_length=self.max_length,
+        ).to(device)
+        outputs = self.backbone(**tokens)
+        residue_embeddings = outputs.last_hidden_state
+        mask = tokens["attention_mask"].unsqueeze(-1).to(residue_embeddings.dtype)
+        if mask.shape[1] > 2:
+            residue_embeddings = residue_embeddings[:, 1:-1, :]
+            mask = mask[:, 1:-1, :]
+        embeddings = (residue_embeddings * mask).sum(dim=1) / mask.sum(dim=1).clamp_min(1.0)
+        embeddings = self.projection(embeddings)
         return self.head(embeddings).squeeze(-1)
 
 
@@ -366,4 +390,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-

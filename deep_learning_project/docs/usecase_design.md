@@ -84,6 +84,17 @@ The first thesis-ready model should compare:
 3. molecule + protein sequence fusion
 4. molecule + AlphaFold structure fusion
 
+Current implementation focus:
+
+```text
+experiments/experiment_3_molecule_protein_fusion.py
+```
+
+This experiment compares molecule-only prediction against molecule+protein
+sequence-context prediction on the same molecule-target rows. The resulting
+delta in ROC-AUC and balanced accuracy is the first direct evidence for whether
+target context adds useful signal.
+
 The key research question:
 
 ```text
@@ -155,4 +166,3 @@ For each molecule-target pair:
 The use case can be presented as:
 
 > A deep-learning virtual screening system for kinase inhibitors that combines molecular information with AlphaFold-derived protein structure to prioritize candidate compounds for target-specific activity.
-

@@ -25,6 +25,7 @@ task:
 model:
   molecule_encoder: "morgan_fingerprint_mlp"
   protein_encoder_first: "esm2_embedding_mlp"
+  protein_encoder_lightweight: "hashed_amino_acid_kmer_mlp"
   protein_encoder_structure: "alphafold_contact_map_cnn"
   fusion: "concat_mlp"
 
@@ -38,4 +39,3 @@ evaluation:
     - "random"
     - "scaffold"
     - "leave_one_target_out"
-
