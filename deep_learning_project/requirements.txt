@@ -1,0 +1,15 @@
+# Deep learning experiment dependencies
+#
+# Install from the deep_learning_project directory with:
+#   python -m pip install -r requirements.txt
+#
+# RDKit wheels are available on many current Python versions. If pip cannot
+# resolve rdkit for your platform, install it with conda-forge instead:
+#   conda install -c conda-forge rdkit
+
+numpy>=1.26
+torch>=2.2
+transformers>=4.40
+accelerate>=0.30
+safetensors>=0.4
+rdkit>=2023.9

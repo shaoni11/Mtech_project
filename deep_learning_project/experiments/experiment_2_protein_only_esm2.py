@@ -120,7 +120,7 @@ class ProteinOnlyRegressor(nn.Module):
 
         self.max_length = max_length
         self.tokenizer = AutoTokenizer.from_pretrained(model_name)
-        self.backbone = AutoModel.from_pretrained(model_name)
+        self.backbone = AutoModel.from_pretrained(model_name, add_pooling_layer=False)
         hidden_size = int(self.backbone.config.hidden_size)
         self.projection = nn.Linear(hidden_size, embedding_dim)
         if not fine_tune_backbone:

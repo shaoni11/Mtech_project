@@ -406,7 +406,68 @@ Protein context improves several targets, including:
 
 Some targets do not improve or slightly decrease, especially targets with heavy class imbalance or very few inactive examples. For example, CHEMBL4040 has 1,330 active rows and only 21 inactive rows in the test split, so balanced accuracy and ROC-AUC are sensitive to small prediction changes.
 
-## 8. Overall Findings
+## 8. Experiment 4: Molecule 3D Point-Cloud Classifier
+
+Script:
+
+```text
+experiments/experiment_4_molecule_3d_pointcloud.py
+```
+
+### Objective
+
+Add a direct 3D Vision & Geometry course-topic experiment to the project:
+
+```text
+Can approximate 3D molecular geometry predict activity?
+```
+
+### Course Syllabus Alignment
+
+This experiment uses topics from Unit III:
+
+- 3D Point Cloud
+- Volumetric / structure representation
+- Euclidean geometry through centered and scale-normalized xyz coordinates
+- Rotation handling through optional random rotation augmentation
+
+### Model
+
+```text
+SMILES -> RDKit ETKDG 3D conformer -> atom point cloud -> PointNet-style classifier -> active/inactive
+```
+
+Each molecule is converted into a fixed-size atom point cloud. Each point contains:
+
+- normalized xyz coordinates
+- atomic number
+- degree
+- formal charge
+- hydrogen count
+- aromatic/ring flags
+- hybridization flags
+
+Run command:
+
+```bash
+multimodal_datapipeline/.venv/bin/python deep_learning_project/experiments/experiment_4_molecule_3d_pointcloud.py --augment-rotation
+```
+
+The default row cap is:
+
+```text
+--max-rows 3000
+```
+
+This is intentional because 3D conformer generation is much slower than Morgan fingerprint generation.
+
+### Interpretation
+
+Experiment 4 is the cleanest answer to the 3D Vision & Geometry syllabus requirement. Experiment 3 is a molecule-protein deep learning experiment, but Experiment 4 explicitly uses 3D point clouds and geometric normalization.
+
+After running it fully, compare its test ROC-AUC and PR-AUC against Experiment 1 to evaluate whether generated 3D geometry adds useful signal beyond 2D molecular fingerprints.
+
+## 9. Overall Findings
 
 ### Finding 1: Molecule structure is a strong signal
 
@@ -436,7 +497,11 @@ Molecule + protein scaffold ROC-AUC: 0.8837
 
 The model gains performance by including protein sequence context. This supports the broader project direction: multimodal or target-aware models are more informative than molecule-only models.
 
-## 9. Limitations
+### Finding 4: Experiment 4 aligns the project with 3D Vision & Geometry
+
+Experiment 4 uses an atom point cloud generated from 3D molecular conformers. This creates a direct link to Unit III of the 3D Vision & Geometry syllabus.
+
+## 10. Limitations
 
 ### 1. Experiment 1 uses molecule-level labels
 
@@ -474,7 +539,11 @@ cold-target split
 
 The ChEMBL activity labels are imbalanced toward active rows. This is why PR-AUC is high and balanced accuracy is more informative than accuracy alone.
 
-## 10. Recommended Next Experiments
+### 6. Experiment 4 uses generated conformers
+
+The 3D coordinates are approximate RDKit conformers, not experimentally solved ligand poses inside a protein pocket. This is still valid for a 3D point-cloud experiment, but it should not be presented as ligand-protein docking.
+
+## 11. Recommended Next Experiments
 
 ### Priority 1: Cold-Target Evaluation
 
@@ -492,7 +561,21 @@ Test whether molecule-protein fusion generalizes to unseen targets.
 
 This is a stronger biological generalization experiment than scaffold split alone.
 
-### Priority 2: AlphaFold Contact-Map Model
+### Priority 2: Full Experiment 4 Run
+
+Run:
+
+```bash
+multimodal_datapipeline/.venv/bin/python deep_learning_project/experiments/experiment_4_molecule_3d_pointcloud.py --augment-rotation
+```
+
+Purpose:
+
+```text
+Produce full metrics for the 3D point-cloud course-topic experiment.
+```
+
+### Priority 3: AlphaFold Contact-Map Model
 
 Add an experiment:
 
@@ -510,7 +593,7 @@ AlphaFold contact map -> CNN
 concat -> fusion MLP -> active/inactive
 ```
 
-### Priority 3: Compare Three Protein Representations
+### Priority 4: Compare Three Protein Representations
 
 Compare:
 
@@ -553,4 +636,3 @@ Adding protein sequence context improves molecule-target activity prediction.
 This is an impactful first insight because it directly supports the claim that target-aware deep learning can improve drug activity prediction over molecule-only models.
 
 The next major step should be to replace or augment the protein k-mer vector with AlphaFold-derived structural features. That would move the project from target-aware prediction toward true structure-aware drug discovery.
-

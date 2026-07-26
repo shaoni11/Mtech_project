@@ -109,7 +109,39 @@ scaffold
 This gives a stronger drug-discovery insight than a random split because it
 tests generalization to unseen molecular scaffolds.
 
-### Experiment 4: AlphaFold Contact-Map Fusion
+### Experiment 4: Molecule 3D Point-Cloud Classifier
+
+Task:
+
+```text
+SMILES -> RDKit 3D conformer -> atom point cloud -> active / inactive
+```
+
+Model:
+
+- RDKit ETKDG 3D conformer generation
+- centered and scale-normalized atom xyz coordinates
+- atom-level chemical features
+- PointNet-style shared MLP + max pooling
+- MLP classifier
+
+Course syllabus alignment:
+
+- Unit III: 3D Point Cloud
+- Unit III: Volumetric / structure representation
+- Geometry concepts: Euclidean coordinates, translation normalization, scale normalization, random rotation augmentation
+
+Purpose:
+
+Add a direct 3D Vision & Geometry course-topic experiment to the drug activity prediction project.
+
+Implementation status:
+
+```text
+experiments/experiment_4_molecule_3d_pointcloud.py
+```
+
+### Experiment 5: AlphaFold Contact-Map Fusion
 
 Task:
 
@@ -128,7 +160,7 @@ Purpose:
 
 Test structure-aware prediction using AlphaFold.
 
-### Experiment 5: AlphaFold Residue-Graph Fusion
+### Experiment 6: AlphaFold Residue-Graph Fusion
 
 Task:
 
@@ -179,7 +211,7 @@ model | input modalities | split | ROC-AUC | PR-AUC | F1 | balanced accuracy
 
 ## Phase 6: Optional Computer Vision Extension
 
-### Experiment 6: Image-Only BBBC021 MoA Classification
+### Experiment 7: Image-Only BBBC021 MoA Classification
 
 Task:
 
@@ -201,7 +233,7 @@ Caveat:
 
 The dataset is small: 516 usable rows.
 
-### Experiment 7: Molecule + Image MoA Classification
+### Experiment 8: Molecule + Image MoA Classification
 
 Task:
 

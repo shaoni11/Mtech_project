@@ -1,0 +1,204 @@
+{
+  "experiment": "experiment_4_molecule_3d_pointcloud",
+  "question": "Can approximate 3D molecular geometry predict activity?",
+  "course_syllabus_topics": [
+    "Unit III: 3D Point Cloud",
+    "Unit III: Volumetric Representation",
+    "Euclidean geometry: centering, scaling, rotation augmentation"
+  ],
+  "input_csv": "/Users/shaonichakravarty/Documents/IIIT_Dharwad/research_project/Mtech_project/multimodal_datapipeline/data/processed/chembl_molecule_curated.csv",
+  "device": "mps",
+  "n_rows": 3000,
+  "n_active": 2344,
+  "n_inactive": 656,
+  "n_conformer_failures": 0,
+  "feature": {
+    "type": "rdkit_etkdg_atom_point_cloud",
+    "max_atoms": 64,
+    "point_dim": 12,
+    "coordinates": "centered_and_unit_scaled_xyz",
+    "atom_features": [
+      "atomic_number",
+      "degree",
+      "formal_charge",
+      "hydrogen_count",
+      "aromatic",
+      "ring",
+      "hybridization_flags"
+    ]
+  },
+  "split_summary": {
+    "train_rows": 2100,
+    "val_rows": 300,
+    "test_rows": 600
+  },
+  "train": {
+    "accuracy": 0.7557142857142857,
+    "balanced_accuracy": 0.6671505896691401,
+    "precision": 0.8574144486692015,
+    "recall": 0.8244972577696527,
+    "specificity": 0.5098039215686274,
+    "f1": 0.8406337371854614,
+    "tp": 1353.0,
+    "tn": 234.0,
+    "fp": 225.0,
+    "fn": 288.0,
+    "roc_auc": 0.7749923992889186,
+    "pr_auc": 0.9253291957253895,
+    "n_examples": 2100.0,
+    "n_active": 1641.0,
+    "n_inactive": 459.0
+  },
+  "val": {
+    "accuracy": 0.74,
+    "balanced_accuracy": 0.6212121212121212,
+    "precision": 0.8333333333333334,
+    "recall": 0.8333333333333334,
+    "specificity": 0.4090909090909091,
+    "f1": 0.8333333333333334,
+    "tp": 195.0,
+    "tn": 27.0,
+    "fp": 39.0,
+    "fn": 39.0,
+    "roc_auc": 0.7680652680652681,
+    "pr_auc": 0.9145294151359246,
+    "n_examples": 300.0,
+    "n_active": 234.0,
+    "n_inactive": 66.0
+  },
+  "test": {
+    "accuracy": 0.7133333333333334,
+    "balanced_accuracy": 0.6048275525317794,
+    "precision": 0.8292682926829268,
+    "recall": 0.7974413646055437,
+    "specificity": 0.4122137404580153,
+    "f1": 0.8130434782608695,
+    "tp": 374.0,
+    "tn": 54.0,
+    "fp": 77.0,
+    "fn": 95.0,
+    "roc_auc": 0.678233695209883,
+    "pr_auc": 0.8791101437419703,
+    "n_examples": 600.0,
+    "n_active": 469.0,
+    "n_inactive": 131.0
+  },
+  "history": [
+    {
+      "epoch": 1.0,
+      "train_loss": 0.30282747394898357,
+      "val_roc_auc": 0.6748899248899249,
+      "val_pr_auc": 0.8693429530715908,
+      "val_f1": 0.875717017208413,
+      "val_balanced_accuracy": 0.5347707847707848
+    },
+    {
+      "epoch": 2.0,
+      "train_loss": 0.29997634186464195,
+      "val_roc_auc": 0.7048044548044547,
+      "val_pr_auc": 0.8820183847886149,
+      "val_f1": 0.8769841269841269,
+      "val_balanced_accuracy": 0.601010101010101
+    },
+    {
+      "epoch": 3.0,
+      "train_loss": 0.29477523354923024,
+      "val_roc_auc": 0.7142579642579643,
+      "val_pr_auc": 0.8862317743413074,
+      "val_f1": 0.7720930232558141,
+      "val_balanced_accuracy": 0.6274281274281275
+    },
+    {
+      "epoch": 4.0,
+      "train_loss": 0.2876887496779947,
+      "val_roc_auc": 0.7286324786324786,
+      "val_pr_auc": 0.8969266296748202,
+      "val_f1": 0.728643216080402,
+      "val_balanced_accuracy": 0.6658896658896659
+    },
+    {
+      "epoch": 5.0,
+      "train_loss": 0.2830811958102619,
+      "val_roc_auc": 0.7334239834239834,
+      "val_pr_auc": 0.8986845822032742,
+      "val_f1": 0.766990291262136,
+      "val_balanced_accuracy": 0.6860916860916861
+    },
+    {
+      "epoch": 6.0,
+      "train_loss": 0.2760928255670211,
+      "val_roc_auc": 0.7343952343952344,
+      "val_pr_auc": 0.8972198239232408,
+      "val_f1": 0.8026905829596411,
+      "val_balanced_accuracy": 0.6324786324786325
+    },
+    {
+      "epoch": 7.0,
+      "train_loss": 0.27475422708427205,
+      "val_roc_auc": 0.7455322455322455,
+      "val_pr_auc": 0.9035895822196802,
+      "val_f1": 0.6051873198847262,
+      "val_balanced_accuracy": 0.6637529137529138
+    },
+    {
+      "epoch": 8.0,
+      "train_loss": 0.26892034095876355,
+      "val_roc_auc": 0.745920745920746,
+      "val_pr_auc": 0.9036336164443252,
+      "val_f1": 0.798165137614679,
+      "val_balanced_accuracy": 0.6596736596736597
+    },
+    {
+      "epoch": 9.0,
+      "train_loss": 0.2678279079058591,
+      "val_roc_auc": 0.7521367521367521,
+      "val_pr_auc": 0.9059549320213536,
+      "val_f1": 0.8,
+      "val_balanced_accuracy": 0.6672494172494172
+    },
+    {
+      "epoch": 10.0,
+      "train_loss": 0.2637455463409424,
+      "val_roc_auc": 0.7612665112665112,
+      "val_pr_auc": 0.9117079082728105,
+      "val_f1": 0.6773333333333332,
+      "val_balanced_accuracy": 0.6653069153069153
+    },
+    {
+      "epoch": 11.0,
+      "train_loss": 0.25956528765313763,
+      "val_roc_auc": 0.7647630147630148,
+      "val_pr_auc": 0.913108417489173,
+      "val_f1": 0.7360406091370559,
+      "val_balanced_accuracy": 0.6961926961926962
+    },
+    {
+      "epoch": 12.0,
+      "train_loss": 0.2533859636853723,
+      "val_roc_auc": 0.7680652680652681,
+      "val_pr_auc": 0.9145294151359246,
+      "val_f1": 0.8333333333333334,
+      "val_balanced_accuracy": 0.6212121212121212
+    }
+  ],
+  "args": {
+    "data": "/Users/shaonichakravarty/Documents/IIIT_Dharwad/research_project/Mtech_project/multimodal_datapipeline/data/processed/chembl_molecule_curated.csv",
+    "out_dir": "/Users/shaonichakravarty/Documents/IIIT_Dharwad/research_project/Mtech_project/deep_learning_project/experiments/experiment_4_molecule_3d_pointcloud",
+    "activity_threshold": 6.0,
+    "max_atoms": 64,
+    "optimize_iters": 80,
+    "hidden_dim": 128,
+    "embedding_dim": 128,
+    "dropout": 0.25,
+    "epochs": 12,
+    "batch_size": 128,
+    "learning_rate": 0.001,
+    "weight_decay": 0.0001,
+    "test_size": 0.2,
+    "val_size": 0.1,
+    "seed": 42,
+    "device": "auto",
+    "max_rows": 3000,
+    "augment_rotation": false
+  }
+}

@@ -53,6 +53,7 @@ deep_learning_project/
     experiment_1_molecule_only_mlp.py
     experiment_2_protein_only_esm2.py
     experiment_3_molecule_protein_fusion.py
+    experiment_4_molecule_3d_pointcloud.py
     deep_learning_utils/
     experiment_1_molecule_only_mlp/
     experiment_2_protein_only_esm2/
@@ -149,6 +150,35 @@ Outputs:
 experiments/experiment_3_molecule_protein_fusion/metrics.json
 experiments/experiment_3_molecule_protein_fusion/test_predictions.csv
 experiments/experiment_3_molecule_protein_fusion/comparison_report.md
+```
+
+Experiment 4:
+
+```bash
+python experiments/experiment_4_molecule_3d_pointcloud.py --augment-rotation
+```
+
+This is the course-aligned 3D Vision & Geometry experiment:
+
+```text
+SMILES -> RDKit 3D conformer -> atom point cloud -> PointNet-style classifier -> active/inactive
+```
+
+Syllabus topics used:
+
+- Unit III: 3D Point Cloud
+- Unit III: Volumetric / structure representation
+- Euclidean geometry through centered/scaled xyz coordinates and random rotation augmentation
+
+The default `--max-rows 3000` keeps 3D conformer generation practical. Increase it for a fuller run after the smoke test passes.
+
+Outputs:
+
+```text
+experiments/experiment_4_molecule_3d_pointcloud/metrics.json
+experiments/experiment_4_molecule_3d_pointcloud/test_predictions.csv
+experiments/experiment_4_molecule_3d_pointcloud/comparison_report.md
+experiments/experiment_4_molecule_3d_pointcloud/conformer_failures.csv
 ```
 
 ## Secondary Extensions
