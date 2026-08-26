@@ -1,35 +1,145 @@
 # M.Tech Project Status Summary
 
-Last updated: 2026-07-26
+Last updated: 2026-08-26
 
 ## Overall
 
-`multimodal_datapipeline/` is a staged multimodal drug-discovery data and baseline pipeline. It currently supports:
+`multimodal_datapipeline/` is now organized as a staged multimodal drug-discovery data pipeline and baseline-experiment project.
 
-- dataset ingestion from ChEMBL, AlphaFold, and BBBC021
-- processed single-modality and paired-modality tables
+The current structure separates:
+
+- `data/`: data acquisition entrypoints, source adapters, pipeline orchestration, and processed data tables.
+- `package/multimodal_datapipeline/`: reusable importable Python package code.
+- `workflows/`: runnable research workflows, mostly baseline curation, validation, and training scripts.
+- `results/`: saved model and validation outputs.
+- `reports/`: project diagrams and thesis/report artifacts.
+- `exploration/`: scratch exploration only.
+- `3rdparty/python/`: Pants dependency lockfile location.
+
+The project currently supports:
+
+- dataset ingestion from ChEMBL, AlphaFold, BBBC021, and optional HTML scraping
+- cytoskeleton-specific ChEMBL acquisition
+- processed molecule, protein, image, and paired-modality tables
 - reusable molecule, protein, image, and fusion model components
 - runnable baselines for molecule-only, protein-only, and image-only experiments
 - guarded placeholders for molecule-protein, molecule-image, protein-image, and full multimodal fusion training
+- Pants-based Python target ownership and dependency lockfile generation
 
-The pipeline is usable for staged experiments, but the full molecule + protein + image model is still blocked by dataset alignment.
+The pipeline is usable for staged experiments. Full molecule + protein + image modeling is still blocked by dataset alignment.
 
-## Data Ingestion Status
+## Current Directory Structure
 
-Dataset ingestion entrypoint:
+```text
+multimodal_datapipeline/
+├── 3rdparty/python/
+│   └── default.lock
+├── configs/
+├── data/
+│   ├── acquire_data.py
+│   ├── pipelines/
+│   │   └── dataset_pipeline.py
+│   ├── sources/
+│   │   ├── alphafold.py
+│   │   ├── bbbc021.py
+│   │   ├── chembl.py
+│   │   └── scrape.py
+│   ├── processed/
+│   ├── raw/
+│   ├── interim/
+│   └── external/
+├── dataset_pipeline_output/
+├── exploration/
+├── package/multimodal_datapipeline/
+│   ├── models/
+│   └── utils/
+├── reports/
+├── results/
+├── workflows/baselines/
+├── pants.toml
+├── pyproject.toml
+├── requirements.txt
+└── README.md
+```
+
+## Environment And Tooling
+
+Project virtual environment:
+
+```text
+multimodal_datapipeline/multimodal_venv/
+```
+
+Install project locally:
 
 ```bash
 cd Mtech_project/multimodal_datapipeline
-PYTHONPATH=src python datapipeline.py --help
+source multimodal_venv/bin/activate
+python -m pip install -e .
 ```
 
-Implemented ingestion modules:
+Pants config:
 
-- `src/multimodal_datapipeline/data/chembl.py`: ChEMBL activity and target lookup API helpers.
-- `src/multimodal_datapipeline/data/alphafold.py`: AlphaFold metadata and PDB download helpers.
-- `src/multimodal_datapipeline/data/bbbc021.py`: BBBC021 metadata/image ZIP download and extraction helpers.
-- `src/multimodal_datapipeline/data/scrape.py`: optional HTML table scraping helper.
-- `src/multimodal_datapipeline/pipelines/dataset_pipeline.py`: master CLI orchestration.
+```text
+multimodal_datapipeline/pants.toml
+```
+
+Pants lockfile:
+
+```text
+multimodal_datapipeline/3rdparty/python/default.lock
+```
+
+Generate or refresh the lockfile:
+
+```bash
+cd Mtech_project/multimodal_datapipeline
+pants generate-lockfiles
+```
+
+Pants ignores local virtual environments and generated data output directories so it does not scan large artifacts or absolute symlinks.
+
+## Data Acquisition Status
+
+Unified acquisition entrypoint:
+
+```bash
+cd Mtech_project/multimodal_datapipeline
+python data/acquire_data.py --help
+```
+
+Equivalent installed entrypoints after `python -m pip install -e .`:
+
+```bash
+multimodal-datapipeline --help
+mmdp-dataset --help
+```
+
+Implemented acquisition modules:
+
+| Module | Purpose |
+|---|---|
+| `data/acquire_data.py` | unified data acquisition CLI and cytoskeleton ChEMBL subcommand |
+| `data/pipelines/dataset_pipeline.py` | master ChEMBL, AlphaFold, BBBC021, scraping orchestration |
+| `data/sources/chembl.py` | ChEMBL activity and target lookup helpers |
+| `data/sources/alphafold.py` | AlphaFold metadata and PDB download helpers |
+| `data/sources/bbbc021.py` | BBBC021 metadata/image ZIP download and extraction helpers |
+| `data/sources/scrape.py` | optional HTML table scraping helper |
+
+Main acquisition command:
+
+```bash
+python data/acquire_data.py --download-missing-phase1
+```
+
+Other supported acquisition commands:
+
+```bash
+python data/acquire_data.py --chembl-target CHEMBL203 --chembl-standard-type IC50 --chembl-max-records 1000
+python data/acquire_data.py --alphafold-ids P00533 P31749 P15056
+python data/acquire_data.py --download-missing-phase1 --download-bbbc021-images --bbbc021-extract
+python data/acquire_data.py cytoskeleton-chembl
+```
 
 Current ingestion outputs:
 
@@ -38,10 +148,12 @@ Current ingestion outputs:
 | ChEMBL multi-target activities | Done | `dataset_pipeline_output/chembl/activities_multitarget.csv` |
 | ChEMBL per-target activities | Done | `dataset_pipeline_output/chembl/activities_by_target/` |
 | ChEMBL target mapping | Done | `dataset_pipeline_output/chembl/target_mapping.csv` |
+| ChEMBL single-target activities | Present | `dataset_pipeline_output/chembl/activities.csv` |
+| Cytoskeleton ChEMBL activities | Present | `dataset_pipeline_output/chembl/cytoskeleton_activities.csv` |
 | AlphaFold structures | Done | `dataset_pipeline_output/alphafold/structures/` |
 | AlphaFold metadata | Done | `dataset_pipeline_output/alphafold/metadata.csv` |
 | BBBC021 metadata | Done | `dataset_pipeline_output/bbbc021/*.csv` |
-| BBBC021 Week 1 image ZIPs | Done | `dataset_pipeline_output/bbbc021/zips/` |
+| BBBC021 image ZIPs | Present | `dataset_pipeline_output/bbbc021/zips/` |
 | BBBC021 extracted images | Present | `dataset_pipeline_output/bbbc021/images/` |
 | Manifest | Done | `dataset_pipeline_output/manifest.json` |
 
@@ -103,7 +215,7 @@ Curation logic:
 - standardizes molecules with RDKit
 - keeps largest fragment when salts/fragments exist
 - removes metals and non-organic records
-- applies basic drug-like filters for heavy atoms, molecular weight, logP, HBD, and HBA
+- applies drug-like filters for heavy atoms, molecular weight, logP, HBD, and HBA
 - aggregates repeated molecule-target measurements
 - labels activity using `pChEMBL >= 6.0`
 
@@ -120,91 +232,43 @@ Key counts:
 | Active rows | 37,261 |
 | Inactive rows | 9,654 |
 
-### Baseline 2 Protein-Only Table
+### Baseline Processed Tables
 
-Output:
+Baseline 2 protein-only:
 
-```text
-data/processed/baseline_2_protein_only.csv
-```
-
-Columns include:
-
-```text
-target_chembl_id, uniprot_id, pref_name, organism, alphafold_pdb_path,
-protein_sequence, sequence_length, n_molecule_target_rows, active_fraction, label
-```
-
-Status:
-
+- output: `data/processed/baseline_2_protein_only.csv`
 - 12 target rows
 - 12 rows with extracted protein sequence
 - 12 rows with activity labels
-- AlphaFold PDB paths retained for future structure/contact-map experiments
+- all target-level binary labels are active, so the training script uses `active_fraction` regression
 
-Important caveat:
+Baseline 3 image-only:
 
-All target-level binary labels are active, so the runnable protein-only baseline uses `active_fraction` regression rather than binary classification.
-
-### Baseline 3 Image-Only Table
-
-Output:
-
-```text
-data/processed/baseline_3_image_only.csv
-```
-
-Columns include:
-
-```text
-compound, smiles, concentration, moa, plate, well, replicate,
-dapi_path, tubulin_path, actin_path
-```
-
-Status:
-
+- output: `data/processed/baseline_3_image_only.csv`
 - 516 usable 3-channel microscopy rows
 - 8 unique compounds
 - 5 MoA classes
 - 3,332 BBBC021 rows skipped because image channel files were missing locally
 - 9,352 BBBC021 rows skipped because MoA labels were missing for the compound/concentration pair
 
-### Baseline 4 Molecule + Protein Table
+Baseline 4 molecule + protein:
 
-Output:
-
-```text
-data/processed/baseline_4_molecule_protein.csv
-```
-
-Status:
-
+- output: `data/processed/baseline_4_molecule_protein.csv`
 - 46,915 rows
 - 42,033 unique molecules
 - 12 targets
 - no rows skipped for missing protein
+- strongest aligned multimodal table currently available
 
-This is the strongest aligned multimodal table currently available.
+Baseline 5 molecule + image:
 
-### Baseline 5 Molecule + Image Table
-
-Output:
-
-```text
-data/processed/baseline_5_molecule_image.csv
-```
-
-Status:
-
+- output: `data/processed/baseline_5_molecule_image.csv`
 - 300 rows
 - 6 unique compounds
 - 3 MoA classes
+- valid for a small molecule-image proof of concept
 
-This is valid for a small molecule-image proof of concept, but it is much smaller than the ChEMBL molecule-protein dataset.
-
-### Baseline 6 and 7 Blockers
-
-Baseline 6, protein + image:
+Baseline 6 protein + image:
 
 ```text
 blocked: BBBC021 image rows do not currently contain target/protein annotations.
@@ -216,7 +280,7 @@ Required alignment:
 image row -> compound -> known target -> UniProt/protein sequence
 ```
 
-Baseline 7, molecule + protein + image:
+Baseline 7 molecule + protein + image:
 
 ```text
 blocked: exact SMILES overlap between molecule-protein and molecule-image tables is 0.
@@ -230,35 +294,44 @@ Current alignment counts:
 | Molecule-image SMILES | 6 |
 | Exact SMILES overlap | 0 |
 
-## Model Code Status
+## Package Code Status
 
-Reusable model components are implemented under:
+Reusable package code is under:
 
 ```text
-src/multimodal_datapipeline/models/
+package/multimodal_datapipeline/
 ```
+
+Model components:
 
 | File | Status |
 |---|---|
-| `molecule_encoder.py` | RDKit Morgan fingerprint featurizer + MLP molecule encoder |
-| `protein_encoder.py` | ESM-2 sequence encoder + projection layer |
-| `image_encoder.py` | DINOv2 image encoder + projection layer |
-| `fusion.py` | concatenation fusion head for two or three modalities |
+| `models/molecule_encoder.py` | RDKit Morgan fingerprint featurizer + MLP molecule encoder |
+| `models/protein_encoder.py` | ESM-2 sequence encoder + projection layer |
+| `models/image_encoder.py` | DINOv2 image encoder + projection layer |
+| `models/fusion.py` | concatenation fusion head for two or three modalities |
+
+Utility components:
+
+| File | Status |
+|---|---|
+| `utils/io.py` | filesystem, CSV, JSON, and table-writing helpers |
+| `utils/paths.py` | project/package/workflow path helpers |
+| `utils/baseline_launcher.py` | installed console-entrypoint launcher for baseline training scripts |
 
 Important implementation detail:
 
-- The model components exist and are reusable.
-- The runnable baseline scripts do not all use these components yet.
-- Baseline 1 uses a lightweight hashed SMILES n-gram logistic regression.
-- Baseline 3 uses a small custom microscopy CNN, not DINOv2.
-- Baseline 4, 5, 6, and 7 training scripts are guarded placeholders.
+- The reusable model components exist.
+- Baseline 1 currently uses hashed SMILES n-gram logistic regression, not the RDKit Morgan fingerprint MLP model component.
+- Baseline 3 currently uses a small custom microscopy CNN, not DINOv2.
+- Baseline 4, 5, 6, and 7 training scripts are still guarded placeholders.
 
-## Baseline Script Status
+## Workflow Script Status
 
 Baseline scripts are under:
 
 ```text
-scripts/baselines/
+workflows/baselines/
 ```
 
 | Baseline | Data Curation | Validation | Training | Current Status |
@@ -271,20 +344,67 @@ scripts/baselines/
 | 6 Protein + image | Blocked | Guarded | Placeholder | Blocked by missing alignment |
 | 7 Molecule + protein + image | Blocked | Guarded | Placeholder | Blocked by zero SMILES overlap |
 
-## Saved Experiment Results
+Installed baseline entrypoints:
+
+```bash
+mmdp-baseline-1
+mmdp-baseline-2
+mmdp-baseline-3
+mmdp-baseline-4
+mmdp-baseline-5
+mmdp-baseline-6
+mmdp-baseline-7
+```
+
+Direct script pattern:
+
+```bash
+python workflows/baselines/baseline_1_molecule_only/curate_data.py
+python workflows/baselines/baseline_1_molecule_only/validate_smiles.py
+python workflows/baselines/baseline_1_molecule_only/train.py
+```
+
+## Saved Results
 
 Saved outputs are under:
 
 ```text
-multimodal_datapipeline/experiments/
+multimodal_datapipeline/results/
 ```
+
+Current saved result folders:
+
+| Folder | Meaning |
+|---|---|
+| `molecule_encoder_validation/` | RDKit and molecule encoder input validation |
+| `molecule_only_baseline/` | Baseline 1 molecule-only training output |
+| `baseline_2_protein_only/` | Baseline 2 protein-only regression output |
+| `baseline_3_image_only/` | Baseline 3 image-only MoA classification output |
+
+### Molecule Encoder Validation
+
+Generated by:
+
+```bash
+python workflows/baselines/baseline_1_molecule_only/validate_smiles.py
+```
+
+Result:
+
+- 52,811 unique SMILES checked
+- all 52,811 passed RDKit validation
+- 15,532 had stereochemistry
+- no unassigned atom or bond stereochemistry
+- molecule encoder smoke test passed with embedding shape `[16, 256]`
+
+This is a data-quality validation result, not a model-training result.
 
 ### Baseline 1: Molecule-Only
 
 Run folder:
 
 ```text
-experiments/molecule_only_baseline/
+results/molecule_only_baseline/
 ```
 
 Task:
@@ -319,7 +439,7 @@ This baseline is heavily biased toward predicting active molecules. It gives a u
 Run folder:
 
 ```text
-experiments/baseline_2_protein_only/
+results/baseline_2_protein_only/
 ```
 
 Task:
@@ -352,7 +472,7 @@ This is a pipeline sanity check, not a strong scientific result. With only 12 ta
 Run folder:
 
 ```text
-experiments/baseline_3_image_only/
+results/baseline_3_image_only/
 ```
 
 Task:
@@ -390,37 +510,21 @@ Test metrics:
 
 Interpretation:
 
-Baseline 3 is now implemented and has a completed run. The dataset is small and class-imbalanced, but the model learns meaningful image signal.
-
-### Additional Saved Outputs
-
-Other saved folders:
-
-- `baseline_1_smoke_test/`
-- `baseline_3_image_only_smoke_test/`
-- `molecule_only_baseline_wrapper_test/`
-- `molecule_encoder_validation/`
-
-Molecule encoder validation result:
-
-- 52,811 unique SMILES checked
-- all 52,811 passed RDKit validation
-- 15,532 had stereochemistry
-- molecule encoder smoke test passed with embedding shape `[16, 256]`
+Baseline 3 is implemented and has a completed run. The dataset is small and class-imbalanced, but the model learns meaningful image signal.
 
 ## Current Gaps
 
-1. Baseline 4 training is not implemented inside `multimodal_datapipeline`.
+1. Baseline 4 training is not implemented.
 
-The molecule + protein table is ready, but `scripts/baselines/baseline_4_molecule_protein/train.py` exits with:
+The molecule + protein table is ready, but `workflows/baselines/baseline_4_molecule_protein/train.py` exits with:
 
 ```text
 Baseline 4 data is prepared. Next step: train MoleculeEncoder + ProteinEncoder + FusionHead.
 ```
 
-2. Baseline 5 training is not implemented inside `multimodal_datapipeline`.
+2. Baseline 5 training is not implemented.
 
-The molecule + image table is ready, but `scripts/baselines/baseline_5_molecule_image/train.py` exits with:
+The molecule + image table is ready, but `workflows/baselines/baseline_5_molecule_image/train.py` exits with:
 
 ```text
 Baseline 5 data is prepared. Next step: train MoleculeEncoder + ImageEncoder + FusionHead.
@@ -451,7 +555,7 @@ The reusable DINOv2 image encoder exists, but the completed Baseline 3 run uses 
 
 Priority 1:
 
-Implement Baseline 4 training inside `multimodal_datapipeline`:
+Implement Baseline 4 training:
 
 ```text
 Morgan fingerprint / MoleculeEncoder -> molecule embedding
@@ -459,11 +563,11 @@ ESM-2 / ProteinEncoder -> protein embedding
 ConcatenationFusion -> active/inactive
 ```
 
-Use `data/processed/baseline_4_molecule_protein.csv`, scaffold split, and report ROC-AUC, PR-AUC, F1, and balanced accuracy.
+Use `data/processed/baseline_4_molecule_protein.csv`, scaffold split where possible, and report ROC-AUC, PR-AUC, F1, balanced accuracy, and inactive-class recall.
 
 Priority 2:
 
-Add a stronger molecule-only neural baseline inside `multimodal_datapipeline` using:
+Add a stronger molecule-only neural baseline using:
 
 ```text
 RDKit Morgan fingerprint -> MLP -> active/inactive

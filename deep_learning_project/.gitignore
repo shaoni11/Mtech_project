@@ -1,9 +1,0 @@
-__pycache__/
-*.py[cod]
-experiments/experiment_1_molecule_only_mlp/
-experiments/experiment_2_protein_only_esm2/
-experiments/experiment_3_molecule_protein_fusion/
-experiments/experiment_3_cold_target/
-!experiments/.gitkeep
-reports/*/
-!reports/.gitkeep

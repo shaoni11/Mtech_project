@@ -1,0 +1,41 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "multimodal-datapipeline"
+version = "0.1.0"
+description = "Multimodal drug discovery data pipeline and baseline experiments."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "beautifulsoup4>=4.12",
+    "numpy>=1.26",
+    "pandas>=2.2",
+    "requests>=2.31",
+    "chembl-webresource-client>=0.10.9",
+    "rdkit>=2023.9",
+    "torch>=2.2",
+    "transformers>=4.40",
+    "accelerate>=0.30",
+    "safetensors>=0.4",
+    "pillow>=10.0",
+    "matplotlib>=3.8",
+]
+
+[project.scripts]
+multimodal-datapipeline = "data.pipelines.dataset_pipeline:main"
+mmdp-dataset = "data.pipelines.dataset_pipeline:main"
+mmdp-baseline-1 = "multimodal_datapipeline.utils.baseline_launcher:baseline_1_molecule_only"
+mmdp-baseline-2 = "multimodal_datapipeline.utils.baseline_launcher:baseline_2_protein_only"
+mmdp-baseline-3 = "multimodal_datapipeline.utils.baseline_launcher:baseline_3_image_only"
+mmdp-baseline-4 = "multimodal_datapipeline.utils.baseline_launcher:baseline_4_molecule_protein"
+mmdp-baseline-5 = "multimodal_datapipeline.utils.baseline_launcher:baseline_5_molecule_image"
+mmdp-baseline-6 = "multimodal_datapipeline.utils.baseline_launcher:baseline_6_protein_image"
+mmdp-baseline-7 = "multimodal_datapipeline.utils.baseline_launcher:baseline_7_molecule_protein_image"
+
+[tool.setuptools]
+package-dir = {"" = "package"}
+
+[tool.setuptools.packages.find]
+where = ["package"]

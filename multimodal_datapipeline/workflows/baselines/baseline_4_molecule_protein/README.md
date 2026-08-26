@@ -1,0 +1,43 @@
+# Baseline 4: Molecule + Protein
+
+Flow:
+
+```text
+SMILES -> molecule encoder --------\
+                                    -> fusion -> prediction
+protein sequence -> protein encoder /
+```
+
+Current model components:
+
+```text
+package/multimodal_datapipeline/models/molecule_encoder.py
+package/multimodal_datapipeline/models/protein_encoder.py
+package/multimodal_datapipeline/models/fusion.py
+```
+
+Planned input table:
+
+```text
+curated_smiles
+target_chembl_id
+uniprot_id
+protein_sequence
+median_pchembl
+label
+```
+
+Recommended next script:
+
+```text
+train_molecule_protein_baseline.py
+```
+
+Commands:
+
+```bash
+python workflows/baselines/baseline_2_protein_only/curate_data.py
+python workflows/baselines/baseline_4_molecule_protein/curate_data.py
+python workflows/baselines/baseline_4_molecule_protein/validate_inputs.py
+python workflows/baselines/baseline_4_molecule_protein/train.py
+```

@@ -12,17 +12,25 @@ flowchart TB
 
     %% Entrypoints
     subgraph E["Entrypoints"]
-        CLI["datapipeline.py<br/>PYTHONPATH=src python datapipeline.py"]
-        WRAPPERS["scripts/<br/>baseline and utility wrappers"]
+        CLI["data/acquire_data.py<br/>dataset acquisition CLI"]
+        WRAPPERS["workflows/<br/>baseline workflows"]
     end
 
-    %% Core ingestion package
-    subgraph P["src/multimodal_datapipeline"]
-        PIPE["pipelines/dataset_pipeline.py<br/>orchestrates downloads and manifest"]
-        CHEM_MOD["data/chembl.py<br/>target lookup + activity fetch"]
-        AF_MOD["data/alphafold.py<br/>PDB structure download"]
-        BBBC_MOD["data/bbbc021.py<br/>metadata, ZIP download, extraction"]
-        SCRAPE_MOD["data/scrape.py<br/>HTML table extraction"]
+    %% Core ingestion pipeline
+    subgraph P["data/pipelines"]
+        PIPE["dataset_pipeline.py<br/>orchestrates downloads and manifest"]
+    end
+
+    %% Data acquisition helpers
+    subgraph H["data/sources"]
+        CHEM_MOD["chembl.py<br/>target lookup + activity fetch"]
+        AF_MOD["alphafold.py<br/>PDB structure download"]
+        BBBC_MOD["bbbc021.py<br/>metadata, ZIP download, extraction"]
+        SCRAPE_MOD["scrape.py<br/>HTML table extraction"]
+    end
+
+    %% Shared package helpers
+    subgraph U["package/multimodal_datapipeline"]
         IO["utils/io.py<br/>directory, CSV, JSON helpers"]
     end
 
@@ -30,6 +38,7 @@ flowchart TB
     subgraph O["Dataset Pipeline Output"]
         OUT["dataset_pipeline_output/manifest.json"]
         CHEM_OUT["dataset_pipeline_output/chembl/<br/>target_mapping.csv<br/>activities.csv<br/>activities_multitarget.csv<br/>activities_by_target/*.csv"]
+        CYTO_OUT["dataset_pipeline_output/chembl/<br/>cytoskeleton_activities.csv"]
         AF_OUT["dataset_pipeline_output/alphafold/<br/>metadata.csv<br/>structures/*.pdb"]
         BBBC_OUT["dataset_pipeline_output/bbbc021/<br/>BBBC021 metadata CSVs<br/>download_manifest.csv<br/>images/<br/>zips/"]
         SCRAPE_OUT["dataset_pipeline_output/scrape/<br/>scraped_table.csv"]
@@ -63,9 +72,9 @@ flowchart TB
 
     %% Results
     subgraph R["Experiment Outputs"]
-        EXP["experiments/<br/>metrics.json<br/>test_predictions.csv<br/>model artifacts"]
+        EXP["results/<br/>metrics.json<br/>test_predictions.csv<br/>model artifacts"]
         REPORTS["reports/<br/>figures, tables, thesis exports"]
-        NOTEBOOKS["notebooks/<br/>exploration only"]
+        NOTEBOOKS["exploration/<br/>scratch notebooks only"]
     end
 
     CHEMBL --> CLI
@@ -73,6 +82,7 @@ flowchart TB
     BBBC --> CLI
     WEB --> CLI
     CLI --> PIPE
+    CLI --> CYTO_OUT
 
     PIPE --> CHEM_MOD
     PIPE --> AF_MOD
@@ -131,10 +141,10 @@ flowchart TB
 
 ## Main Flow
 
-1. `datapipeline.py` calls `src/multimodal_datapipeline/pipelines/dataset_pipeline.py`.
-2. The pipeline downloads or scrapes ChEMBL, AlphaFold, BBBC021, and optional tabular web data.
-3. Downloaded artifacts are written under `dataset_pipeline_output/`.
-4. Curated and trainable datasets are organized through `data/raw/`, `data/interim/`, and `data/processed/`.
-5. Baseline scripts consume processed data and route it through molecule, protein, image, or fusion model components.
-6. Experiment outputs are stored under `experiments/`, while thesis-ready artifacts belong in `reports/`.
-
+1. `data/acquire_data.py` is the unified data acquisition script.
+2. `data/acquire_data.py` calls `data/pipelines/dataset_pipeline.py` for ChEMBL, AlphaFold, BBBC021, and scraping.
+3. The `cytoskeleton-chembl` mode downloads actin/tubulin ChEMBL activity records.
+4. Downloaded artifacts are written under `dataset_pipeline_output/`.
+5. Curated and trainable datasets are organized through `data/raw/`, `data/interim/`, and `data/processed/`.
+6. Baseline workflows consume processed data and route it through molecule, protein, image, or fusion model components.
+7. Experiment outputs are stored under `results/`, while thesis-ready artifacts belong in `reports/`.

@@ -3,6 +3,7 @@ beautifulsoup4>=4.12
 numpy>=1.26
 pandas>=2.2
 requests>=2.31
+chembl-webresource-client>=0.10.9
 
 # Molecule encoder: RDKit Morgan fingerprints
 rdkit>=2023.9
