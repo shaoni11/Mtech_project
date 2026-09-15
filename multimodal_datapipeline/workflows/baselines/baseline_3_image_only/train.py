@@ -27,6 +27,7 @@ import numpy as np
 import torch
 from PIL import Image
 from torch import nn
+from torch.nn import functional as F
 from torch.utils.data import DataLoader, Dataset
 
 
@@ -143,18 +144,30 @@ class BBBC021ImageDataset(Dataset):
         rows: list[dict[str, str]],
         label_to_id: dict[str, int],
         image_size: int,
+        augment: bool = False,
+        cache_images: bool = False,
     ) -> None:
         self.rows = rows
         self.label_to_id = label_to_id
         self.image_size = image_size
+        self.augment = augment
+        self.cached_images = None
+        if cache_images:
+            self.cached_images = [load_three_channel_image(row, image_size) for row in rows]
 
     def __len__(self) -> int:
         return len(self.rows)
 
     def __getitem__(self, index: int) -> dict[str, object]:
         row = self.rows[index]
+        if self.cached_images is None:
+            image = load_three_channel_image(row, self.image_size)
+        else:
+            image = self.cached_images[index]
+        if self.augment:
+            image = augment_image(image)
         return {
-            "image": load_three_channel_image(row, self.image_size),
+            "image": image,
             "label": self.label_to_id[row["moa"]],
             "moa": row["moa"],
             "compound": row["compound"],
@@ -163,6 +176,49 @@ class BBBC021ImageDataset(Dataset):
             "well": row["well"],
             "replicate": row["replicate"],
         }
+
+
+def augment_image(image: torch.Tensor) -> torch.Tensor:
+    """Lightweight microscopy-safe augmentation for small data experiments."""
+    if torch.rand(()) < 0.5:
+        image = torch.flip(image, dims=[1])
+    if torch.rand(()) < 0.5:
+        image = torch.flip(image, dims=[2])
+    if torch.rand(()) < 0.5:
+        k = int(torch.randint(1, 4, ()).item())
+        image = torch.rot90(image, k=k, dims=[1, 2])
+
+    brightness = 0.9 + 0.2 * torch.rand(1, 1, 1)
+    noise = torch.randn_like(image) * 0.015
+    image = image * brightness + noise
+    return image.clamp(0.0, 1.0)
+
+
+class TinyMicroscopyCNN(nn.Module):
+    def __init__(self, num_classes: int, dropout: float = 0.25) -> None:
+        super().__init__()
+        self.features = nn.Sequential(
+            nn.Conv2d(3, 16, kernel_size=3, padding=1),
+            nn.BatchNorm2d(16),
+            nn.ReLU(),
+            nn.MaxPool2d(2),
+            nn.Conv2d(16, 32, kernel_size=3, padding=1),
+            nn.BatchNorm2d(32),
+            nn.ReLU(),
+            nn.MaxPool2d(2),
+            nn.Conv2d(32, 64, kernel_size=3, padding=1),
+            nn.BatchNorm2d(64),
+            nn.ReLU(),
+            nn.AdaptiveAvgPool2d((1, 1)),
+        )
+        self.classifier = nn.Sequential(
+            nn.Flatten(),
+            nn.Dropout(dropout),
+            nn.Linear(64, num_classes),
+        )
+
+    def forward(self, images: torch.Tensor) -> torch.Tensor:
+        return self.classifier(self.features(images.float()))
 
 
 class SmallMicroscopyCNN(nn.Module):
@@ -194,6 +250,71 @@ class SmallMicroscopyCNN(nn.Module):
 
     def forward(self, images: torch.Tensor) -> torch.Tensor:
         return self.classifier(self.features(images.float()))
+
+
+class DINOv2LinearClassifier(nn.Module):
+    """Frozen DINOv2 backbone with a trainable MoA classifier head."""
+
+    def __init__(
+        self,
+        num_classes: int,
+        model_name: str = "facebook/dinov2-small",
+        dropout: float = 0.25,
+    ) -> None:
+        super().__init__()
+        try:
+            from transformers import AutoModel
+        except ModuleNotFoundError as exc:
+            raise ModuleNotFoundError(
+                "DINOv2 experiments require transformers. Install project requirements first."
+            ) from exc
+
+        self.backbone = AutoModel.from_pretrained(model_name)
+        for parameter in self.backbone.parameters():
+            parameter.requires_grad = False
+
+        hidden_size = int(self.backbone.config.hidden_size)
+        self.classifier = nn.Sequential(
+            nn.Dropout(dropout),
+            nn.Linear(hidden_size, num_classes),
+        )
+        self.register_buffer("mean", torch.tensor([0.485, 0.456, 0.406]).view(1, 3, 1, 1))
+        self.register_buffer("std", torch.tensor([0.229, 0.224, 0.225]).view(1, 3, 1, 1))
+
+    def forward(self, images: torch.Tensor) -> torch.Tensor:
+        pixel_values = F.interpolate(
+            images.float(),
+            size=(224, 224),
+            mode="bilinear",
+            align_corners=False,
+        )
+        pixel_values = (pixel_values - self.mean) / self.std
+        with torch.no_grad():
+            outputs = self.backbone(pixel_values=pixel_values)
+            if getattr(outputs, "pooler_output", None) is not None:
+                features = outputs.pooler_output
+            else:
+                features = outputs.last_hidden_state[:, 0, :]
+        return self.classifier(features)
+
+
+def build_model(
+    model_name: str,
+    num_classes: int,
+    dropout: float,
+    dinov2_model_name: str,
+) -> nn.Module:
+    if model_name == "tiny_cnn":
+        return TinyMicroscopyCNN(num_classes=num_classes, dropout=dropout)
+    if model_name == "small_cnn":
+        return SmallMicroscopyCNN(num_classes=num_classes, dropout=dropout)
+    if model_name == "dinov2_linear":
+        return DINOv2LinearClassifier(
+            num_classes=num_classes,
+            model_name=dinov2_model_name,
+            dropout=dropout,
+        )
+    raise ValueError(f"Unknown model: {model_name}")
 
 
 def collate_batch(batch: list[dict[str, object]]) -> dict[str, object]:
@@ -302,6 +423,12 @@ def build_arg_parser() -> argparse.ArgumentParser:
     parser.add_argument("--learning-rate", type=float, default=1e-3)
     parser.add_argument("--weight-decay", type=float, default=1e-4)
     parser.add_argument("--dropout", type=float, default=0.25)
+    parser.add_argument("--model", default="small_cnn", choices=["tiny_cnn", "small_cnn", "dinov2_linear"])
+    parser.add_argument("--dinov2-model-name", default="facebook/dinov2-small")
+    parser.add_argument("--augment", action="store_true")
+    parser.add_argument("--cache-images", action="store_true")
+    parser.add_argument("--log-every", type=int, default=1)
+    parser.add_argument("--save-model", action="store_true")
     parser.add_argument("--test-size", type=float, default=0.2)
     parser.add_argument("--val-size", type=float, default=0.1)
     parser.add_argument("--seed", type=int, default=42)
@@ -351,11 +478,22 @@ def main() -> None:
     splits = stratified_split(rows, label_to_id, args.test_size, args.val_size, args.seed)
 
     device = select_device(args.device)
-    model = SmallMicroscopyCNN(num_classes=len(label_to_id), dropout=args.dropout).to(device)
+    model = build_model(
+        model_name=args.model,
+        num_classes=len(label_to_id),
+        dropout=args.dropout,
+        dinov2_model_name=args.dinov2_model_name,
+    ).to(device)
 
     loaders = {
         name: DataLoader(
-            BBBC021ImageDataset(split_rows, label_to_id, args.image_size),
+            BBBC021ImageDataset(
+                split_rows,
+                label_to_id,
+                args.image_size,
+                augment=args.augment and name == "train",
+                cache_images=args.cache_images,
+            ),
             batch_size=args.batch_size,
             shuffle=(name == "train"),
             num_workers=args.num_workers,
@@ -388,13 +526,21 @@ def main() -> None:
             train_losses.append(float(loss.detach().cpu()))
 
         val_metrics, _ = evaluate(model, loaders["val"], loss_fn, device, id_to_label)
-        history.append(
-            {
-                "epoch": epoch,
-                "train_loss": sum(train_losses) / max(1, len(train_losses)),
-                **{f"val_{key}": value for key, value in val_metrics.items()},
-            }
-        )
+        epoch_metrics = {
+            "epoch": epoch,
+            "train_loss": sum(train_losses) / max(1, len(train_losses)),
+            **{f"val_{key}": value for key, value in val_metrics.items()},
+        }
+        history.append(epoch_metrics)
+        if args.log_every and (epoch == 1 or epoch == args.epochs or epoch % args.log_every == 0):
+            print(
+                "Epoch "
+                f"{epoch:03d}/{args.epochs} "
+                f"train_loss={epoch_metrics['train_loss']:.4f} "
+                f"val_acc={epoch_metrics['val_accuracy']:.4f} "
+                f"val_macro_f1={epoch_metrics['val_macro_f1']:.4f}",
+                flush=True,
+            )
 
     train_metrics, _ = evaluate(model, loaders["train"], loss_fn, device, id_to_label)
     val_metrics, _ = evaluate(model, loaders["val"], loss_fn, device, id_to_label)
@@ -403,9 +549,12 @@ def main() -> None:
     metrics = {
         "task": "image_only_moa_classification",
         "input_csv": str(args.data),
-        "model": "small_microscopy_cnn",
+        "model": args.model,
+        "dinov2_model_name": args.dinov2_model_name if args.model == "dinov2_linear" else None,
         "channels": CHANNEL_COLUMNS,
         "image_size": args.image_size,
+        "augment": args.augment,
+        "cache_images": args.cache_images,
         "device": str(device),
         "n_rows": len(rows),
         "labels": id_to_label,
@@ -425,9 +574,21 @@ def main() -> None:
     predictions_path = args.out_dir / "test_predictions.csv"
     write_predictions(predictions_path, test_predictions)
 
+    if args.save_model:
+        torch.save(
+            {
+                "model": model.state_dict(),
+                "label_to_id": label_to_id,
+                "id_to_label": id_to_label,
+                "args": vars(args) | {"data": str(args.data), "out_dir": str(args.out_dir)},
+            },
+            args.out_dir / "model.pt",
+        )
+
     print("Image-only baseline complete")
     print(f"Rows: {len(rows)}")
     print(f"Classes: {len(label_to_id)}")
+    print(f"Model: {args.model}")
     print(f"Device: {device}")
     print(f"Test metrics: {test_metrics}")
     print(f"Wrote metrics: {metrics_path}")

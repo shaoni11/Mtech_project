@@ -1,0 +1,26 @@
+[
+  {
+    "experiment": "tiny_cnn",
+    "accuracy": 0.5922330097087378,
+    "macro_precision": 0.24649122807017543,
+    "macro_recall": 0.32413793103448274,
+    "macro_f1": 0.273109243697479,
+    "loss": 1.5886694192886353
+  },
+  {
+    "experiment": "small_cnn",
+    "accuracy": 0.4174757281553398,
+    "macro_precision": 0.08349514563106795,
+    "macro_recall": 0.2,
+    "macro_f1": 0.11780821917808218,
+    "loss": 1.9428279399871826
+  },
+  {
+    "experiment": "small_cnn_augmented",
+    "accuracy": 0.4174757281553398,
+    "macro_precision": 0.08349514563106795,
+    "macro_recall": 0.2,
+    "macro_f1": 0.11780821917808218,
+    "loss": 1.9223625659942627
+  }
+]

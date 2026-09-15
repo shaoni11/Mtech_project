@@ -1,0 +1,85 @@
+{
+  "task": "image_only_moa_classification",
+  "input_csv": "/Users/shaonichakravarty/Documents/IIIT_Dharwad/research_project/Mtech_project/multimodal_datapipeline/data/processed/baseline_3_image_only.csv",
+  "model": "small_cnn",
+  "dinov2_model_name": null,
+  "channels": [
+    "dapi_path",
+    "tubulin_path",
+    "actin_path"
+  ],
+  "image_size": 128,
+  "augment": true,
+  "device": "cpu",
+  "n_rows": 516,
+  "labels": {
+    "0": "Actin disruptors",
+    "1": "Aurora kinase inhibitors",
+    "2": "DMSO",
+    "3": "Microtubule destabilizers",
+    "4": "Microtubule stabilizers"
+  },
+  "class_counts": {
+    "Actin disruptors": 48,
+    "Aurora kinase inhibitors": 72,
+    "Microtubule destabilizers": 36,
+    "Microtubule stabilizers": 216,
+    "DMSO": 144
+  },
+  "split_sizes": {
+    "train": 361,
+    "val": 52,
+    "test": 103
+  },
+  "train": {
+    "accuracy": 0.4182825484764543,
+    "macro_precision": 0.08365650969529086,
+    "macro_recall": 0.2,
+    "macro_f1": 0.11796875,
+    "loss": 1.9230484167734783
+  },
+  "val": {
+    "accuracy": 0.4230769230769231,
+    "macro_precision": 0.08461538461538462,
+    "macro_recall": 0.2,
+    "macro_f1": 0.1189189189189189,
+    "loss": 1.8890726566314697
+  },
+  "test": {
+    "accuracy": 0.4174757281553398,
+    "macro_precision": 0.08349514563106795,
+    "macro_recall": 0.2,
+    "macro_f1": 0.11780821917808218,
+    "loss": 1.9223625659942627
+  },
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 1.1416615148385365,
+      "val_accuracy": 0.4230769230769231,
+      "val_macro_precision": 0.08461538461538462,
+      "val_macro_recall": 0.2,
+      "val_macro_f1": 0.1189189189189189,
+      "val_loss": 1.8890726566314697
+    }
+  ],
+  "args": {
+    "data": "/Users/shaonichakravarty/Documents/IIIT_Dharwad/research_project/Mtech_project/multimodal_datapipeline/data/processed/baseline_3_image_only.csv",
+    "out_dir": "results/baseline_3_image_only_suite_smoke/small_cnn_augmented",
+    "image_size": 128,
+    "epochs": 1,
+    "batch_size": 64,
+    "learning_rate": 0.001,
+    "weight_decay": 0.0001,
+    "dropout": 0.25,
+    "model": "small_cnn",
+    "dinov2_model_name": "facebook/dinov2-small",
+    "augment": true,
+    "save_model": false,
+    "test_size": 0.2,
+    "val_size": 0.1,
+    "seed": 42,
+    "num_workers": 0,
+    "device": "auto"
+  }
+}

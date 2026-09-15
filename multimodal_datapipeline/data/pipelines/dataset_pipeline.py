@@ -13,7 +13,10 @@ if str(PROJECT_ROOT) not in sys.path:
 
 from data.sources.alphafold import alphafold_download_structures
 from data.sources.bbbc021 import (
+    BBBC021_ALL_IMAGE_ZIPS,
     BBBC021_WEEK1_ZIPS,
+    BBBC021_WEEK_ZIPS,
+    bbbc021_download_cellprofiler_pipelines,
     bbbc021_download_images,
     bbbc021_download_metadata,
 )
@@ -133,6 +136,18 @@ def main():
         help="Specific BBBC021 image ZIP filenames to download.",
     )
     parser.add_argument(
+        "--bbbc021-image-set",
+        default="week1",
+        choices=["week1", "all"],
+        help="Preset BBBC021 image ZIP group. Use 'all' for the full 55-ZIP image dataset.",
+    )
+    parser.add_argument(
+        "--bbbc021-weeks",
+        nargs="*",
+        default=[],
+        help="Specific BBBC021 weeks to download, e.g. Week2 Week3. Overrides --bbbc021-image-set.",
+    )
+    parser.add_argument(
         "--bbbc021-max-zips",
         type=int,
         default=None,
@@ -142,6 +157,11 @@ def main():
         "--bbbc021-extract",
         action="store_true",
         help="Extract downloaded BBBC021 image ZIPs after download.",
+    )
+    parser.add_argument(
+        "--download-bbbc021-cellprofiler",
+        action="store_true",
+        help="Download BBBC021 CellProfiler analysis and illumination pipeline files.",
     )
     parser.add_argument("--scrape-url", default=None, help="Optional HTML page with table to scrape")
     parser.add_argument("--scrape-table-index", type=int, default=0)
@@ -294,13 +314,33 @@ def main():
             bbbc_dir = os.path.join(args.outdir, "bbbc021")
             print("Downloading BBBC021 metadata")
             bbbc_rows = bbbc021_download_metadata(session, bbbc_dir, force=args.force)
+            if args.download_bbbc021_cellprofiler:
+                print("Downloading BBBC021 CellProfiler pipeline files")
+                bbbc_rows.extend(
+                    bbbc021_download_cellprofiler_pipelines(session, bbbc_dir, force=args.force)
+                )
             if args.download_bbbc021_images:
+                selected_image_zips = list(args.bbbc021_image_zips)
+                if args.bbbc021_weeks:
+                    selected_image_zips = []
+                    for week in args.bbbc021_weeks:
+                        if week not in BBBC021_WEEK_ZIPS:
+                            raise SystemExit(
+                                f"Unknown BBBC021 week {week!r}. "
+                                f"Choose from: {', '.join(BBBC021_WEEK_ZIPS)}"
+                            )
+                        selected_image_zips.extend(BBBC021_WEEK_ZIPS[week])
+                elif args.bbbc021_image_set == "all":
+                    selected_image_zips = BBBC021_ALL_IMAGE_ZIPS
+                elif args.bbbc021_image_zips == BBBC021_WEEK1_ZIPS:
+                    selected_image_zips = BBBC021_WEEK1_ZIPS
+
                 print("Downloading BBBC021 image ZIPs")
                 bbbc_rows.extend(
                     bbbc021_download_images(
                         session,
                         bbbc_dir,
-                        image_zips=args.bbbc021_image_zips,
+                        image_zips=selected_image_zips,
                         max_zips=args.bbbc021_max_zips,
                         extract=args.bbbc021_extract,
                         force=args.force,
@@ -316,7 +356,12 @@ def main():
             manifest["bbbc021"] = {
                 "metadata_downloaded": True,
                 "images_requested": args.download_bbbc021_images,
-                "image_zips": args.bbbc021_image_zips[: args.bbbc021_max_zips],
+                "image_set": args.bbbc021_image_set,
+                "weeks": args.bbbc021_weeks,
+                "image_zips": (selected_image_zips if args.download_bbbc021_images else [])[
+                    : args.bbbc021_max_zips
+                ],
+                "cellprofiler_requested": args.download_bbbc021_cellprofiler,
                 "extract": args.bbbc021_extract,
                 "rows": len(bbbc_rows),
                 "file": bbbc_manifest_csv,

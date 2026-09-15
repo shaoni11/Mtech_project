@@ -1,0 +1,42 @@
+[
+  {
+    "experiment": "tiny_cnn",
+    "model": "tiny_cnn",
+    "device": "cpu",
+    "accuracy": 0.7496757457846952,
+    "macro_precision": 0.6716107021111001,
+    "macro_recall": 0.7630301943828974,
+    "macro_f1": 0.6589530393077697,
+    "loss": 0.7454544585578295
+  },
+  {
+    "experiment": "small_cnn",
+    "model": "small_cnn",
+    "device": "cpu",
+    "accuracy": 0.6679636835278858,
+    "macro_precision": 0.5903254621159302,
+    "macro_recall": 0.6840507836824693,
+    "macro_f1": 0.5684522509451118,
+    "loss": 1.131640369186596
+  },
+  {
+    "experiment": "small_cnn_augmented",
+    "model": "small_cnn",
+    "device": "cpu",
+    "accuracy": 0.5369649805447471,
+    "macro_precision": 0.6397645251155889,
+    "macro_recall": 0.5745993976268425,
+    "macro_f1": 0.4886556755465553,
+    "loss": 1.6961710094189157
+  },
+  {
+    "experiment": "dinov2_linear",
+    "model": "dinov2_linear",
+    "device": "mps",
+    "accuracy": 0.8261997405966277,
+    "macro_precision": 0.6869347883510303,
+    "macro_recall": 0.7918241041090488,
+    "macro_f1": 0.7181167057250223,
+    "loss": 0.5794908660559022
+  }
+]

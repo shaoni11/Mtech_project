@@ -10,11 +10,11 @@ from __future__ import annotations
 
 import sys
 from pathlib import Path
-import pandas as pd
-from chembl_webresource_client.new_client import new_client
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 PACKAGE_DIR = PROJECT_ROOT / "package"
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
 if str(PACKAGE_DIR) not in sys.path:
     sys.path.insert(0, str(PACKAGE_DIR))
 
@@ -64,6 +64,9 @@ def find_human_targets(target_client, target_spec: dict) -> list[dict]:
 
 def run_cytoskeleton_chembl() -> None:
     """Download ChEMBL activity records for actin/tubulin bridge targets."""
+
+    import pandas as pd
+    from chembl_webresource_client.new_client import new_client
 
     targets_to_query = [
         {"gene": "ACTB", "uniprot_id": "P60709"},

@@ -1,65 +1,60 @@
 # M.Tech Project Status Summary
 
-Last updated: 2026-08-26
+Last updated: 2026-09-15
 
 ## Overall
 
-`multimodal_datapipeline/` is now organized as a staged multimodal drug-discovery data pipeline and baseline-experiment project.
+`multimodal_datapipeline/` is organized as a staged multimodal drug-discovery data pipeline and baseline-experiment project.
 
-The current structure separates:
+The current project has two complementary experiment areas:
 
-- `data/`: data acquisition entrypoints, source adapters, pipeline orchestration, and processed data tables.
-- `package/multimodal_datapipeline/`: reusable importable Python package code.
-- `workflows/`: runnable research workflows, mostly baseline curation, validation, and training scripts.
-- `results/`: saved model and validation outputs.
-- `reports/`: project diagrams and thesis/report artifacts.
-- `exploration/`: scratch exploration only.
-- `3rdparty/python/`: Pants dependency lockfile location.
+- `Mtech_project/multimodal_datapipeline/`: data acquisition, processed tables, reusable model components, workflow baselines, and saved pipeline results.
+- `deep_learning_project/`: independent deep-learning experiments that reuse the processed pipeline tables for stronger neural baselines and comparative reports.
+- `3D_CV_Geometry/`: 3D molecular geometry experiment artifacts, including a PointNet-style 3D molecule model.
 
 The project currently supports:
 
 - dataset ingestion from ChEMBL, AlphaFold, BBBC021, and optional HTML scraping
 - cytoskeleton-specific ChEMBL acquisition
-- processed molecule, protein, image, and paired-modality tables
+- processed molecule, protein, image, molecule-protein, and molecule-image tables
 - reusable molecule, protein, image, and fusion model components
-- runnable baselines for molecule-only, protein-only, and image-only experiments
-- guarded placeholders for molecule-protein, molecule-image, protein-image, and full multimodal fusion training
+- completed molecule-only, protein-only, image-only, molecule-protein fusion, and molecule 3D experiments
+- image-only model comparison runs, including CNN variants and DINOv2 linear probing
 - Pants-based Python target ownership and dependency lockfile generation
 
-The pipeline is usable for staged experiments. Full molecule + protein + image modeling is still blocked by dataset alignment.
+The strongest aligned multimodal table currently available is the molecule + protein table. Full molecule + protein + image modeling is still blocked by compound identity alignment between ChEMBL and BBBC021.
 
 ## Current Directory Structure
 
 ```text
-multimodal_datapipeline/
-├── 3rdparty/python/
-│   └── default.lock
+Mtech_project/
+├── multimodal_datapipeline/
+│   ├── 3rdparty/python/
+│   ├── configs/
+│   ├── data/
+│   ├── dataset_pipeline_output/
+│   ├── package/multimodal_datapipeline/
+│   ├── reports/
+│   ├── results/
+│   ├── workflows/baselines/
+│   ├── pants.toml
+│   ├── pyproject.toml
+│   ├── requirements.txt
+│   └── README.md
+├── experiment_plan.txt
+├── experiments_conducted.md
+└── project_status_summary.md
+
+deep_learning_project/
 ├── configs/
-├── data/
-│   ├── acquire_data.py
-│   ├── pipelines/
-│   │   └── dataset_pipeline.py
-│   ├── sources/
-│   │   ├── alphafold.py
-│   │   ├── bbbc021.py
-│   │   ├── chembl.py
-│   │   └── scrape.py
-│   ├── processed/
-│   ├── raw/
-│   ├── interim/
-│   └── external/
-├── dataset_pipeline_output/
-├── exploration/
-├── package/multimodal_datapipeline/
-│   ├── models/
-│   └── utils/
+├── docs/
+├── experiments/
 ├── reports/
-├── results/
-├── workflows/baselines/
-├── pants.toml
-├── pyproject.toml
 ├── requirements.txt
 └── README.md
+
+3D_CV_Geometry/
+└── 3D_computer_vision_and_geometry/
 ```
 
 ## Environment And Tooling
@@ -67,10 +62,10 @@ multimodal_datapipeline/
 Project virtual environment:
 
 ```text
-multimodal_datapipeline/multimodal_venv/
+Mtech_project/multimodal_datapipeline/multimodal_venv/
 ```
 
-Install project locally:
+Install the pipeline project locally:
 
 ```bash
 cd Mtech_project/multimodal_datapipeline
@@ -78,16 +73,25 @@ source multimodal_venv/bin/activate
 python -m pip install -e .
 ```
 
-Pants config:
+Important CLI entrypoints:
 
-```text
-multimodal_datapipeline/pants.toml
+```bash
+multimodal-datapipeline --help
+mmdp-dataset --help
+mmdp-baseline-1
+mmdp-baseline-2
+mmdp-baseline-3
+mmdp-baseline-4
+mmdp-baseline-5
+mmdp-baseline-6
+mmdp-baseline-7
 ```
 
-Pants lockfile:
+Pants config and lockfile:
 
 ```text
-multimodal_datapipeline/3rdparty/python/default.lock
+Mtech_project/multimodal_datapipeline/pants.toml
+Mtech_project/multimodal_datapipeline/3rdparty/python/default.lock
 ```
 
 Generate or refresh the lockfile:
@@ -97,8 +101,6 @@ cd Mtech_project/multimodal_datapipeline
 pants generate-lockfiles
 ```
 
-Pants ignores local virtual environments and generated data output directories so it does not scan large artifacts or absolute symlinks.
-
 ## Data Acquisition Status
 
 Unified acquisition entrypoint:
@@ -106,13 +108,6 @@ Unified acquisition entrypoint:
 ```bash
 cd Mtech_project/multimodal_datapipeline
 python data/acquire_data.py --help
-```
-
-Equivalent installed entrypoints after `python -m pip install -e .`:
-
-```bash
-multimodal-datapipeline --help
-mmdp-dataset --help
 ```
 
 Implemented acquisition modules:
@@ -181,7 +176,7 @@ P27361, P24941, P35968, P12931, P00519, P42345
 Processed tables are under:
 
 ```text
-multimodal_datapipeline/data/processed/
+Mtech_project/multimodal_datapipeline/data/processed/
 ```
 
 | Table | Rows | Status |
@@ -239,7 +234,6 @@ Baseline 2 protein-only:
 - output: `data/processed/baseline_2_protein_only.csv`
 - 12 target rows
 - 12 rows with extracted protein sequence
-- 12 rows with activity labels
 - all target-level binary labels are active, so the training script uses `active_fraction` regression
 
 Baseline 3 image-only:
@@ -299,7 +293,7 @@ Current alignment counts:
 Reusable package code is under:
 
 ```text
-package/multimodal_datapipeline/
+Mtech_project/multimodal_datapipeline/package/multimodal_datapipeline/
 ```
 
 Model components:
@@ -319,42 +313,32 @@ Utility components:
 | `utils/paths.py` | project/package/workflow path helpers |
 | `utils/baseline_launcher.py` | installed console-entrypoint launcher for baseline training scripts |
 
-Important implementation detail:
+Important implementation details:
 
-- The reusable model components exist.
-- Baseline 1 currently uses hashed SMILES n-gram logistic regression, not the RDKit Morgan fingerprint MLP model component.
-- Baseline 3 currently uses a small custom microscopy CNN, not DINOv2.
-- Baseline 4, 5, 6, and 7 training scripts are still guarded placeholders.
+- Baseline 1 in `multimodal_datapipeline` is a classical hashed SMILES n-gram logistic-regression baseline.
+- `deep_learning_project/experiments/experiment_1_molecule_only_mlp.py` adds a stronger RDKit Morgan fingerprint MLP molecule-only model.
+- Baseline 3 now has both the original single-run CNN result and a broader image-only suite with CNN variants and DINOv2 linear probing.
+- `workflows/baselines/baseline_4_molecule_protein/train.py` now contains an implemented molecule + protein training path using Morgan fingerprints, frozen ESM-2 embeddings, and concatenation fusion.
+- Baseline 5 training remains a placeholder.
+- Baselines 6 and 7 remain blocked by data alignment.
 
 ## Workflow Script Status
 
 Baseline scripts are under:
 
 ```text
-workflows/baselines/
+Mtech_project/multimodal_datapipeline/workflows/baselines/
 ```
 
 | Baseline | Data Curation | Validation | Training | Current Status |
 |---|---|---|---|---|
 | 1 Molecule-only | Done | Done | Done | Runnable and run |
 | 2 Protein-only | Done | Done | Done | Runnable and run |
-| 3 Image-only | Done | Done | Done | Runnable and run |
-| 4 Molecule + protein | Done | Done | Placeholder | Data ready, training pending |
+| 3 Image-only | Done | Done | Done | Runnable and run; image suite also completed |
+| 4 Molecule + protein | Done | Done | Implemented | Data ready; workflow training script implemented; independent fusion experiment completed |
 | 5 Molecule + image | Done | Done | Placeholder | Data ready, training pending |
-| 6 Protein + image | Blocked | Guarded | Placeholder | Blocked by missing alignment |
+| 6 Protein + image | Blocked | Guarded | Placeholder | Blocked by missing protein-image alignment |
 | 7 Molecule + protein + image | Blocked | Guarded | Placeholder | Blocked by zero SMILES overlap |
-
-Installed baseline entrypoints:
-
-```bash
-mmdp-baseline-1
-mmdp-baseline-2
-mmdp-baseline-3
-mmdp-baseline-4
-mmdp-baseline-5
-mmdp-baseline-6
-mmdp-baseline-7
-```
 
 Direct script pattern:
 
@@ -364,12 +348,18 @@ python workflows/baselines/baseline_1_molecule_only/validate_smiles.py
 python workflows/baselines/baseline_1_molecule_only/train.py
 ```
 
-## Saved Results
+Baseline 4 direct run:
 
-Saved outputs are under:
+```bash
+python workflows/baselines/baseline_4_molecule_protein/train.py
+```
+
+## Saved Pipeline Results
+
+Saved pipeline outputs are under:
 
 ```text
-multimodal_datapipeline/results/
+Mtech_project/multimodal_datapipeline/results/
 ```
 
 Current saved result folders:
@@ -377,9 +367,12 @@ Current saved result folders:
 | Folder | Meaning |
 |---|---|
 | `molecule_encoder_validation/` | RDKit and molecule encoder input validation |
-| `molecule_only_baseline/` | Baseline 1 molecule-only training output |
-| `baseline_2_protein_only/` | Baseline 2 protein-only regression output |
-| `baseline_3_image_only/` | Baseline 3 image-only MoA classification output |
+| `molecule_only_baseline/` | Baseline 1 molecule-only classical training output |
+| `baseline_2_protein_only/` | Baseline 2 protein-only ESM-2 regression output |
+| `baseline_3_image_only/` | Baseline 3 original image-only MoA classification output |
+| `baseline_3_image_only_smoke/` | quick image-only smoke run |
+| `baseline_3_image_only_suite_smoke/` | quick image-model suite smoke runs |
+| `baseline_3_image_only_full/` | full image-model comparison suite |
 
 ### Molecule Encoder Validation
 
@@ -399,7 +392,7 @@ Result:
 
 This is a data-quality validation result, not a model-training result.
 
-### Baseline 1: Molecule-Only
+### Baseline 1: Molecule-Only Classical
 
 Run folder:
 
@@ -432,7 +425,7 @@ Test metrics:
 
 Interpretation:
 
-This baseline is heavily biased toward predicting active molecules. It gives a useful sanity baseline but has weak inactive-class separation.
+This is a useful sanity baseline, but it is biased toward predicting active molecules and has weak inactive-class separation.
 
 ### Baseline 2: Protein-Only
 
@@ -452,7 +445,7 @@ Dataset:
 
 - 12 protein targets
 - split: 8 train, 2 validation, 2 test
-- device: MPS
+- model: `facebook/esm2_t6_8M_UR50D`
 
 Test metrics:
 
@@ -467,7 +460,7 @@ Interpretation:
 
 This is a pipeline sanity check, not a strong scientific result. With only 12 target-level rows, R2 is unstable and should not be used as a thesis claim.
 
-### Baseline 3: Image-Only
+### Baseline 3: Image-Only Original Run
 
 Run folder:
 
@@ -486,17 +479,6 @@ Dataset:
 - 516 image rows
 - 5 MoA classes
 - split: 361 train, 52 validation, 103 test
-- device: MPS
-
-MoA class counts:
-
-| Class | Rows |
-|---|---:|
-| Actin disruptors | 48 |
-| Aurora kinase inhibitors | 72 |
-| DMSO | 144 |
-| Microtubule destabilizers | 36 |
-| Microtubule stabilizers | 216 |
 
 Test metrics:
 
@@ -512,29 +494,215 @@ Interpretation:
 
 Baseline 3 is implemented and has a completed run. The dataset is small and class-imbalanced, but the model learns meaningful image signal.
 
+### Baseline 3: Full Image Model Suite
+
+Run folder:
+
+```text
+results/baseline_3_image_only_full/
+```
+
+Task:
+
+```text
+BBBC021 3-channel microscopy image -> image model -> MoA class
+```
+
+Completed models:
+
+| Model | Device | Accuracy | Macro F1 | Loss |
+|---|---|---:|---:|---:|
+| `tiny_cnn` | CPU | 0.7497 | 0.6590 | 0.7455 |
+| `small_cnn` | CPU | 0.6680 | 0.5685 | 1.1316 |
+| `small_cnn_augmented` | CPU | 0.5370 | 0.4887 | 1.6962 |
+| `dinov2_linear` | MPS | 0.8262 | 0.7181 | 0.5795 |
+
+Interpretation:
+
+DINOv2 linear probing is currently the strongest image-only result. The augmented small CNN underperformed in this run, likely because the dataset is small and augmentation may have introduced harder variation than the model could absorb.
+
+## Deep Learning Experiments
+
+Independent experiment scripts and outputs are under:
+
+```text
+deep_learning_project/experiments/
+```
+
+### Experiment 1: Molecule-Only MLP
+
+Run folder:
+
+```text
+deep_learning_project/experiments/experiment_1_molecule_only_mlp/
+```
+
+Task:
+
+```text
+RDKit Morgan fingerprint -> MLP -> active/inactive
+```
+
+Dataset:
+
+- input: `data/processed/chembl_molecule_curated.csv`
+- fingerprint: 2048-bit Morgan fingerprint, radius 2
+- model: MLP classifier
+- test examples: 8,407
+
+Test metrics:
+
+| Metric | Value |
+|---|---:|
+| Accuracy | 0.8701 |
+| Balanced accuracy | 0.8324 |
+| Precision | 0.9432 |
+| Recall | 0.8933 |
+| Specificity | 0.7715 |
+| F1 | 0.9176 |
+| ROC-AUC | 0.9128 |
+| PR-AUC | 0.9731 |
+
+Interpretation:
+
+This is a much stronger molecule-only neural baseline than the original hashed n-gram logistic-regression baseline.
+
+### Experiment 2: Protein-Only ESM-2
+
+Run folder:
+
+```text
+deep_learning_project/experiments/experiment_2_protein_only_esm2/
+```
+
+Task:
+
+```text
+protein sequence -> frozen ESM-2 -> MLP -> active_fraction
+```
+
+Dataset:
+
+- input: `data/processed/baseline_2_protein_only.csv`
+- 12 target-level rows
+- model: `facebook/esm2_t6_8M_UR50D`
+
+Test metrics:
+
+| Metric | Value |
+|---|---:|
+| MSE | 0.0014 |
+| RMSE | 0.0371 |
+| MAE | 0.0368 |
+| R2 | -13.3835 |
+
+Interpretation:
+
+This is still a sanity baseline because the protein-only table has only 12 rows.
+
+### Experiment 3: Molecule + Protein Fusion
+
+Run folder:
+
+```text
+deep_learning_project/experiments/experiment_3_molecule_protein_fusion/
+```
+
+Question:
+
+```text
+Does adding protein/target sequence context improve row-level activity prediction?
+```
+
+Models compared:
+
+```text
+1. molecule_only_pair:
+   Morgan fingerprint -> MLP -> active/inactive
+
+2. molecule_protein_kmer_fusion:
+   Morgan fingerprint -> MLP --------\
+                                      -> fusion MLP -> active/inactive
+   protein sequence k-mer features -> MLP /
+```
+
+Dataset and split:
+
+- input: `data/processed/baseline_4_molecule_protein.csv`
+- split: scaffold
+- train rows: 32,840
+- validation rows: 4,692
+- test rows: 9,383
+- test label counts: 7,893 active, 1,490 inactive
+- all 12 targets are represented in train, validation, and test
+
+Test metrics:
+
+| Model | Accuracy | Balanced accuracy | F1 | ROC-AUC | PR-AUC | Specificity |
+|---|---:|---:|---:|---:|---:|---:|
+| Molecule-only pair | 0.8522 | 0.7853 | 0.9095 | 0.8765 | 0.9706 | 0.6872 |
+| Molecule + protein k-mer fusion | 0.8255 | 0.8089 | 0.8893 | 0.8835 | 0.9725 | 0.7846 |
+
+Interpretation:
+
+Adding protein k-mer sequence context gives a modest improvement in ROC-AUC, PR-AUC, balanced accuracy, and inactive-class specificity, while reducing raw accuracy and F1. This is useful evidence that target context helps especially for inactive-class separation, but the gain is modest and should be interpreted with scaffold-split caveats.
+
+### Experiment 4: Molecule 3D Point Cloud
+
+Run folder:
+
+```text
+deep_learning_project/experiments/experiment_4_molecule_3d_pointcloud/
+```
+
+Task:
+
+```text
+SMILES -> RDKit conformer -> atom-level 3D point cloud -> PointNet-style model -> active/inactive
+```
+
+Dataset:
+
+- input: `data/processed/chembl_molecule_curated.csv`
+- max rows used: 3,000
+- max atoms: 64
+- test examples: 600
+- saved artifacts include `pointnet_3d.pt`, `test_predictions.csv`, `conformer_failures.csv`, `comparison_report.md`, and `metrics_visualization.png`
+
+Test metrics:
+
+| Metric | Value |
+|---|---:|
+| Accuracy | 0.7133 |
+| Balanced accuracy | 0.6048 |
+| Precision | 0.8293 |
+| Recall | 0.7974 |
+| Specificity | 0.4122 |
+| F1 | 0.8130 |
+| ROC-AUC | 0.6782 |
+| PR-AUC | 0.8791 |
+
+Interpretation:
+
+The 3D PointNet experiment is completed, but it is weaker than the 2D Morgan fingerprint MLP on the current setup. It is best framed as a 3D-computer-vision extension rather than the main drug-discovery baseline.
+
 ## Current Gaps
 
-1. Baseline 4 training is not implemented.
+1. Baseline 5 molecule + image training is not implemented.
 
-The molecule + protein table is ready, but `workflows/baselines/baseline_4_molecule_protein/train.py` exits with:
-
-```text
-Baseline 4 data is prepared. Next step: train MoleculeEncoder + ProteinEncoder + FusionHead.
-```
-
-2. Baseline 5 training is not implemented.
-
-The molecule + image table is ready, but `workflows/baselines/baseline_5_molecule_image/train.py` exits with:
+The molecule + image table is ready, but the table is small:
 
 ```text
-Baseline 5 data is prepared. Next step: train MoleculeEncoder + ImageEncoder + FusionHead.
+300 rows, 6 compounds, 3 MoA classes
 ```
 
-3. Baseline 6 is blocked by missing protein-image labels.
+It should be treated as a proof-of-concept fusion experiment rather than a strong thesis result.
+
+2. Baseline 6 is blocked by missing protein-image labels.
 
 BBBC021 rows currently provide compound/image/MoA information, not target/protein annotations.
 
-4. Baseline 7 is blocked by molecule identity alignment.
+3. Baseline 7 is blocked by molecule identity alignment.
 
 There is currently no exact SMILES overlap between:
 
@@ -543,19 +711,23 @@ baseline_4_molecule_protein.csv
 baseline_5_molecule_image.csv
 ```
 
-5. Baseline 1 is a weak classical baseline.
+4. Baseline 2 protein-only remains underpowered.
 
-It uses hashed SMILES character n-grams and logistic regression, not the RDKit Morgan fingerprint MLP model component.
+The protein-only table has only 12 target-level rows, so it is useful for checking the ESM-2 pipeline but not for strong model claims.
 
-6. Baseline 3 does not use the DINOv2 model component yet.
+5. Molecule + protein fusion has been tested with protein k-mer features, while the workflow Baseline 4 script supports frozen ESM-2 embeddings.
 
-The reusable DINOv2 image encoder exists, but the completed Baseline 3 run uses a small CNN.
+The next clean comparison is to run the implemented workflow Baseline 4 ESM-2 fusion and compare it with the completed k-mer fusion experiment.
+
+6. Image-only DINOv2 is strong, but image fusion remains limited by compound overlap.
+
+DINOv2 linear probing performs best among the completed image-only runs, but this does not yet solve the molecule/protein/image alignment problem.
 
 ## Recommended Next Work
 
 Priority 1:
 
-Implement Baseline 4 training:
+Run and report the implemented workflow Baseline 4 ESM-2 fusion model:
 
 ```text
 Morgan fingerprint / MoleculeEncoder -> molecule embedding
@@ -563,29 +735,31 @@ ESM-2 / ProteinEncoder -> protein embedding
 ConcatenationFusion -> active/inactive
 ```
 
-Use `data/processed/baseline_4_molecule_protein.csv`, scaffold split where possible, and report ROC-AUC, PR-AUC, F1, balanced accuracy, and inactive-class recall.
+Compare it directly against the completed `experiment_3_molecule_protein_fusion` k-mer fusion model and the molecule-only pair ablation.
 
 Priority 2:
 
-Add a stronger molecule-only neural baseline using:
-
-```text
-RDKit Morgan fingerprint -> MLP -> active/inactive
-```
-
-This will be a fairer comparator for Baseline 4 than the current hashed n-gram logistic regression.
+Use `experiment_1_molecule_only_mlp` as the main molecule-only comparator in the thesis/report, because it is much stronger and fairer than the original classical Baseline 1.
 
 Priority 3:
 
-Implement Baseline 5 molecule-image fusion:
+Report the image-only suite with DINOv2 linear probing as the strongest Baseline 3 result:
+
+```text
+best image-only result: DINOv2 linear, accuracy 0.8262, macro F1 0.7181
+```
+
+Priority 4:
+
+Implement Baseline 5 molecule-image fusion only as a proof of concept:
 
 ```text
 MoleculeEncoder + image CNN/DINOv2 encoder -> fusion -> MoA
 ```
 
-Keep it as proof of concept because the table has only 300 rows and 6 compounds.
+Because the table has only 300 rows and 6 compounds, it should not be overclaimed.
 
-Priority 4:
+Priority 5:
 
 Do not spend major thesis effort on Baseline 6 or Baseline 7 until biological alignment is fixed.
 
@@ -596,3 +770,14 @@ BBBC021 compound -> canonical SMILES -> ChEMBL molecule ID/activity -> target ->
 ```
 
 If exact overlap remains zero, use a different imaging dataset, a different compound-target source, or similarity-based exploratory matching with clear caveats.
+
+## Suggested Report Framing
+
+Main results to emphasize:
+
+1. The data pipeline successfully builds reusable molecule, protein, image, and paired-modality tables from ChEMBL, AlphaFold, and BBBC021.
+2. The strongest molecule-only result is the Morgan fingerprint MLP with ROC-AUC 0.9128 and PR-AUC 0.9731.
+3. The molecule + protein fusion experiment gives a modest target-context improvement over molecule-only pair prediction on scaffold split, especially in balanced accuracy and specificity.
+4. The strongest image-only result is DINOv2 linear probing on BBBC021 with accuracy 0.8262 and macro F1 0.7181.
+5. The 3D PointNet experiment is complete but underperforms Morgan fingerprints, making it an exploratory geometry extension.
+6. Full molecule + protein + image modeling remains blocked by real data alignment limitations, not by code structure alone.

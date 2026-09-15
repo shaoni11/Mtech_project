@@ -1,0 +1,275 @@
+{
+  "task": "image_only_moa_classification",
+  "input_csv": "/Users/shaonichakravarty/Documents/IIIT_Dharwad/research_project/Mtech_project/multimodal_datapipeline/data/processed/baseline_3_image_only.csv",
+  "model": "dinov2_linear",
+  "dinov2_model_name": "facebook/dinov2-small",
+  "channels": [
+    "dapi_path",
+    "tubulin_path",
+    "actin_path"
+  ],
+  "image_size": 128,
+  "augment": false,
+  "cache_images": true,
+  "device": "mps",
+  "n_rows": 3848,
+  "labels": {
+    "0": "Actin disruptors",
+    "1": "Aurora kinase inhibitors",
+    "2": "Cholesterol-lowering",
+    "3": "DMSO",
+    "4": "DNA damage",
+    "5": "DNA replication",
+    "6": "Eg5 inhibitors",
+    "7": "Epithelial",
+    "8": "Kinase inhibitors",
+    "9": "Microtubule destabilizers",
+    "10": "Microtubule stabilizers",
+    "11": "Protein degradation",
+    "12": "Protein synthesis"
+  },
+  "class_counts": {
+    "Actin disruptors": 60,
+    "Aurora kinase inhibitors": 144,
+    "Cholesterol-lowering": 72,
+    "DNA damage": 108,
+    "DNA replication": 96,
+    "Eg5 inhibitors": 144,
+    "Epithelial": 88,
+    "Kinase inhibitors": 40,
+    "Microtubule destabilizers": 168,
+    "Microtubule stabilizers": 1428,
+    "Protein degradation": 84,
+    "Protein synthesis": 96,
+    "DMSO": 1320
+  },
+  "split_sizes": {
+    "train": 2692,
+    "val": 385,
+    "test": 771
+  },
+  "train": {
+    "accuracy": 0.8952451708766717,
+    "macro_precision": 0.8002091711394645,
+    "macro_recall": 0.9469093494474184,
+    "macro_f1": 0.8508060713510776,
+    "loss": 0.19274874231034128
+  },
+  "val": {
+    "accuracy": 0.8493506493506493,
+    "macro_precision": 0.7304312953340413,
+    "macro_recall": 0.8521950397516009,
+    "macro_f1": 0.763975175445419,
+    "loss": 0.4119327415525913
+  },
+  "test": {
+    "accuracy": 0.8261997405966277,
+    "macro_precision": 0.6869347883510303,
+    "macro_recall": 0.7918241041090488,
+    "macro_f1": 0.7181167057250223,
+    "loss": 0.5794908660559022
+  },
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 1.6508503826059533,
+      "val_accuracy": 0.4597402597402597,
+      "val_macro_precision": 0.5044379054390178,
+      "val_macro_recall": 0.7060062612098812,
+      "val_macro_f1": 0.4873073625362455,
+      "val_loss": 0.9974172580242157
+    },
+    {
+      "epoch": 2,
+      "train_loss": 0.9176715495142006,
+      "val_accuracy": 0.7948051948051948,
+      "val_macro_precision": 0.6336590996877501,
+      "val_macro_recall": 0.7682748247227885,
+      "val_macro_f1": 0.6649837597001943,
+      "val_loss": 0.6835615670681
+    },
+    {
+      "epoch": 3,
+      "train_loss": 0.6851974248709763,
+      "val_accuracy": 0.8,
+      "val_macro_precision": 0.6621095282294378,
+      "val_macro_recall": 0.8162023245733654,
+      "val_macro_f1": 0.6914805936548789,
+      "val_loss": 0.5509356898069382
+    },
+    {
+      "epoch": 4,
+      "train_loss": 0.6050283774380854,
+      "val_accuracy": 0.7168831168831169,
+      "val_macro_precision": 0.6126556171374042,
+      "val_macro_recall": 0.8443496046437223,
+      "val_macro_f1": 0.6481265435350172,
+      "val_loss": 0.5144916903972626
+    },
+    {
+      "epoch": 5,
+      "train_loss": 0.5327058802165928,
+      "val_accuracy": 0.8025974025974026,
+      "val_macro_precision": 0.6568588889508257,
+      "val_macro_recall": 0.8618662760065475,
+      "val_macro_f1": 0.7156666213453586,
+      "val_loss": 0.46814762517809866
+    },
+    {
+      "epoch": 6,
+      "train_loss": 0.4912679230673073,
+      "val_accuracy": 0.8025974025974026,
+      "val_macro_precision": 0.7061822181173856,
+      "val_macro_recall": 0.8542883210304025,
+      "val_macro_f1": 0.7274781071932802,
+      "val_loss": 0.5190943020582199
+    },
+    {
+      "epoch": 7,
+      "train_loss": 0.4595750516071122,
+      "val_accuracy": 0.8545454545454545,
+      "val_macro_precision": 0.7197813310369872,
+      "val_macro_recall": 0.8836022323578885,
+      "val_macro_f1": 0.7681791234143405,
+      "val_loss": 0.4366049239039421
+    },
+    {
+      "epoch": 8,
+      "train_loss": 0.45516451223362125,
+      "val_accuracy": 0.7740259740259741,
+      "val_macro_precision": 0.6799552339420162,
+      "val_macro_recall": 0.8134256141043471,
+      "val_macro_f1": 0.6980843825635509,
+      "val_loss": 0.5183325386047364
+    },
+    {
+      "epoch": 9,
+      "train_loss": 0.4132648796592591,
+      "val_accuracy": 0.8051948051948052,
+      "val_macro_precision": 0.6917448539211931,
+      "val_macro_recall": 0.8716620358023074,
+      "val_macro_f1": 0.7345145462403949,
+      "val_loss": 0.4128494101762772
+    },
+    {
+      "epoch": 10,
+      "train_loss": 0.37929600475014313,
+      "val_accuracy": 0.8285714285714286,
+      "val_macro_precision": 0.6992099149428276,
+      "val_macro_recall": 0.8695519663845455,
+      "val_macro_f1": 0.7465028275928118,
+      "val_loss": 0.378290636241436
+    },
+    {
+      "epoch": 11,
+      "train_loss": 0.35449790218349037,
+      "val_accuracy": 0.8571428571428571,
+      "val_macro_precision": 0.70011359314638,
+      "val_macro_recall": 0.8329379393859031,
+      "val_macro_f1": 0.7459794378889417,
+      "val_loss": 0.4628414254635572
+    },
+    {
+      "epoch": 12,
+      "train_loss": 0.372119400672306,
+      "val_accuracy": 0.8753246753246753,
+      "val_macro_precision": 0.7345417654241183,
+      "val_macro_recall": 0.8773552741878533,
+      "val_macro_f1": 0.7815107366083136,
+      "val_loss": 0.42584882587194445
+    },
+    {
+      "epoch": 13,
+      "train_loss": 0.3432772071183433,
+      "val_accuracy": 0.8285714285714286,
+      "val_macro_precision": 0.6915912810743294,
+      "val_macro_recall": 0.86631161699035,
+      "val_macro_f1": 0.7426741844255957,
+      "val_loss": 0.3846772912144661
+    },
+    {
+      "epoch": 14,
+      "train_loss": 0.32954233721692183,
+      "val_accuracy": 0.7844155844155845,
+      "val_macro_precision": 0.6630412098023435,
+      "val_macro_recall": 0.8690460620324874,
+      "val_macro_f1": 0.7153582957931275,
+      "val_loss": 0.3866542589664459
+    },
+    {
+      "epoch": 15,
+      "train_loss": 0.3161512125481868,
+      "val_accuracy": 0.8597402597402597,
+      "val_macro_precision": 0.7599629412928646,
+      "val_macro_recall": 0.8309783605032474,
+      "val_macro_f1": 0.7715091275366176,
+      "val_loss": 0.4038650146126747
+    },
+    {
+      "epoch": 16,
+      "train_loss": 0.31107081370373096,
+      "val_accuracy": 0.8441558441558441,
+      "val_macro_precision": 0.7070320507105404,
+      "val_macro_recall": 0.8657320683338783,
+      "val_macro_f1": 0.7508847495384642,
+      "val_loss": 0.39492721498012545
+    },
+    {
+      "epoch": 17,
+      "train_loss": 0.30019369538454616,
+      "val_accuracy": 0.8571428571428571,
+      "val_macro_precision": 0.7186125697327008,
+      "val_macro_recall": 0.872803842713345,
+      "val_macro_f1": 0.767742549816513,
+      "val_loss": 0.38771216675639153
+    },
+    {
+      "epoch": 18,
+      "train_loss": 0.33595869627356884,
+      "val_accuracy": 0.7480519480519481,
+      "val_macro_precision": 0.637786401787018,
+      "val_macro_recall": 0.8585995326945552,
+      "val_macro_f1": 0.6860125855927938,
+      "val_loss": 0.4308130757510662
+    },
+    {
+      "epoch": 19,
+      "train_loss": 0.3150761316464277,
+      "val_accuracy": 0.9090909090909091,
+      "val_macro_precision": 0.8142851845552637,
+      "val_macro_recall": 0.8261786730112521,
+      "val_macro_f1": 0.815818009402921,
+      "val_loss": 0.4738968068361282
+    },
+    {
+      "epoch": 20,
+      "train_loss": 0.28687820129493286,
+      "val_accuracy": 0.8493506493506493,
+      "val_macro_precision": 0.7304312953340413,
+      "val_macro_recall": 0.8521950397516009,
+      "val_macro_f1": 0.763975175445419,
+      "val_loss": 0.4119327415525913
+    }
+  ],
+  "args": {
+    "data": "/Users/shaonichakravarty/Documents/IIIT_Dharwad/research_project/Mtech_project/multimodal_datapipeline/data/processed/baseline_3_image_only.csv",
+    "out_dir": "results/baseline_3_image_only_full/dinov2_linear",
+    "image_size": 128,
+    "epochs": 20,
+    "batch_size": 16,
+    "learning_rate": 0.001,
+    "weight_decay": 0.0001,
+    "dropout": 0.25,
+    "model": "dinov2_linear",
+    "dinov2_model_name": "facebook/dinov2-small",
+    "augment": false,
+    "cache_images": true,
+    "log_every": 1,
+    "save_model": false,
+    "test_size": 0.2,
+    "val_size": 0.1,
+    "seed": 42,
+    "num_workers": 0,
+    "device": "auto"
+  }
+}

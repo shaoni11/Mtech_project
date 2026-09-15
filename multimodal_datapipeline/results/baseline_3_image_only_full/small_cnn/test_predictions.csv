@@ -1,0 +1,772 @@
+compound,concentration,plate,well,replicate,true_moa,predicted_moa,confidence
+DMSO,0.000000,Week9_39222,F11,3,DMSO,DMSO,0.988007664680481
+taxol,0.300000,Week1_22141,D05,2,Microtubule stabilizers,Microtubule stabilizers,0.7980378270149231
+taxol,0.300000,Week9_39301,E02,3,Microtubule stabilizers,Microtubule stabilizers,0.5302938222885132
+taxol,0.300000,Week9_39221,B11,2,Microtubule stabilizers,Protein degradation,0.44919833540916443
+mitomycin C,1.000000,Week4_27861,G05,3,DNA damage,DNA damage,0.8743733167648315
+DMSO,0.000000,Week8_38203,F11,1,DMSO,DNA replication,0.9366284012794495
+taxol,0.300000,Week1_22361,F02,1,Microtubule stabilizers,Microtubule stabilizers,0.9525159597396851
+proteasome inhibitor I,0.100000,Week7_34341,D07,1,Protein degradation,Protein degradation,0.6940632462501526
+taxol,0.300000,Week4_27861,G02,3,Microtubule stabilizers,Microtubule stabilizers,0.7594804167747498
+AZ138,0.030000,Week10_40111,C09,1,Eg5 inhibitors,Eg5 inhibitors,0.9905645847320557
+DMSO,0.000000,Week2_24401,C02,3,DMSO,DMSO,0.9941883087158203
+DMSO,0.000000,Week4_27801,F11,1,DMSO,DMSO,0.6574875116348267
+taxol,0.300000,Week5_29321,C11,2,Microtubule stabilizers,Microtubule stabilizers,0.9830233454704285
+taxol,0.300000,Week7_34341,F02,1,Microtubule stabilizers,Microtubule stabilizers,0.9484255909919739
+DMSO,0.000000,Week3_25421,C02,1,DMSO,DMSO,0.9910151362419128
+simvastatin,6.000000,Week9_39282,D04,1,Cholesterol-lowering,Cholesterol-lowering,0.9775853157043457
+taxol,0.300000,Week4_27521,E02,2,Microtubule stabilizers,Microtubule stabilizers,0.9715225100517273
+taxol,0.300000,Week2_24381,E02,2,Microtubule stabilizers,Protein degradation,0.6986796855926514
+taxol,0.300000,Week6_31661,F02,2,Microtubule stabilizers,Microtubule stabilizers,0.47431525588035583
+AZ-A,30.000000,Week1_22123,G03,1,Aurora kinase inhibitors,Aurora kinase inhibitors,0.9960635304450989
+AZ-C,0.030000,Week3_25421,D06,1,Eg5 inhibitors,Eg5 inhibitors,0.9998751878738403
+DMSO,0.000000,Week4_27861,C02,3,DMSO,Kinase inhibitors,0.6109579801559448
+AZ258,0.300000,Week4_27801,C07,1,Aurora kinase inhibitors,Aurora kinase inhibitors,0.9951456189155579
+nocodazole,3.000000,Week1_22141,E03,2,Microtubule destabilizers,Microtubule destabilizers,0.9936408400535583
+DMSO,0.000000,Week1_22161,B02,3,DMSO,DMSO,0.6884146332740784
+DMSO,0.000000,Week5_28901,F11,1,DMSO,DMSO,0.9228556156158447
+taxol,0.300000,Week3_25681,F02,1,Microtubule stabilizers,Microtubule destabilizers,0.6557175517082214
+DMSO,0.000000,Week10_40111,B02,1,DMSO,Kinase inhibitors,0.8963193297386169
+floxuridine,30.000000,Week9_39283,B04,2,DNA replication,DNA replication,0.9999262094497681
+mitomycin C,0.100000,Week4_27821,G07,2,DNA damage,DNA damage,0.884755551815033
+DMSO,0.000000,Week6_31661,B02,2,DMSO,DMSO,0.9748093485832214
+DMSO,0.000000,Week8_38221,D02,2,DMSO,DNA replication,0.8379461765289307
+proteasome inhibitor I,3.000000,Week7_34381,D04,3,Protein degradation,DNA replication,0.9677755832672119
+taxol,0.300000,Week4_27821,E02,2,Microtubule stabilizers,Microtubule stabilizers,0.948553740978241
+taxol,0.300000,Week4_27481,E02,1,Microtubule stabilizers,Microtubule stabilizers,0.8111404180526733
+DMSO,0.000000,Week1_22141,C02,2,DMSO,Kinase inhibitors,0.6573784351348877
+taxol,0.300000,Week4_27821,G02,2,Microtubule stabilizers,Microtubule stabilizers,0.7157520055770874
+DMSO,0.000000,Week4_27821,C02,2,DMSO,Kinase inhibitors,0.3805369436740875
+DMSO,0.000000,Week2_24361,E11,1,DMSO,DMSO,0.5741655230522156
+taxol,0.300000,Week10_40111,B11,1,Microtubule stabilizers,Microtubule stabilizers,0.9490397572517395
+DMSO,0.000000,Week6_31641,E11,1,DMSO,DMSO,0.9974219799041748
+AZ-A,0.100000,Week1_22123,G08,1,Aurora kinase inhibitors,Aurora kinase inhibitors,0.9201090931892395
+taxol,0.300000,Week9_39222,E02,3,Microtubule stabilizers,Eg5 inhibitors,0.55466228723526
+DMSO,0.000000,Week2_24381,F11,2,DMSO,Protein degradation,0.7383168339729309
+taxol,0.300000,Week2_24121,E02,1,Microtubule stabilizers,Protein degradation,0.5084010362625122
+AZ138,0.100000,Week10_40111,C08,1,Eg5 inhibitors,Eg5 inhibitors,0.9998601675033569
+DMSO,0.000000,Week7_34681,C02,3,DMSO,Kinase inhibitors,0.9455887675285339
+simvastatin,2.000000,Week9_39282,D05,1,Cholesterol-lowering,Cholesterol-lowering,0.42298346757888794
+taxol,0.300000,Week4_27481,G02,1,Microtubule stabilizers,Microtubule stabilizers,0.5552018284797668
+demecolcine,1.000000,Week3_25681,B05,1,Microtubule destabilizers,Microtubule destabilizers,0.996088981628418
+taxol,0.300000,Week6_32121,B11,2,Microtubule stabilizers,Microtubule stabilizers,0.8029510378837585
+DMSO,0.000000,Week7_34341,D02,1,DMSO,DMSO,0.9950390458106995
+taxol,0.300000,Week6_31641,F02,1,Microtubule stabilizers,Eg5 inhibitors,0.49367207288742065
+taxol,0.300000,Week1_22361,D11,1,Microtubule stabilizers,Microtubule stabilizers,0.9184949398040771
+taxol,0.300000,Week6_31661,D11,2,Microtubule stabilizers,Microtubule stabilizers,0.5618374347686768
+taxol,0.300000,Week10_40115,G02,2,Microtubule stabilizers,Microtubule stabilizers,0.7236597537994385
+cyclohexamide,50.000000,Week4_27821,B03,2,Protein synthesis,Protein synthesis,0.9028105735778809
+taxol,0.300000,Week6_32161,F02,3,Microtubule stabilizers,Microtubule stabilizers,0.5314661860466003
+taxol,0.300000,Week5_28921,D11,2,Microtubule stabilizers,Eg5 inhibitors,0.4614889323711395
+taxol,0.300000,Week4_27861,F02,3,Microtubule stabilizers,Eg5 inhibitors,0.5731832385063171
+taxol,0.300000,Week8_38241,F02,3,Microtubule stabilizers,Microtubule stabilizers,0.8068588376045227
+DMSO,0.000000,Week2_24381,C02,2,DMSO,Protein degradation,0.8653537631034851
+DMSO,0.000000,Week4_27481,E11,1,DMSO,DNA replication,0.8760284185409546
+DMSO,0.000000,Week10_40119,C02,3,DMSO,Kinase inhibitors,0.8240377902984619
+latrunculin B,3.000000,Week1_22381,B05,2,Actin disruptors,DMSO,0.6234311461448669
+taxol,0.300000,Week6_32161,C11,3,Microtubule stabilizers,Microtubule stabilizers,0.4031311869621277
+DMSO,0.000000,Week4_27542,D02,3,DMSO,DNA replication,0.9396036863327026
+taxol,0.300000,Week2_24121,G02,1,Microtubule stabilizers,Microtubule stabilizers,0.8370298743247986
+mitoxantrone,0.003000,Week9_39301,F10,3,DNA replication,DNA replication,0.9999431371688843
+emetine,0.300000,Week3_25681,C07,1,Protein synthesis,Protein degradation,0.5907154679298401
+AZ-U,3.000000,Week10_40111,D05,1,Epithelial,Epithelial,0.9999232292175293
+DMSO,0.000000,Week10_40119,E11,3,DMSO,DMSO,0.7447047829627991
+demecolcine,0.300000,Week3_25721,B06,3,Microtubule destabilizers,Microtubule destabilizers,0.9999269247055054
+mitomycin C,1.000000,Week4_27821,G05,2,DNA damage,DNA damage,0.9828622937202454
+taxol,0.300000,Week5_28921,E02,2,Microtubule stabilizers,Microtubule stabilizers,0.5632038116455078
+taxol,0.300000,Week3_25441,F02,2,Microtubule stabilizers,Protein degradation,0.296606183052063
+taxol,0.300000,Week7_34641,F02,1,Microtubule stabilizers,Microtubule destabilizers,0.8650901317596436
+taxol,0.300000,Week2_24161,E02,3,Microtubule stabilizers,Microtubule stabilizers,0.9644033312797546
+taxol,0.300000,Week3_25721,G02,3,Microtubule stabilizers,Microtubule stabilizers,0.9731848239898682
+demecolcine,10.000000,Week3_25721,B03,3,Microtubule destabilizers,Microtubule destabilizers,0.9998763799667358
+vincristine,0.300000,Week3_25461,B06,3,Microtubule destabilizers,Microtubule destabilizers,0.9983331561088562
+DMSO,0.000000,Week5_29301,F11,1,DMSO,DMSO,0.46049606800079346
+taxol,0.300000,Week7_34341,D11,1,Microtubule stabilizers,Eg5 inhibitors,0.5317854285240173
+DMSO,0.000000,Week7_34641,G11,1,DMSO,Kinase inhibitors,0.9995923638343811
+taxol,0.300000,Week3_25721,D11,3,Microtubule stabilizers,Microtubule stabilizers,0.980968713760376
+vincristine,0.003000,Week3_25421,B10,1,Microtubule destabilizers,Microtubule destabilizers,0.995596706867218
+docetaxel,0.100000,Week7_34341,C05,1,Microtubule stabilizers,Microtubule stabilizers,0.9006895422935486
+taxol,0.300000,Week10_40119,E02,3,Microtubule stabilizers,Microtubule stabilizers,0.9441539645195007
+etoposide,1.000000,Week3_25441,F06,2,DNA damage,DNA damage,0.7693397998809814
+DMSO,0.000000,Week2_24401,C02,3,DMSO,DMSO,0.716002881526947
+demecolcine,1.000000,Week3_25681,B05,1,Microtubule destabilizers,Microtubule destabilizers,0.9681223630905151
+DMSO,0.000000,Week3_25721,D02,3,DMSO,Kinase inhibitors,0.5243592262268066
+simvastatin,2.000000,Week9_39283,D05,2,Cholesterol-lowering,DMSO,0.9351642727851868
+DMSO,0.000000,Week1_22361,D02,1,DMSO,DMSO,0.8529065251350403
+DMSO,0.000000,Week3_25461,G11,3,DMSO,Kinase inhibitors,0.6102311015129089
+taxol,0.300000,Week1_22141,F02,2,Microtubule stabilizers,Microtubule stabilizers,0.9874738454818726
+taxol,0.300000,Week2_24401,C11,3,Microtubule stabilizers,Microtubule stabilizers,0.5319955348968506
+vincristine,0.010000,Week3_25421,B09,1,Microtubule destabilizers,Microtubule destabilizers,0.9988573789596558
+DMSO,0.000000,Week5_28921,E11,2,DMSO,DMSO,0.8453924655914307
+DMSO,0.000000,Week2_24121,C02,1,DMSO,DMSO,0.9841656684875488
+AZ-A,10.000000,Week1_22123,G04,1,Aurora kinase inhibitors,Aurora kinase inhibitors,0.9479852914810181
+DMSO,0.000000,Week4_27542,D02,3,DMSO,DMSO,0.6569863557815552
+emetine,0.300000,Week3_25681,C07,1,Protein synthesis,Protein degradation,0.747234582901001
+DMSO,0.000000,Week5_29341,E11,3,DMSO,DMSO,0.8812881112098694
+taxol,0.300000,Week10_40119,D11,3,Microtubule stabilizers,Microtubule stabilizers,0.8614277839660645
+taxol,0.300000,Week1_22381,G02,2,Microtubule stabilizers,Microtubule destabilizers,0.4181174337863922
+ALLN,3.000000,Week2_24121,D06,1,Protein degradation,DNA replication,0.8789651393890381
+DMSO,0.000000,Week1_22381,E11,2,DMSO,Kinase inhibitors,0.8615314960479736
+taxol,0.300000,Week10_40115,E02,2,Microtubule stabilizers,Microtubule stabilizers,0.7308251261711121
+mitomycin C,3.000000,Week4_27821,G04,2,DNA damage,DNA replication,0.8117063641548157
+AZ-C,0.001000,Week3_25461,D09,3,Eg5 inhibitors,Eg5 inhibitors,0.9959814548492432
+taxol,0.300000,Week9_39283,D11,2,Microtubule stabilizers,Microtubule stabilizers,0.6917818188667297
+MG-132,0.100000,Week2_24361,C09,1,Protein degradation,Protein degradation,0.7008407711982727
+mitomycin C,3.000000,Week4_27821,G04,2,DNA damage,DNA replication,0.9417479038238525
+taxol,0.300000,Week2_24161,G02,3,Microtubule stabilizers,Microtubule stabilizers,0.9789961576461792
+AZ-C,0.300000,Week3_25461,D04,3,Eg5 inhibitors,Eg5 inhibitors,0.9402110576629639
+DMSO,0.000000,Week9_39221,C02,2,DMSO,DNA replication,0.9837126731872559
+taxol,0.300000,Week6_32121,D11,2,Microtubule stabilizers,Microtubule stabilizers,0.5758793950080872
+taxol,0.300000,Week1_22401,D11,3,Microtubule stabilizers,Microtubule stabilizers,0.9835228323936462
+DMSO,0.000000,Week5_29301,C02,1,DMSO,DMSO,0.9388121962547302
+DMSO,0.000000,Week6_32121,G11,2,DMSO,DNA replication,0.5746678113937378
+AZ258,1.000000,Week4_27801,C06,1,Aurora kinase inhibitors,Aurora kinase inhibitors,0.9889854192733765
+cytochalasin B,30.000000,Week1_22161,B03,3,Actin disruptors,Protein degradation,0.6747108697891235
+DMSO,0.000000,Week2_24121,G11,1,DMSO,DMSO,0.9996428489685059
+mitoxantrone,0.010000,Week9_39282,F09,1,DNA replication,DNA replication,0.981259286403656
+docetaxel,0.100000,Week7_34641,C05,1,Microtubule stabilizers,Microtubule stabilizers,0.94415283203125
+DMSO,0.000000,Week9_39221,D02,2,DMSO,DMSO,0.43791162967681885
+DMSO,0.000000,Week9_39282,G11,1,DMSO,DMSO,0.9187073111534119
+taxol,0.300000,Week4_27821,D11,2,Microtubule stabilizers,Microtubule stabilizers,0.905436635017395
+taxol,0.300000,Week3_25681,B11,1,Microtubule stabilizers,Microtubule destabilizers,0.9000473618507385
+DMSO,0.000000,Week2_24141,D02,2,DMSO,DMSO,0.9907230734825134
+taxol,0.300000,Week5_29341,C11,3,Microtubule stabilizers,Microtubule stabilizers,0.8024284839630127
+taxol,0.300000,Week4_27542,G02,3,Microtubule stabilizers,Microtubule stabilizers,0.668484091758728
+taxol,0.300000,Week2_24141,B11,2,Microtubule stabilizers,Eg5 inhibitors,0.6270930171012878
+docetaxel,0.030000,Week7_34641,C06,1,Microtubule stabilizers,Microtubule stabilizers,0.9999501705169678
+taxol,1.000000,Week1_22161,D04,3,Microtubule stabilizers,Microtubule stabilizers,0.9377017021179199
+taxol,0.300000,Week1_22381,E02,2,Microtubule stabilizers,Microtubule stabilizers,0.9777761101722717
+taxol,0.300000,Week2_24121,E02,1,Microtubule stabilizers,Microtubule stabilizers,0.8444855809211731
+DMSO,0.000000,Week7_34661,G11,2,DMSO,Kinase inhibitors,0.6411488652229309
+DMSO,0.000000,Week8_38221,G11,2,DMSO,DMSO,0.6921254992485046
+taxol,0.300000,Week10_40119,C11,3,Microtubule stabilizers,Microtubule stabilizers,0.8533608317375183
+taxol,0.300000,Week4_27821,E02,2,Microtubule stabilizers,Microtubule stabilizers,0.4871150851249695
+DMSO,0.000000,Week9_39222,C02,3,DMSO,Kinase inhibitors,0.3326704502105713
+DMSO,0.000000,Week4_27481,G11,1,DMSO,DNA replication,0.8847891688346863
+DMSO,0.000000,Week5_29341,G11,3,DMSO,DMSO,0.8821451663970947
+taxol,0.300000,Week1_22381,D11,2,Microtubule stabilizers,Microtubule stabilizers,0.9895639419555664
+cyclohexamide,50.000000,Week4_27861,B03,3,Protein synthesis,Protein synthesis,0.928020179271698
+anisomycin,1.000000,Week4_27481,B05,1,Protein synthesis,Protein degradation,0.6283320188522339
+DMSO,0.000000,Week3_25421,G11,1,DMSO,DMSO,0.7546131014823914
+DMSO,0.000000,Week6_32121,B02,2,DMSO,DMSO,0.9767681360244751
+taxol,0.300000,Week9_39221,C11,2,Microtubule stabilizers,Microtubule stabilizers,0.48173877596855164
+DMSO,0.000000,Week3_25701,E11,2,DMSO,DMSO,0.907331109046936
+ALLN,3.000000,Week2_24141,D06,2,Protein degradation,DNA replication,0.7195599675178528
+DMSO,0.000000,Week5_29321,B02,2,DMSO,Kinase inhibitors,0.7906579971313477
+taxol,0.300000,Week8_38341,C11,1,Microtubule stabilizers,DNA replication,0.5332750678062439
+taxol,0.300000,Week5_29321,C11,2,Microtubule stabilizers,Eg5 inhibitors,0.869050920009613
+vincristine,0.100000,Week3_25461,B07,3,Microtubule destabilizers,Microtubule destabilizers,0.9939385652542114
+docetaxel,0.100000,Week7_34641,C05,1,Microtubule stabilizers,Microtubule stabilizers,0.9990697503089905
+taxol,0.300000,Week10_40115,G02,2,Microtubule stabilizers,Microtubule stabilizers,0.538201630115509
+taxol,0.300000,Week1_22123,D05,1,Microtubule stabilizers,Microtubule stabilizers,0.9966760873794556
+taxol,0.300000,Week4_27801,D11,1,Microtubule stabilizers,Eg5 inhibitors,0.9101577401161194
+taxol,0.300000,Week9_39222,F02,3,Microtubule stabilizers,Microtubule stabilizers,0.8802804350852966
+ALLN,100.000000,Week2_24161,D03,3,Protein degradation,Protein degradation,0.9533473253250122
+taxol,0.300000,Week4_27821,G02,2,Microtubule stabilizers,Microtubule stabilizers,0.7730352282524109
+taxol,0.300000,Week3_25701,E02,2,Microtubule stabilizers,Eg5 inhibitors,0.5739884972572327
+AZ-C,0.003000,Week3_25441,D08,2,Eg5 inhibitors,Eg5 inhibitors,0.9673275947570801
+taxol,0.300000,Week3_25421,E02,1,Microtubule stabilizers,Microtubule stabilizers,0.9915476441383362
+proteasome inhibitor I,3.000000,Week7_34641,D04,1,Protein degradation,Protein degradation,0.7833095192909241
+DMSO,0.000000,Week1_22141,F11,2,DMSO,DMSO,0.574622392654419
+DMSO,0.000000,Week2_24141,C02,2,DMSO,DMSO,0.5235375165939331
+etoposide,1.000000,Week3_25461,F06,3,DNA damage,DNA damage,0.8921607136726379
+mevinolin/lovastatin,1.500000,Week9_39222,E06,3,Cholesterol-lowering,DMSO,0.6241437792778015
+DMSO,0.000000,Week1_22381,C02,2,DMSO,DMSO,0.8214535713195801
+DMSO,0.000000,Week9_39222,G11,3,DMSO,DMSO,0.8046733736991882
+cytochalasin B,10.000000,Week1_22161,B04,3,Actin disruptors,DMSO,0.6796672940254211
+DMSO,0.000000,Week4_27821,G11,2,DMSO,DMSO,0.9004578590393066
+epothilone B,0.100000,Week1_22361,D06,1,Microtubule stabilizers,Microtubule stabilizers,0.8203610181808472
+DMSO,0.000000,Week10_40111,D02,1,DMSO,Kinase inhibitors,0.8722922801971436
+DMSO,0.000000,Week4_27861,E11,3,DMSO,DNA replication,0.8270779848098755
+DMSO,0.000000,Week1_22141,D02,2,DMSO,DMSO,0.5669270157814026
+DMSO,0.000000,Week1_22401,F11,3,DMSO,DNA replication,0.6893438100814819
+AZ841,0.100000,Week3_25461,E08,3,Aurora kinase inhibitors,Aurora kinase inhibitors,0.9530013799667358
+camptothecin,0.030000,Week8_38221,C08,2,DNA replication,DNA replication,0.9999860525131226
+taxol,0.300000,Week7_34381,C11,3,Microtubule stabilizers,Microtubule stabilizers,0.7531922459602356
+floxuridine,30.000000,Week9_39283,B04,2,DNA replication,DNA replication,0.9996521472930908
+DMSO,0.000000,Week4_27861,G11,3,DMSO,DNA replication,0.6151023507118225
+taxol,0.300000,Week1_22123,D05,1,Microtubule stabilizers,Microtubule stabilizers,0.9970965385437012
+DMSO,0.000000,Week7_34661,B02,2,DMSO,Kinase inhibitors,0.9949963092803955
+AZ258,1.000000,Week4_27821,C06,2,Aurora kinase inhibitors,Aurora kinase inhibitors,0.9995132684707642
+taxol,0.300000,Week9_39221,F02,2,Microtubule stabilizers,Microtubule stabilizers,0.7543705701828003
+taxol,0.300000,Week7_34681,D11,3,Microtubule stabilizers,Microtubule destabilizers,0.5805184245109558
+DMSO,0.000000,Week5_28901,B02,1,DMSO,DNA replication,0.7150652408599854
+DMSO,0.000000,Week9_39283,F11,2,DMSO,DNA replication,0.7742972373962402
+cyclohexamide,50.000000,Week4_27861,B03,3,Protein synthesis,Protein degradation,0.47105103731155396
+DMSO,0.000000,Week4_27521,E11,2,DMSO,DMSO,0.950366199016571
+taxol,0.300000,Week5_28901,C11,1,Microtubule stabilizers,Microtubule stabilizers,0.7094738483428955
+taxol,0.300000,Week7_34341,B11,1,Microtubule stabilizers,Eg5 inhibitors,0.634286105632782
+DMSO,0.000000,Week9_39283,C02,2,DMSO,DNA replication,0.6335787773132324
+DMSO,0.000000,Week4_27481,C02,1,DMSO,DMSO,0.9600781798362732
+taxol,0.300000,Week4_27861,F02,3,Microtubule stabilizers,Microtubule stabilizers,0.9018682241439819
+DMSO,0.000000,Week5_29301,E11,1,DMSO,Kinase inhibitors,0.707089364528656
+DMSO,0.000000,Week6_31681,F11,3,DMSO,DMSO,0.7193654775619507
+DMSO,0.000000,Week7_34661,D02,2,DMSO,Kinase inhibitors,0.9727193117141724
+taxol,0.300000,Week9_39222,D11,3,Microtubule stabilizers,Microtubule stabilizers,0.6006840467453003
+cyclohexamide,15.000000,Week4_27861,B04,3,Protein synthesis,Protein degradation,0.5813231468200684
+taxol,0.300000,Week8_38241,B11,3,Microtubule stabilizers,Microtubule stabilizers,0.3056454360485077
+epothilone B,0.300000,Week1_22361,D05,1,Microtubule stabilizers,Microtubule stabilizers,0.9688917994499207
+AZ138,0.100000,Week10_40119,C08,3,Eg5 inhibitors,Eg5 inhibitors,0.988006055355072
+DMSO,0.000000,Week9_39206,C02,1,DMSO,DMSO,0.9978147745132446
+AZ138,0.100000,Week10_40115,C08,2,Eg5 inhibitors,Eg5 inhibitors,0.9242860674858093
+DMSO,0.000000,Week4_27801,C02,1,DMSO,DMSO,0.9225271940231323
+DMSO,0.000000,Week6_32121,C02,2,DMSO,DMSO,0.930742084980011
+epothilone B,0.100000,Week1_22361,D06,1,Microtubule stabilizers,Microtubule stabilizers,0.36010584235191345
+taxol,0.300000,Week6_31681,B11,3,Microtubule stabilizers,Microtubule stabilizers,0.47921040654182434
+taxol,0.300000,Week8_38342,B11,2,Microtubule stabilizers,Eg5 inhibitors,0.7003258466720581
+DMSO,0.000000,Week5_28961,E11,3,DMSO,DMSO,0.8673015236854553
+DMSO,0.000000,Week9_39282,B02,1,DMSO,DMSO,0.7201034426689148
+camptothecin,0.030000,Week8_38221,C08,2,DNA replication,DNA replication,0.9999723434448242
+DMSO,0.000000,Week1_22161,C02,3,DMSO,DMSO,0.3682345449924469
+taxol,0.300000,Week10_40115,B11,2,Microtubule stabilizers,Eg5 inhibitors,0.9228218793869019
+etoposide,3.000000,Week3_25441,F05,2,DNA damage,DNA damage,0.766071617603302
+DMSO,0.000000,Week7_34681,C02,3,DMSO,Kinase inhibitors,0.9511695504188538
+taxol,0.300000,Week5_29341,B11,3,Microtubule stabilizers,Microtubule stabilizers,0.7453358769416809
+cytochalasin B,30.000000,Week1_22141,B03,2,Actin disruptors,Protein degradation,0.7411079406738281
+DMSO,0.000000,Week3_25721,F11,3,DMSO,DMSO,0.40626370906829834
+vincristine,0.010000,Week3_25441,B09,2,Microtubule destabilizers,Microtubule destabilizers,0.9957901835441589
+demecolcine,0.300000,Week3_25681,B06,1,Microtubule destabilizers,Microtubule destabilizers,0.9992517828941345
+DMSO,0.000000,Week5_28901,G11,1,DMSO,DMSO,0.6721993684768677
+AZ-J,1.000000,Week5_28901,B05,1,Epithelial,Epithelial,0.9224368929862976
+DMSO,0.000000,Week9_39222,D02,3,DMSO,DMSO,0.9811773300170898
+DMSO,0.000000,Week2_24381,F11,2,DMSO,DMSO,0.6389115452766418
+DMSO,0.000000,Week2_24141,G11,2,DMSO,DMSO,0.9922863245010376
+DMSO,0.000000,Week4_27521,F11,2,DMSO,DMSO,0.6707394123077393
+taxol,0.300000,Week1_22361,F02,1,Microtubule stabilizers,Microtubule stabilizers,0.9724605679512024
+taxol,0.300000,Week9_39206,C11,1,Microtubule stabilizers,Eg5 inhibitors,0.7075321078300476
+taxol,0.300000,Week7_34641,B11,1,Microtubule stabilizers,Microtubule destabilizers,0.5024805068969727
+taxol,0.300000,Week9_39206,D11,1,Microtubule stabilizers,Microtubule stabilizers,0.5919111967086792
+taxol,0.300000,Week4_27821,B11,2,Microtubule stabilizers,Eg5 inhibitors,0.38543128967285156
+DMSO,0.000000,Week7_34681,G11,3,DMSO,Kinase inhibitors,0.9726786017417908
+MG-132,3.000000,Week2_24401,C06,3,Protein degradation,Protein degradation,0.947577714920044
+taxol,0.300000,Week10_40119,F02,3,Microtubule stabilizers,Microtubule stabilizers,0.8729127049446106
+DMSO,0.000000,Week8_38203,D02,1,DMSO,DNA replication,0.836699366569519
+AZ-C,0.100000,Week3_25441,D05,2,Eg5 inhibitors,Eg5 inhibitors,0.9815459847450256
+taxol,0.300000,Week9_39283,C11,2,Microtubule stabilizers,Microtubule stabilizers,0.9036363363265991
+taxol,0.300000,Week3_25441,E02,2,Microtubule stabilizers,Microtubule stabilizers,0.9783564209938049
+demecolcine,10.000000,Week3_25681,B03,1,Microtubule destabilizers,Microtubule destabilizers,0.9986905455589294
+DMSO,0.000000,Week2_24161,B02,3,DMSO,DMSO,0.8588849306106567
+DMSO,0.000000,Week8_38203,C02,1,DMSO,DNA replication,0.8650692105293274
+AZ138,3.000000,Week10_40119,C05,3,Eg5 inhibitors,Eg5 inhibitors,0.9986780285835266
+taxol,0.300000,Week4_27521,B11,2,Microtubule stabilizers,Microtubule stabilizers,0.46317875385284424
+taxol,0.300000,Week5_28901,F02,1,Microtubule stabilizers,Microtubule stabilizers,0.9723348617553711
+AZ-A,10.000000,Week1_22141,G04,2,Aurora kinase inhibitors,Aurora kinase inhibitors,0.9994668364524841
+taxol,0.300000,Week3_25681,G02,1,Microtubule stabilizers,Microtubule destabilizers,0.7796730995178223
+taxol,0.300000,Week5_29301,E02,1,Microtubule stabilizers,Microtubule stabilizers,0.7640975117683411
+DMSO,0.000000,Week4_27521,D02,2,DMSO,DMSO,0.678806483745575
+taxol,0.300000,Week9_39301,B11,3,Microtubule stabilizers,Microtubule stabilizers,0.42474690079689026
+taxol,0.300000,Week2_24381,G02,2,Microtubule stabilizers,Cholesterol-lowering,0.36164945363998413
+AZ138,0.030000,Week10_40111,C09,1,Eg5 inhibitors,Eg5 inhibitors,0.9900373220443726
+taxol,0.300000,Week4_27542,F02,3,Microtubule stabilizers,Eg5 inhibitors,0.5554247498512268
+AZ841,0.100000,Week3_25421,E08,1,Aurora kinase inhibitors,Aurora kinase inhibitors,0.9905446767807007
+taxol,0.300000,Week6_31681,F02,3,Microtubule stabilizers,Eg5 inhibitors,0.5336527824401855
+DMSO,0.000000,Week6_31641,C02,1,DMSO,DMSO,0.8983674049377441
+DMSO,0.000000,Week10_40119,D02,3,DMSO,Kinase inhibitors,0.8365200757980347
+PP-2,3.000000,Week8_38341,E05,1,Epithelial,DNA replication,0.9203423857688904
+DMSO,0.000000,Week4_27861,B02,3,DMSO,DMSO,0.50456702709198
+demecolcine,1.000000,Week3_25721,B05,3,Microtubule destabilizers,Microtubule destabilizers,0.999363362789154
+taxol,0.300000,Week9_39283,B11,2,Microtubule stabilizers,Eg5 inhibitors,0.6293047666549683
+taxol,0.300000,Week9_39301,D11,3,Microtubule stabilizers,Protein degradation,0.2713887691497803
+taxol,0.300000,Week1_22161,D05,3,Microtubule stabilizers,Microtubule stabilizers,0.9008962512016296
+taxol,0.300000,Week7_34381,D11,3,Microtubule stabilizers,Microtubule stabilizers,0.5433855056762695
+DMSO,0.000000,Week10_40111,G11,1,DMSO,Kinase inhibitors,0.9052775502204895
+methotrexate,10.000000,Week2_24161,G03,3,DNA replication,DNA replication,0.9225241541862488
+DMSO,0.000000,Week5_29321,D02,2,DMSO,Kinase inhibitors,0.5352542996406555
+nocodazole,1.000000,Week1_22141,E04,2,Microtubule destabilizers,Microtubule destabilizers,0.9933820962905884
+taxol,0.300000,Week10_40111,E02,1,Microtubule stabilizers,Microtubule stabilizers,0.8863707780838013
+PP-2,10.000000,Week8_38342,E04,2,Epithelial,Epithelial,0.9522204399108887
+taxol,0.300000,Week8_38341,B11,1,Microtubule stabilizers,Eg5 inhibitors,0.5298446416854858
+DMSO,0.000000,Week10_40115,F11,2,DMSO,DMSO,0.9497538805007935
+taxol,0.300000,Week9_39282,B11,1,Microtubule stabilizers,Microtubule stabilizers,0.6988090872764587
+taxol,0.300000,Week4_27861,D11,3,Microtubule stabilizers,Microtubule stabilizers,0.7899459004402161
+DMSO,0.000000,Week3_25701,B02,2,DMSO,DMSO,0.7668337225914001
+DMSO,0.000000,Week6_31661,E11,2,DMSO,Kinase inhibitors,0.4786440134048462
+mitomycin C,3.000000,Week4_27861,G04,3,DNA damage,DNA replication,0.5428632497787476
+DMSO,0.000000,Week1_22123,C02,1,DMSO,Microtubule destabilizers,0.665758490562439
+DMSO,0.000000,Week3_25461,C02,3,DMSO,DMSO,0.8175162672996521
+DMSO,0.000000,Week5_28901,E11,1,DMSO,DMSO,0.5631412863731384
+simvastatin,6.000000,Week9_39283,D04,2,Cholesterol-lowering,Cholesterol-lowering,0.935404360294342
+etoposide,10.000000,Week3_25421,F04,1,DNA damage,DNA replication,0.9750152230262756
+DMSO,0.000000,Week1_22401,B02,3,DMSO,Kinase inhibitors,0.8986231088638306
+DMSO,0.000000,Week10_40119,C02,3,DMSO,Kinase inhibitors,0.9465632438659668
+DMSO,0.000000,Week1_22381,F11,2,DMSO,DMSO,0.9157773852348328
+DMSO,0.000000,Week5_29321,F11,2,DMSO,DMSO,0.7216067314147949
+AZ841,1.000000,Week3_25441,E06,2,Aurora kinase inhibitors,Aurora kinase inhibitors,0.9888327121734619
+ALLN,3.000000,Week2_24141,D06,2,Protein degradation,DNA replication,0.8761113882064819
+AZ-C,0.030000,Week3_25441,D06,2,Eg5 inhibitors,Eg5 inhibitors,0.9994877576828003
+DMSO,0.000000,Week10_40119,D02,3,DMSO,DMSO,0.5445986986160278
+alsterpaullone,1.000000,Week7_34661,G06,2,Kinase inhibitors,DMSO,0.3488682806491852
+DMSO,0.000000,Week3_25701,G11,2,DMSO,Kinase inhibitors,0.5924499034881592
+DMSO,0.000000,Week6_32121,D02,2,DMSO,DMSO,0.8948907256126404
+DMSO,0.000000,Week3_25701,D02,2,DMSO,DMSO,0.5831502079963684
+mevinolin/lovastatin,15.000000,Week9_39206,E04,1,Cholesterol-lowering,Cholesterol-lowering,0.7232635021209717
+taxol,0.300000,Week2_24381,F02,2,Microtubule stabilizers,Protein degradation,0.7654852867126465
+taxol,0.300000,Week3_25441,E02,2,Microtubule stabilizers,Microtubule stabilizers,0.7213953137397766
+anisomycin,0.300000,Week4_27521,B06,2,Protein synthesis,Protein degradation,0.6925759315490723
+taxol,0.300000,Week5_29341,C11,3,Microtubule stabilizers,Microtubule stabilizers,0.5499433279037476
+AZ841,0.300000,Week3_25461,E07,3,Aurora kinase inhibitors,Aurora kinase inhibitors,0.988564133644104
+DMSO,0.000000,Week2_24141,B02,2,DMSO,DMSO,0.9334821105003357
+taxol,0.300000,Week1_22381,B11,2,Microtubule stabilizers,Microtubule stabilizers,0.9198721051216125
+DMSO,0.000000,Week1_22123,E11,1,DMSO,Aurora kinase inhibitors,0.6225766539573669
+nocodazole,3.000000,Week1_22123,E03,1,Microtubule destabilizers,Microtubule destabilizers,0.9987590312957764
+taxol,0.300000,Week3_25461,D11,3,Microtubule stabilizers,Microtubule stabilizers,0.5902667045593262
+colchicine,0.030000,Week1_22401,E07,3,Microtubule destabilizers,Kinase inhibitors,0.732624351978302
+docetaxel,0.030000,Week7_34341,C06,1,Microtubule stabilizers,Microtubule stabilizers,0.7897454500198364
+DMSO,0.000000,Week5_28921,E11,2,DMSO,Kinase inhibitors,0.49859681725502014
+DMSO,0.000000,Week7_34381,F11,3,DMSO,DMSO,0.9219071865081787
+AZ-C,0.030000,Week3_25461,D06,3,Eg5 inhibitors,Eg5 inhibitors,0.9796944260597229
+taxol,0.300000,Week10_40119,G02,3,Microtubule stabilizers,Microtubule stabilizers,0.6211773157119751
+DMSO,0.000000,Week1_22161,D02,3,DMSO,Kinase inhibitors,0.7516837120056152
+taxol,0.300000,Week3_25421,E02,1,Microtubule stabilizers,Microtubule stabilizers,0.6949220299720764
+DMSO,0.000000,Week2_24161,B02,3,DMSO,DMSO,0.9241864085197449
+simvastatin,6.000000,Week9_39282,D04,1,Cholesterol-lowering,Kinase inhibitors,0.5437673330307007
+AZ-U,1.000000,Week10_40119,D06,3,Epithelial,Epithelial,0.9571120738983154
+AZ-U,1.000000,Week10_40111,D06,1,Epithelial,Epithelial,0.9984344840049744
+nocodazole,3.000000,Week1_22141,E03,2,Microtubule destabilizers,Microtubule destabilizers,0.9997614026069641
+DMSO,0.000000,Week10_40111,E11,1,DMSO,Kinase inhibitors,0.5213397145271301
+taxol,0.300000,Week6_32121,E02,2,Microtubule stabilizers,Microtubule stabilizers,0.9319101572036743
+DMSO,0.000000,Week7_34681,B02,3,DMSO,Kinase inhibitors,0.44782689213752747
+anisomycin,0.300000,Week4_27542,B06,3,Protein synthesis,Protein degradation,0.8176180124282837
+taxol,0.300000,Week1_22123,G02,1,Microtubule stabilizers,Microtubule stabilizers,0.9805364608764648
+DMSO,0.000000,Week9_39301,G11,3,DMSO,DNA replication,0.6306200623512268
+mevinolin/lovastatin,1.500000,Week9_39221,E06,2,Cholesterol-lowering,DMSO,0.8984853625297546
+AZ841,1.000000,Week3_25441,E06,2,Aurora kinase inhibitors,Aurora kinase inhibitors,0.9958785772323608
+DMSO,0.000000,Week5_28961,F11,3,DMSO,Kinase inhibitors,0.5954723358154297
+DMSO,0.000000,Week8_38203,E11,1,DMSO,DMSO,0.9014730453491211
+taxol,0.300000,Week1_22381,G02,2,Microtubule stabilizers,Microtubule stabilizers,0.9880667924880981
+DMSO,0.000000,Week3_25421,E11,1,DMSO,Kinase inhibitors,0.8748292326927185
+DMSO,0.000000,Week1_22141,C02,2,DMSO,DMSO,0.661902129650116
+latrunculin B,3.000000,Week1_22381,B05,2,Actin disruptors,Cholesterol-lowering,0.6986371278762817
+DMSO,0.000000,Week9_39222,E11,3,DMSO,DMSO,0.9277654886245728
+taxol,0.300000,Week7_34641,E02,1,Microtubule stabilizers,Microtubule destabilizers,0.6381657719612122
+taxol,0.300000,Week2_24361,G02,1,Microtubule stabilizers,Epithelial,0.41050371527671814
+DMSO,0.000000,Week6_31681,F11,3,DMSO,DMSO,0.7660932540893555
+DMSO,0.000000,Week9_39301,F11,3,DMSO,DNA replication,0.7892467975616455
+taxol,0.300000,Week5_29321,D11,2,Microtubule stabilizers,Eg5 inhibitors,0.9579167366027832
+DMSO,0.000000,Week1_22401,G11,3,DMSO,DMSO,0.6860142350196838
+AZ138,0.300000,Week10_40119,C07,3,Eg5 inhibitors,Eg5 inhibitors,0.9998818635940552
+taxol,0.300000,Week8_38203,C11,1,Microtubule stabilizers,Microtubule stabilizers,0.5425388216972351
+taxol,0.300000,Week2_24361,B11,1,Microtubule stabilizers,Protein degradation,0.7934045791625977
+colchicine,0.030000,Week1_22381,E07,2,Microtubule destabilizers,Kinase inhibitors,0.6520967483520508
+taxol,0.300000,Week5_29301,F02,1,Microtubule stabilizers,Eg5 inhibitors,0.5434284806251526
+taxol,0.300000,Week5_28901,C11,1,Microtubule stabilizers,Microtubule stabilizers,0.8875535130500793
+DMSO,0.000000,Week10_40111,F11,1,DMSO,Kinase inhibitors,0.9557093381881714
+taxol,0.300000,Week7_34681,C11,3,Microtubule stabilizers,Eg5 inhibitors,0.3791234493255615
+taxol,0.300000,Week2_24121,B11,1,Microtubule stabilizers,Protein degradation,0.41577813029289246
+etoposide,1.000000,Week3_25461,F06,3,DNA damage,DNA damage,0.5487450957298279
+DMSO,0.000000,Week10_40111,E11,1,DMSO,Kinase inhibitors,0.7560945749282837
+DMSO,0.000000,Week7_34641,B02,1,DMSO,Kinase inhibitors,0.9935371279716492
+taxol,0.300000,Week1_22401,B11,3,Microtubule stabilizers,Microtubule stabilizers,0.9755194783210754
+vincristine,1.000000,Week3_25441,B05,2,Microtubule destabilizers,Microtubule destabilizers,0.9891384243965149
+DMSO,0.000000,Week2_24381,B02,2,DMSO,Protein degradation,0.7954209446907043
+AZ138,3.000000,Week10_40119,C05,3,Eg5 inhibitors,Eg5 inhibitors,0.9999861717224121
+DMSO,0.000000,Week5_28921,D02,2,DMSO,DMSO,0.4221460521221161
+DMSO,0.000000,Week7_34381,C02,3,DMSO,DMSO,0.5528098940849304
+taxol,0.300000,Week3_25441,F02,2,Microtubule stabilizers,Microtubule stabilizers,0.7864536046981812
+DMSO,0.000000,Week2_24121,B02,1,DMSO,DMSO,0.7722347974777222
+DMSO,0.000000,Week4_27481,B02,1,DMSO,DMSO,0.8917542099952698
+anisomycin,1.000000,Week4_27542,B05,3,Protein synthesis,Protein synthesis,0.8861013650894165
+DMSO,0.000000,Week6_32161,F11,3,DMSO,DNA replication,0.9725469946861267
+taxol,0.300000,Week3_25461,D11,3,Microtubule stabilizers,Microtubule stabilizers,0.4480571150779724
+camptothecin,0.030000,Week8_38221,C08,2,DNA replication,DNA replication,0.9998103976249695
+taxol,0.300000,Week8_38342,G02,2,Microtubule stabilizers,Cholesterol-lowering,0.351601243019104
+mitomycin C,1.000000,Week4_27861,G05,3,DNA damage,DNA damage,0.8646084666252136
+simvastatin,2.000000,Week9_39283,D05,2,Cholesterol-lowering,DMSO,0.8654564619064331
+taxol,0.300000,Week7_34641,C11,1,Microtubule stabilizers,Epithelial,0.6435997486114502
+DMSO,0.000000,Week1_22141,F11,2,DMSO,DMSO,0.535037100315094
+taxol,0.300000,Week5_28921,B11,2,Microtubule stabilizers,Microtubule stabilizers,0.955827534198761
+DMSO,0.000000,Week1_22401,F11,3,DMSO,Kinase inhibitors,0.269812673330307
+taxol,0.300000,Week1_22161,D11,3,Microtubule stabilizers,Microtubule stabilizers,0.9821642637252808
+DMSO,0.000000,Week4_27521,E11,2,DMSO,DMSO,0.48974311351776123
+DMSO,0.000000,Week10_40111,F11,1,DMSO,Kinase inhibitors,0.8276320695877075
+taxol,0.300000,Week10_40115,D11,2,Microtubule stabilizers,Microtubule stabilizers,0.9716780185699463
+DMSO,0.000000,Week5_29341,E11,3,DMSO,DMSO,0.5564688444137573
+taxol,0.300000,Week5_28921,F02,2,Microtubule stabilizers,Eg5 inhibitors,0.36184874176979065
+taxol,0.300000,Week10_40111,F02,1,Microtubule stabilizers,Microtubule stabilizers,0.9138422012329102
+taxol,0.300000,Week6_31661,E02,2,Microtubule stabilizers,Eg5 inhibitors,0.7150524854660034
+camptothecin,0.010000,Week8_38221,C09,2,DNA replication,DNA replication,0.9999949932098389
+DMSO,0.000000,Week8_38342,G11,2,DMSO,DMSO,0.9949677586555481
+taxol,0.300000,Week4_27481,C11,1,Microtubule stabilizers,Eg5 inhibitors,0.7717962861061096
+DMSO,0.000000,Week3_25681,C02,1,DMSO,DMSO,0.9820117950439453
+DMSO,0.000000,Week4_27481,D02,1,DMSO,DMSO,0.4229819178581238
+DMSO,0.000000,Week10_40111,B02,1,DMSO,Kinase inhibitors,0.9137700200080872
+taxol,0.300000,Week3_25421,G02,1,Microtubule stabilizers,Microtubule stabilizers,0.8926395773887634
+latrunculin B,3.000000,Week1_22401,B05,3,Actin disruptors,DMSO,0.5916109085083008
+AZ-U,1.000000,Week10_40119,D06,3,Epithelial,Epithelial,0.9230235815048218
+DMSO,0.000000,Week6_31641,B02,1,DMSO,DNA replication,0.6127410531044006
+DMSO,0.000000,Week10_40111,G11,1,DMSO,Kinase inhibitors,0.9675466418266296
+DMSO,0.000000,Week8_38342,D02,2,DMSO,DMSO,0.9461755752563477
+DMSO,0.000000,Week5_28961,B02,3,DMSO,Kinase inhibitors,0.6830279231071472
+AZ-U,3.000000,Week10_40111,D05,1,Epithelial,Epithelial,0.9980523586273193
+DMSO,0.000000,Week8_38342,F11,2,DMSO,DMSO,0.9122821092605591
+docetaxel,0.300000,Week7_34641,C04,1,Microtubule stabilizers,Microtubule stabilizers,0.9647765755653381
+taxol,0.300000,Week7_34341,E02,1,Microtubule stabilizers,Microtubule stabilizers,0.7668477892875671
+mitomycin C,0.100000,Week4_27861,G07,3,DNA damage,DNA damage,0.975996196269989
+mevinolin/lovastatin,1.500000,Week9_39221,E06,2,Cholesterol-lowering,DMSO,0.9034448862075806
+docetaxel,0.300000,Week7_34641,C04,1,Microtubule stabilizers,Microtubule stabilizers,0.9962922930717468
+DMSO,0.000000,Week4_27861,G11,3,DMSO,DMSO,0.9721936583518982
+AZ-A,3.000000,Week1_22123,G05,1,Aurora kinase inhibitors,Aurora kinase inhibitors,0.99715256690979
+DMSO,0.000000,Week9_39206,D02,1,DMSO,DMSO,0.8949095010757446
+taxol,0.300000,Week8_38221,F02,2,Microtubule stabilizers,Microtubule stabilizers,0.5716311931610107
+alsterpaullone,1.000000,Week7_34681,G06,3,Kinase inhibitors,Kinase inhibitors,0.9598686695098877
+taxol,0.300000,Week3_25701,E02,2,Microtubule stabilizers,Microtubule stabilizers,0.9749881625175476
+AZ258,0.300000,Week4_27861,C07,3,Aurora kinase inhibitors,Aurora kinase inhibitors,0.9990845918655396
+DMSO,0.000000,Week8_38341,D02,1,DMSO,DNA replication,0.785505473613739
+DMSO,0.000000,Week4_27542,B02,3,DMSO,DMSO,0.6863330602645874
+DMSO,0.000000,Week1_22123,D02,1,DMSO,DMSO,0.5389482975006104
+taxol,0.300000,Week9_39222,B11,3,Microtubule stabilizers,Eg5 inhibitors,0.6635473966598511
+DMSO,0.000000,Week7_34641,E11,1,DMSO,Kinase inhibitors,0.9700219035148621
+DMSO,0.000000,Week6_31681,D02,3,DMSO,DMSO,0.9931641221046448
+DMSO,0.000000,Week10_40119,D02,3,DMSO,Kinase inhibitors,0.6840755939483643
+DMSO,0.000000,Week4_27521,B02,2,DMSO,DMSO,0.5924107432365417
+DMSO,0.000000,Week8_38221,F11,2,DMSO,DMSO,0.9764246940612793
+DMSO,0.000000,Week7_34341,D02,1,DMSO,DMSO,0.9889899492263794
+demecolcine,10.000000,Week3_25681,B03,1,Microtubule destabilizers,Microtubule destabilizers,0.9934424161911011
+DMSO,0.000000,Week1_22361,E11,1,DMSO,Kinase inhibitors,0.8075799942016602
+taxol,0.300000,Week1_22161,D05,3,Microtubule stabilizers,Microtubule stabilizers,0.4757941663265228
+taxol,0.300000,Week6_32161,B11,3,Microtubule stabilizers,Cholesterol-lowering,0.3045462369918823
+AZ-A,0.300000,Week1_22161,G07,3,Aurora kinase inhibitors,Aurora kinase inhibitors,0.9998468160629272
+mitoxantrone,0.003000,Week9_39282,F10,1,DNA replication,DNA replication,0.9169436693191528
+PD-169316,10.000000,Week7_34661,F04,2,Kinase inhibitors,Kinase inhibitors,0.9571191668510437
+DMSO,0.000000,Week2_24141,G11,2,DMSO,DMSO,0.6032915115356445
+taxol,0.300000,Week4_27801,B11,1,Microtubule stabilizers,Microtubule stabilizers,0.5097612738609314
+DMSO,0.000000,Week6_31661,C02,2,DMSO,DNA replication,0.9194582104682922
+taxol,0.300000,Week3_25681,C11,1,Microtubule stabilizers,Microtubule stabilizers,0.8351297974586487
+vincristine,1.000000,Week3_25441,B05,2,Microtubule destabilizers,Microtubule destabilizers,0.9850435256958008
+taxol,0.300000,Week4_27521,D11,2,Microtubule stabilizers,Microtubule stabilizers,0.5775472521781921
+DMSO,0.000000,Week4_27821,B02,2,DMSO,Kinase inhibitors,0.7310648560523987
+epothilone B,1.000000,Week1_22361,D04,1,Microtubule stabilizers,Microtubule stabilizers,0.721306324005127
+taxol,0.300000,Week10_40119,F02,3,Microtubule stabilizers,Microtubule stabilizers,0.6649473905563354
+DMSO,0.000000,Week3_25701,D02,2,DMSO,Kinase inhibitors,0.5292359590530396
+DMSO,0.000000,Week5_29301,B02,1,DMSO,DMSO,0.7191510796546936
+cytochalasin B,30.000000,Week1_22161,B03,3,Actin disruptors,DMSO,0.6756829619407654
+taxol,0.300000,Week6_31661,C11,2,Microtubule stabilizers,Microtubule stabilizers,0.6094637513160706
+taxol,0.300000,Week5_28921,D11,2,Microtubule stabilizers,Microtubule stabilizers,0.9452546834945679
+DMSO,0.000000,Week6_32161,C02,3,DMSO,DMSO,0.7181784510612488
+AZ841,0.100000,Week3_25461,E08,3,Aurora kinase inhibitors,Aurora kinase inhibitors,0.954957902431488
+taxol,0.300000,Week7_34661,G02,2,Microtubule stabilizers,Aurora kinase inhibitors,0.6717464923858643
+vincristine,0.010000,Week3_25441,B09,2,Microtubule destabilizers,Microtubule destabilizers,0.9879620671272278
+taxol,0.300000,Week3_25701,E02,2,Microtubule stabilizers,Microtubule stabilizers,0.8355631828308105
+taxol,0.300000,Week1_22141,B11,2,Microtubule stabilizers,Microtubule stabilizers,0.9956762194633484
+epothilone B,0.100000,Week1_22401,D06,3,Microtubule stabilizers,Microtubule stabilizers,0.9830437302589417
+DMSO,0.000000,Week6_31641,C02,1,DMSO,DMSO,0.9934132695198059
+DMSO,0.000000,Week4_27801,C02,1,DMSO,DMSO,0.5175384283065796
+AZ258,0.100000,Week4_27821,C08,2,Aurora kinase inhibitors,Aurora kinase inhibitors,0.9869201183319092
+taxol,0.300000,Week2_24161,C11,3,Microtubule stabilizers,Microtubule stabilizers,0.8898317217826843
+taxol,0.300000,Week2_24381,G02,2,Microtubule stabilizers,Microtubule stabilizers,0.5336564779281616
+taxol,0.300000,Week3_25461,E02,3,Microtubule stabilizers,Microtubule stabilizers,0.8002371788024902
+taxol,0.300000,Week3_25421,B11,1,Microtubule stabilizers,Microtubule stabilizers,0.9522727727890015
+DMSO,0.000000,Week7_34681,C02,3,DMSO,Kinase inhibitors,0.9509606957435608
+AZ-J,10.000000,Week5_28901,B03,1,Epithelial,Epithelial,0.9987554550170898
+DMSO,0.000000,Week8_38241,D02,3,DMSO,DNA replication,0.9806991219520569
+taxol,0.300000,Week7_34661,D11,2,Microtubule stabilizers,Microtubule destabilizers,0.7424142956733704
+DMSO,0.000000,Week4_27821,D02,2,DMSO,DMSO,0.48930883407592773
+taxol,0.300000,Week3_25461,E02,3,Microtubule stabilizers,Microtubule stabilizers,0.6241689324378967
+anisomycin,0.300000,Week4_27481,B06,1,Protein synthesis,Protein degradation,0.9560490846633911
+DMSO,0.000000,Week2_24361,C02,1,DMSO,DMSO,0.9466562867164612
+taxol,0.300000,Week10_40115,D11,2,Microtubule stabilizers,Microtubule stabilizers,0.9753878712654114
+PD-169316,10.000000,Week7_34681,F04,3,Kinase inhibitors,Kinase inhibitors,0.98446124792099
+taxol,0.300000,Week5_29341,G02,3,Microtubule stabilizers,Eg5 inhibitors,0.740323543548584
+taxol,0.300000,Week7_34661,B11,2,Microtubule stabilizers,Microtubule destabilizers,0.872488796710968
+taxol,0.300000,Week8_38342,C11,2,Microtubule stabilizers,Eg5 inhibitors,0.7546733021736145
+taxol,0.300000,Week1_22401,D11,3,Microtubule stabilizers,Microtubule stabilizers,0.9715844988822937
+DMSO,0.000000,Week1_22361,C02,1,DMSO,DMSO,0.5542312264442444
+taxol,0.300000,Week9_39221,G02,2,Microtubule stabilizers,Eg5 inhibitors,0.47129109501838684
+DMSO,0.000000,Week6_31641,F11,1,DMSO,DMSO,0.822666347026825
+AZ-A,3.000000,Week1_22141,G05,2,Aurora kinase inhibitors,Aurora kinase inhibitors,0.9999345541000366
+taxol,0.300000,Week3_25701,F02,2,Microtubule stabilizers,Microtubule stabilizers,0.6406479477882385
+taxol,0.300000,Week6_31681,D11,3,Microtubule stabilizers,Microtubule stabilizers,0.649664044380188
+taxol,0.300000,Week5_28961,G02,3,Microtubule stabilizers,Microtubule stabilizers,0.3085081875324249
+mitomycin C,0.300000,Week4_27821,G06,2,DNA damage,DNA damage,0.8577107191085815
+docetaxel,0.030000,Week7_34341,C06,1,Microtubule stabilizers,Microtubule destabilizers,0.5947325825691223
+taxol,0.300000,Week9_39283,D11,2,Microtubule stabilizers,Microtubule stabilizers,0.7652392983436584
+taxol,0.300000,Week2_24361,G02,1,Microtubule stabilizers,Protein degradation,0.7407315969467163
+DMSO,0.000000,Week9_39282,F11,1,DMSO,DMSO,0.9463343620300293
+AZ258,0.100000,Week4_27801,C08,1,Aurora kinase inhibitors,Aurora kinase inhibitors,0.9961040019989014
+AZ841,0.100000,Week3_25441,E08,2,Aurora kinase inhibitors,Aurora kinase inhibitors,0.99649977684021
+DMSO,0.000000,Week2_24121,B02,1,DMSO,DMSO,0.8206884860992432
+cyclohexamide,15.000000,Week4_27801,B04,1,Protein synthesis,Protein synthesis,0.5386015176773071
+DMSO,0.000000,Week2_24121,C02,1,DMSO,DMSO,0.998420238494873
+DMSO,0.000000,Week3_25681,B02,1,DMSO,DMSO,0.9938673377037048
+DMSO,0.000000,Week7_34681,D02,3,DMSO,Kinase inhibitors,0.9387624859809875
+DMSO,0.000000,Week7_34661,D02,2,DMSO,Kinase inhibitors,0.9638938307762146
+taxol,0.300000,Week5_28921,G02,2,Microtubule stabilizers,Microtubule stabilizers,0.713540256023407
+DMSO,0.000000,Week7_34641,B02,1,DMSO,Kinase inhibitors,0.9834521412849426
+AZ138,0.100000,Week10_40115,C08,2,Eg5 inhibitors,Eg5 inhibitors,0.9876518249511719
+taxol,0.300000,Week8_38241,B11,3,Microtubule stabilizers,Protein degradation,0.616314172744751
+taxol,0.300000,Week8_38241,E02,3,Microtubule stabilizers,Microtubule stabilizers,0.47970861196517944
+taxol,0.300000,Week5_28901,D11,1,Microtubule stabilizers,Microtubule stabilizers,0.489610880613327
+DMSO,0.000000,Week2_24161,G11,3,DMSO,DMSO,0.533659040927887
+cytochalasin B,10.000000,Week1_22161,B04,3,Actin disruptors,DMSO,0.6371054649353027
+DMSO,0.000000,Week5_29321,B02,2,DMSO,Kinase inhibitors,0.511239230632782
+DMSO,0.000000,Week3_25421,F11,1,DMSO,DMSO,0.7375317811965942
+DMSO,0.000000,Week1_22161,E11,3,DMSO,DNA replication,0.9944724440574646
+DMSO,0.000000,Week5_28961,G11,3,DMSO,Kinase inhibitors,0.6899929046630859
+nocodazole,3.000000,Week1_22123,E03,1,Microtubule destabilizers,Microtubule destabilizers,0.9998360872268677
+taxol,0.300000,Week5_29341,B11,3,Microtubule stabilizers,Eg5 inhibitors,0.7608323693275452
+taxol,0.300000,Week6_32061,D11,1,Microtubule stabilizers,Microtubule stabilizers,0.8883577585220337
+taxol,0.300000,Week2_24121,C11,1,Microtubule stabilizers,Microtubule stabilizers,0.5208372473716736
+taxol,0.300000,Week1_22141,F02,2,Microtubule stabilizers,Microtubule stabilizers,0.8805708885192871
+taxol,0.300000,Week9_39283,G02,2,Microtubule stabilizers,Eg5 inhibitors,0.7496922612190247
+taxol,0.300000,Week7_34641,G02,1,Microtubule stabilizers,Microtubule destabilizers,0.8080615401268005
+taxol,0.300000,Week8_38221,D11,2,Microtubule stabilizers,Protein degradation,0.4882084131240845
+vincristine,0.300000,Week3_25421,B06,1,Microtubule destabilizers,Microtubule destabilizers,0.9999366998672485
+taxol,0.300000,Week8_38241,D11,3,Microtubule stabilizers,Microtubule stabilizers,0.8074957132339478
+DMSO,0.000000,Week7_34681,G11,3,DMSO,Kinase inhibitors,0.9629353880882263
+taxol,0.300000,Week6_32061,B11,1,Microtubule stabilizers,Eg5 inhibitors,0.4794144034385681
+AZ-J,10.000000,Week5_28921,B03,2,Epithelial,Epithelial,0.636489987373352
+floxuridine,30.000000,Week9_39301,B04,3,DNA replication,DNA replication,0.8714314103126526
+AZ-J,1.000000,Week5_28901,B05,1,Epithelial,Epithelial,0.998008668422699
+taxol,0.300000,Week2_24141,D11,2,Microtubule stabilizers,Microtubule stabilizers,0.5214760303497314
+DMSO,0.000000,Week8_38203,G11,1,DMSO,DMSO,0.9893159866333008
+DMSO,0.000000,Week3_25701,D02,2,DMSO,DMSO,0.6316536664962769
+AZ258,0.300000,Week4_27801,C07,1,Aurora kinase inhibitors,Aurora kinase inhibitors,0.9892668724060059
+etoposide,10.000000,Week3_25461,F04,3,DNA damage,DNA damage,0.8379030823707581
+latrunculin B,1.000000,Week1_22361,B06,1,Actin disruptors,Microtubule destabilizers,0.4068666696548462
+AZ-U,3.000000,Week10_40115,D05,2,Epithelial,Epithelial,0.999825656414032
+AZ-J,3.000000,Week5_28901,B04,1,Epithelial,Epithelial,0.9980496168136597
+taxol,0.300000,Week5_28901,B11,1,Microtubule stabilizers,Microtubule stabilizers,0.5872530341148376
+DMSO,0.000000,Week5_28921,F11,2,DMSO,DMSO,0.879441499710083
+taxol,0.300000,Week3_25421,D11,1,Microtubule stabilizers,Microtubule stabilizers,0.9633691310882568
+taxol,0.300000,Week5_29301,E02,1,Microtubule stabilizers,Eg5 inhibitors,0.823512613773346
+DMSO,0.000000,Week5_28921,E11,2,DMSO,Kinase inhibitors,0.8387925028800964
+docetaxel,0.030000,Week7_34381,C06,3,Microtubule stabilizers,Microtubule stabilizers,0.7964188456535339
+DMSO,0.000000,Week2_24401,E11,3,DMSO,DMSO,0.7630648016929626
+DMSO,0.000000,Week3_25441,B02,2,DMSO,DMSO,0.9299277067184448
+DMSO,0.000000,Week9_39283,E11,2,DMSO,DNA replication,0.6756141185760498
+taxol,0.300000,Week2_24141,E02,2,Microtubule stabilizers,Microtubule stabilizers,0.7208077907562256
+DMSO,0.000000,Week5_29321,C02,2,DMSO,DMSO,0.7403901219367981
+taxol,0.300000,Week7_34661,G02,2,Microtubule stabilizers,Aurora kinase inhibitors,0.7939242124557495
+DMSO,0.000000,Week9_39301,G11,3,DMSO,Cholesterol-lowering,0.3189575672149658
+taxol,0.300000,Week1_22401,G02,3,Microtubule stabilizers,Microtubule stabilizers,0.9716220498085022
+taxol,0.300000,Week6_31681,F02,3,Microtubule stabilizers,Protein degradation,0.48201873898506165
+taxol,0.300000,Week3_25461,B11,3,Microtubule stabilizers,Eg5 inhibitors,0.689271867275238
+taxol,3.000000,Week1_22141,D03,2,Microtubule stabilizers,Microtubule stabilizers,0.9561102390289307
+docetaxel,0.300000,Week7_34341,C04,1,Microtubule stabilizers,Microtubule stabilizers,0.9868696331977844
+AZ258,0.300000,Week4_27861,C07,3,Aurora kinase inhibitors,Aurora kinase inhibitors,0.9990471005439758
+taxol,0.300000,Week8_38241,D11,3,Microtubule stabilizers,Microtubule stabilizers,0.3306252658367157
+AZ138,0.300000,Week10_40119,C07,3,Eg5 inhibitors,Eg5 inhibitors,0.9630517363548279
+taxol,0.300000,Week2_24401,E02,3,Microtubule stabilizers,Microtubule stabilizers,0.9570586681365967
+DMSO,0.000000,Week5_29321,E11,2,DMSO,DMSO,0.8330024480819702
+mevinolin/lovastatin,5.000000,Week9_39222,E05,3,Cholesterol-lowering,Cholesterol-lowering,0.9503605961799622
+taxol,0.300000,Week4_27521,E02,2,Microtubule stabilizers,Microtubule stabilizers,0.8490587472915649
+cisplatin,10.000000,Week3_25681,E04,1,DNA damage,DNA damage,0.642632246017456
+taxol,0.300000,Week6_31641,B11,1,Microtubule stabilizers,Eg5 inhibitors,0.9110732674598694
+DMSO,0.000000,Week7_34341,G11,1,DMSO,DMSO,0.9696152806282043
+taxol,0.300000,Week4_27861,B11,3,Microtubule stabilizers,Microtubule stabilizers,0.6740119457244873
+DMSO,0.000000,Week3_25461,D02,3,DMSO,DMSO,0.538155734539032
+cytochalasin D,0.300000,Week2_24161,B06,3,Actin disruptors,DMSO,0.5381654500961304
+mitoxantrone,0.003000,Week9_39283,F10,2,DNA replication,DNA replication,0.9948793649673462
+taxol,0.300000,Week9_39282,G02,1,Microtubule stabilizers,Microtubule stabilizers,0.6538251638412476
+DMSO,0.000000,Week4_27542,G11,3,DMSO,DMSO,0.9156795144081116
+taxol,0.300000,Week9_39206,B11,1,Microtubule stabilizers,Protein degradation,0.3627210557460785
+epothilone B,0.300000,Week1_22361,D05,1,Microtubule stabilizers,Microtubule stabilizers,0.9067140221595764
+taxol,0.300000,Week2_24141,D11,2,Microtubule stabilizers,Microtubule stabilizers,0.882548987865448
+DMSO,0.000000,Week10_40119,E11,3,DMSO,DMSO,0.9054206013679504
+taxol,0.300000,Week3_25701,G02,2,Microtubule stabilizers,Eg5 inhibitors,0.49523210525512695
+taxol,0.300000,Week10_40111,F02,1,Microtubule stabilizers,Microtubule stabilizers,0.5161507725715637
+taxol,0.300000,Week8_38203,E02,1,Microtubule stabilizers,Microtubule stabilizers,0.8582955002784729
+taxol,0.300000,Week8_38203,G02,1,Microtubule stabilizers,Microtubule stabilizers,0.6571515798568726
+DMSO,0.000000,Week6_31661,C02,2,DMSO,DNA replication,0.9832043647766113
+taxol,0.300000,Week1_22361,G02,1,Microtubule stabilizers,Microtubule stabilizers,0.8316185474395752
+DMSO,0.000000,Week9_39282,F11,1,DMSO,DNA replication,0.6879083514213562
+alsterpaullone,1.000000,Week7_34681,G06,3,Kinase inhibitors,Microtubule destabilizers,0.428134948015213
+latrunculin B,1.000000,Week1_22361,B06,1,Actin disruptors,Microtubule destabilizers,0.818727970123291
+AZ-J,3.000000,Week5_28961,B04,3,Epithelial,Epithelial,0.9864480495452881
+taxol,0.300000,Week5_28901,E02,1,Microtubule stabilizers,Microtubule stabilizers,0.989654004573822
+floxuridine,30.000000,Week9_39301,B04,3,DNA replication,DNA replication,0.9990092515945435
+etoposide,1.000000,Week3_25441,F06,2,DNA damage,DNA replication,0.973813533782959
+anisomycin,1.000000,Week4_27542,B05,3,Protein synthesis,Protein synthesis,0.8717706799507141
+DMSO,0.000000,Week9_39283,G11,2,DMSO,DNA replication,0.45477139949798584
+epothilone B,0.100000,Week1_22381,D06,2,Microtubule stabilizers,Microtubule destabilizers,0.8152905702590942
+AZ-C,0.001000,Week3_25441,D09,2,Eg5 inhibitors,Eg5 inhibitors,0.9958361387252808
+chlorambucil,10.000000,Week3_25721,F03,3,DNA damage,DNA damage,0.9676350355148315
+DMSO,0.000000,Week6_31661,G11,2,DMSO,DMSO,0.9388923645019531
+taxol,0.300000,Week1_22161,D05,3,Microtubule stabilizers,Microtubule stabilizers,0.9987062215805054
+demecolcine,10.000000,Week3_25701,B03,2,Microtubule destabilizers,Microtubule destabilizers,0.9996015429496765
+taxol,0.300000,Week3_25701,G02,2,Microtubule stabilizers,Eg5 inhibitors,0.6627557277679443
+DMSO,0.000000,Week2_24381,F11,2,DMSO,Protein degradation,0.9407322406768799
+DMSO,0.000000,Week10_40115,C02,2,DMSO,DMSO,0.7642716765403748
+DMSO,0.000000,Week5_28961,D02,3,DMSO,DMSO,0.5933083891868591
+MG-132,3.000000,Week2_24361,C06,1,Protein degradation,Protein degradation,0.7172412872314453
+DMSO,0.000000,Week4_27861,E11,3,DMSO,DMSO,0.7739906907081604
+emetine,0.300000,Week3_25701,C07,2,Protein synthesis,Protein synthesis,0.9049556851387024
+DMSO,0.000000,Week8_38342,D02,2,DMSO,DMSO,0.6225067973136902
+floxuridine,10.000000,Week9_39301,B05,3,DNA replication,DNA replication,0.903807520866394
+demecolcine,3.000000,Week3_25681,B04,1,Microtubule destabilizers,Microtubule destabilizers,0.9564210176467896
+taxol,0.300000,Week9_39221,B11,2,Microtubule stabilizers,Protein degradation,0.5159435272216797
+DMSO,0.000000,Week3_25701,B02,2,DMSO,Kinase inhibitors,0.750155508518219
+taxol,0.300000,Week8_38203,F02,1,Microtubule stabilizers,Microtubule stabilizers,0.6180558204650879
+DMSO,0.000000,Week2_24121,D02,1,DMSO,DMSO,0.8548858165740967
+taxol,0.300000,Week3_25461,F02,3,Microtubule stabilizers,Microtubule stabilizers,0.48084476590156555
+taxol,0.300000,Week3_25461,C11,3,Microtubule stabilizers,Microtubule stabilizers,0.9413819909095764
+taxol,0.300000,Week4_27861,C11,3,Microtubule stabilizers,Microtubule stabilizers,0.9012113809585571
+DMSO,0.000000,Week7_34341,F11,1,DMSO,DMSO,0.954177737236023
+cisplatin,10.000000,Week3_25721,E04,3,DNA damage,DNA damage,0.9072114825248718
+taxol,0.300000,Week6_31661,C11,2,Microtubule stabilizers,Microtubule stabilizers,0.7860522270202637
+emetine,1.000000,Week3_25721,C06,3,Protein synthesis,Protein degradation,0.5531748533248901
+demecolcine,10.000000,Week3_25721,B03,3,Microtubule destabilizers,Microtubule destabilizers,0.997116208076477
+DMSO,0.000000,Week3_25421,G11,1,DMSO,DMSO,0.9824474453926086
+taxol,0.300000,Week1_22161,B11,3,Microtubule stabilizers,Microtubule stabilizers,0.9230442643165588
+taxol,0.300000,Week8_38203,G02,1,Microtubule stabilizers,Microtubule stabilizers,0.4501676559448242
+taxol,0.300000,Week4_27481,C11,1,Microtubule stabilizers,Microtubule stabilizers,0.8058612942695618
+DMSO,0.000000,Week4_27542,C02,3,DMSO,DMSO,0.6713886857032776
+taxol,0.300000,Week10_40115,F02,2,Microtubule stabilizers,Eg5 inhibitors,0.687116801738739
+DMSO,0.000000,Week7_34641,G11,1,DMSO,Kinase inhibitors,0.8071134090423584
+DMSO,0.000000,Week3_25461,G11,3,DMSO,DMSO,0.7316240072250366
+DMSO,0.000000,Week6_31641,B02,1,DMSO,Protein degradation,0.3408823609352112
+DMSO,0.000000,Week1_22123,G11,1,DMSO,DMSO,0.9407653212547302
+DMSO,0.000000,Week7_34341,E11,1,DMSO,DMSO,0.9592357873916626
+taxol,0.300000,Week10_40115,F02,2,Microtubule stabilizers,Microtubule stabilizers,0.7312290668487549
+AZ-C,0.300000,Week3_25441,D04,2,Eg5 inhibitors,Protein degradation,0.4205527603626251
+taxol,0.300000,Week8_38241,F02,3,Microtubule stabilizers,Protein degradation,0.2970505952835083
+DMSO,0.000000,Week3_25421,D02,1,DMSO,DMSO,0.7614125609397888
+DMSO,0.000000,Week8_38203,G11,1,DMSO,DMSO,0.8021093606948853
+PP-2,10.000000,Week8_38341,E04,1,Epithelial,Epithelial,0.9605662822723389
+DMSO,0.000000,Week8_38221,C02,2,DMSO,DNA replication,0.901368260383606
+DMSO,0.000000,Week7_34681,G11,3,DMSO,Kinase inhibitors,0.9892725944519043
+taxol,0.300000,Week8_38241,B11,3,Microtubule stabilizers,Microtubule stabilizers,0.7678080201148987
+taxol,0.300000,Week6_32161,E02,3,Microtubule stabilizers,Microtubule stabilizers,0.7342278957366943
+nocodazole,1.000000,Week1_22141,E04,2,Microtubule destabilizers,Microtubule destabilizers,0.9991795420646667
+MG-132,0.100000,Week2_24381,C09,2,Protein degradation,Protein degradation,0.5998297929763794
+cyclohexamide,5.000000,Week4_27861,B05,3,Protein synthesis,Protein synthesis,0.7561129331588745
+taxol,0.300000,Week6_31661,B11,2,Microtubule stabilizers,Eg5 inhibitors,0.4026041328907013
+AZ-C,0.010000,Week3_25421,D07,1,Eg5 inhibitors,Eg5 inhibitors,0.9407349824905396
+proteasome inhibitor I,0.100000,Week7_34641,D07,1,Protein degradation,Protein degradation,0.6582463383674622
+etoposide,3.000000,Week3_25461,F05,3,DNA damage,Aurora kinase inhibitors,0.7614782452583313
+AZ258,0.100000,Week4_27801,C08,1,Aurora kinase inhibitors,Aurora kinase inhibitors,0.9967733025550842
+cyclohexamide,5.000000,Week4_27801,B05,1,Protein synthesis,Protein synthesis,0.8822668194770813
+taxol,0.300000,Week8_38221,G02,2,Microtubule stabilizers,Eg5 inhibitors,0.5943058729171753
+taxol,0.300000,Week4_27542,F02,3,Microtubule stabilizers,Microtubule stabilizers,0.878933310508728
+taxol,0.300000,Week7_34661,B11,2,Microtubule stabilizers,Microtubule destabilizers,0.9598195552825928
+taxol,1.000000,Week1_22141,D04,2,Microtubule stabilizers,Microtubule stabilizers,0.9738024473190308
+DMSO,0.000000,Week7_34661,B02,2,DMSO,Kinase inhibitors,0.9483594298362732
+taxol,0.300000,Week3_25721,C11,3,Microtubule stabilizers,Eg5 inhibitors,0.4988110363483429
+epothilone B,0.300000,Week1_22381,D05,2,Microtubule stabilizers,Microtubule stabilizers,0.5189273357391357
+DMSO,0.000000,Week2_24361,C02,1,DMSO,Kinase inhibitors,0.61310875415802
+PD-169316,10.000000,Week7_34661,F04,2,Kinase inhibitors,Kinase inhibitors,0.9515408277511597
+taxol,0.300000,Week3_25461,B11,3,Microtubule stabilizers,Eg5 inhibitors,0.3933006823062897
+taxol,0.300000,Week2_24141,C11,2,Microtubule stabilizers,Protein degradation,0.44576001167297363
+proteasome inhibitor I,3.000000,Week7_34341,D04,1,Protein degradation,DNA replication,0.6254305243492126
+DMSO,0.000000,Week6_32121,E11,2,DMSO,DMSO,0.9988079071044922
+DMSO,0.000000,Week5_29301,F11,1,DMSO,DMSO,0.603714644908905
+taxol,0.300000,Week6_32061,G02,1,Microtubule stabilizers,Cholesterol-lowering,0.34734904766082764
+AZ-C,1.000000,Week3_25421,D03,1,Eg5 inhibitors,Eg5 inhibitors,0.9352407455444336
+lactacystin,10.000000,Week6_31641,B03,1,Protein degradation,DNA replication,0.4704881012439728
+mitoxantrone,0.010000,Week9_39301,F09,3,DNA replication,Cholesterol-lowering,0.22983162105083466
+PP-2,10.000000,Week8_38341,E04,1,Epithelial,DNA replication,0.48502638936042786
+DMSO,0.000000,Week4_27861,B02,3,DMSO,Kinase inhibitors,0.6979296803474426
+lactacystin,10.000000,Week6_31681,B03,3,Protein degradation,DNA replication,0.6054984927177429
+camptothecin,0.030000,Week8_38221,C08,2,DNA replication,DNA replication,0.9997673630714417
+DMSO,0.000000,Week9_39222,G11,3,DMSO,DMSO,0.5618890523910522
+taxol,0.300000,Week1_22161,D11,3,Microtubule stabilizers,Microtubule stabilizers,0.9722821116447449
+taxol,0.300000,Week3_25441,D11,2,Microtubule stabilizers,Protein degradation,0.44472479820251465
+DMSO,0.000000,Week1_22161,E11,3,DMSO,DNA replication,0.6090006232261658
+taxol,0.300000,Week1_22161,C11,3,Microtubule stabilizers,Microtubule stabilizers,0.9913250207901001
+DMSO,0.000000,Week8_38341,G11,1,DMSO,DNA replication,0.9991034865379333
+taxol,0.300000,Week2_24121,B11,1,Microtubule stabilizers,Protein degradation,0.4122677743434906
+DMSO,0.000000,Week2_24121,E11,1,DMSO,DMSO,0.9896148443222046
+DMSO,0.000000,Week7_34661,F11,2,DMSO,Kinase inhibitors,0.875001072883606
+DMSO,0.000000,Week1_22381,E11,2,DMSO,DMSO,0.5130863189697266
+colchicine,0.030000,Week1_22381,E07,2,Microtubule destabilizers,DMSO,0.788066029548645
+taxol,0.300000,Week9_39283,E02,2,Microtubule stabilizers,Protein degradation,0.4358459413051605
+taxol,0.300000,Week2_24141,F02,2,Microtubule stabilizers,Microtubule stabilizers,0.8695813417434692
+floxuridine,30.000000,Week9_39282,B04,1,DNA replication,DNA replication,0.8975543975830078
+mitomycin C,0.300000,Week4_27861,G06,3,DNA damage,DNA damage,0.8983420729637146
+taxol,0.300000,Week2_24401,B11,3,Microtubule stabilizers,Microtubule stabilizers,0.5012105703353882
+AZ-C,0.030000,Week3_25441,D06,2,Eg5 inhibitors,Eg5 inhibitors,0.9994311928749084
+DMSO,0.000000,Week6_32161,C02,3,DMSO,DMSO,0.9172983169555664
+proteasome inhibitor I,0.100000,Week7_34641,D07,1,Protein degradation,DNA replication,0.4764190912246704
+AZ-A,30.000000,Week1_22161,G03,3,Aurora kinase inhibitors,Aurora kinase inhibitors,0.9984390139579773
+AZ-J,10.000000,Week5_28961,B03,3,Epithelial,Epithelial,0.9887571930885315
+mevinolin/lovastatin,1.500000,Week9_39221,E06,2,Cholesterol-lowering,DMSO,0.5184476375579834
+DMSO,0.000000,Week9_39282,C02,1,DMSO,DNA replication,0.5070536136627197
+DMSO,0.000000,Week9_39282,E11,1,DMSO,DNA replication,0.6658996939659119
+taxol,0.300000,Week6_32121,C11,2,Microtubule stabilizers,Microtubule stabilizers,0.6145010590553284
+DMSO,0.000000,Week5_28901,F11,1,DMSO,DMSO,0.7113311290740967
+DMSO,0.000000,Week9_39221,F11,2,DMSO,DMSO,0.9433377981185913
+etoposide,3.000000,Week3_25461,F05,3,DNA damage,DNA damage,0.7583000063896179
+nocodazole,3.000000,Week1_22141,E03,2,Microtubule destabilizers,Microtubule destabilizers,0.9976426959037781
+taxol,0.300000,Week6_32121,G02,2,Microtubule stabilizers,Eg5 inhibitors,0.5530387163162231
+DMSO,0.000000,Week7_34341,G11,1,DMSO,DMSO,0.8555792570114136
+taxol,0.300000,Week4_27821,C11,2,Microtubule stabilizers,Microtubule stabilizers,0.9357913732528687
+alsterpaullone,3.000000,Week7_34681,G05,3,Kinase inhibitors,Kinase inhibitors,0.9703988432884216
+taxol,0.300000,Week1_22141,F02,2,Microtubule stabilizers,Microtubule stabilizers,0.9431170225143433
+DMSO,0.000000,Week6_32061,E11,1,DMSO,DNA replication,0.7621331810951233
+DMSO,0.000000,Week10_40119,B02,3,DMSO,DMSO,0.6309170722961426
+taxol,0.300000,Week9_39222,E02,3,Microtubule stabilizers,Eg5 inhibitors,0.6621673703193665
+DMSO,0.000000,Week9_39282,C02,1,DMSO,DNA replication,0.4721735119819641
+epothilone B,0.100000,Week1_22401,D06,3,Microtubule stabilizers,Microtubule stabilizers,0.8276212215423584
+AZ-C,0.010000,Week3_25441,D07,2,Eg5 inhibitors,Eg5 inhibitors,0.9470862150192261
+DMSO,0.000000,Week1_22161,D02,3,DMSO,DNA replication,0.5859538912773132
+DMSO,0.000000,Week4_27481,G11,1,DMSO,DNA replication,0.8557140827178955
+DMSO,0.000000,Week5_28921,B02,2,DMSO,Kinase inhibitors,0.7225831151008606
+AZ-A,3.000000,Week1_22123,G05,1,Aurora kinase inhibitors,Aurora kinase inhibitors,0.9980775117874146
+AZ-C,0.300000,Week3_25461,D04,3,Eg5 inhibitors,Eg5 inhibitors,0.9911722540855408
+taxol,0.300000,Week2_24121,C11,1,Microtubule stabilizers,Microtubule stabilizers,0.9254833459854126
+nocodazole,1.000000,Week1_22123,E04,1,Microtubule destabilizers,Microtubule destabilizers,0.9932848215103149
+vincristine,1.000000,Week3_25441,B05,2,Microtubule destabilizers,Microtubule destabilizers,0.988389253616333
+taxol,0.300000,Week7_34341,C11,1,Microtubule stabilizers,Protein degradation,0.42328593134880066
+AZ-C,0.003000,Week3_25421,D08,1,Eg5 inhibitors,Eg5 inhibitors,0.9990243911743164
+DMSO,0.000000,Week1_22401,E11,3,DMSO,DMSO,0.9261042475700378
+taxol,0.300000,Week1_22123,C11,1,Microtubule stabilizers,Microtubule stabilizers,0.958461582660675
+taxol,0.300000,Week1_22381,E02,2,Microtubule stabilizers,Microtubule stabilizers,0.8126478791236877
+DMSO,0.000000,Week3_25421,B02,1,DMSO,DMSO,0.9747002124786377
+taxol,0.300000,Week2_24161,F02,3,Microtubule stabilizers,Microtubule stabilizers,0.5495168566703796
+taxol,0.300000,Week8_38342,E02,2,Microtubule stabilizers,Microtubule stabilizers,0.5698161125183105
+taxol,0.300000,Week5_28921,C11,2,Microtubule stabilizers,Microtubule stabilizers,0.8340486884117126
+taxol,0.300000,Week9_39282,E02,1,Microtubule stabilizers,Microtubule stabilizers,0.8468930125236511
+taxol,0.300000,Week8_38342,G02,2,Microtubule stabilizers,Protein degradation,0.5056694149971008
+taxol,0.300000,Week5_29341,D11,3,Microtubule stabilizers,Microtubule stabilizers,0.7150406241416931
+DMSO,0.000000,Week8_38241,F11,3,DMSO,DNA replication,0.9122651219367981
+DMSO,0.000000,Week10_40115,F11,2,DMSO,DMSO,0.8638279438018799
+DMSO,0.000000,Week3_25701,C02,2,DMSO,DMSO,0.5837801098823547
+AZ258,0.100000,Week4_27801,C08,1,Aurora kinase inhibitors,Aurora kinase inhibitors,0.999383807182312
+taxol,0.300000,Week6_31641,C11,1,Microtubule stabilizers,Microtubule stabilizers,0.9322347640991211
+DMSO,0.000000,Week2_24121,G11,1,DMSO,DNA replication,0.7347527146339417
+DMSO,0.000000,Week4_27481,F11,1,DMSO,DNA replication,0.8999596238136292
+AZ-C,0.030000,Week3_25441,D06,2,Eg5 inhibitors,Eg5 inhibitors,0.9647245407104492
+mevinolin/lovastatin,5.000000,Week9_39221,E05,2,Cholesterol-lowering,Cholesterol-lowering,0.8792266249656677
+ALLN,3.000000,Week2_24121,D06,1,Protein degradation,DNA replication,0.883934736251831
+taxol,0.300000,Week6_32121,D11,2,Microtubule stabilizers,Microtubule stabilizers,0.7464089393615723
+mitoxantrone,0.010000,Week9_39283,F09,2,DNA replication,DNA replication,0.9918204545974731
+DMSO,0.000000,Week1_22401,B02,3,DMSO,DMSO,0.8323329091072083
+DMSO,0.000000,Week9_39301,B02,3,DMSO,DNA replication,0.7102748155593872
+mevinolin/lovastatin,5.000000,Week9_39221,E05,2,Cholesterol-lowering,Cholesterol-lowering,0.8942115902900696
+taxol,0.300000,Week9_39221,E02,2,Microtubule stabilizers,Eg5 inhibitors,0.5960251092910767
+cytochalasin B,30.000000,Week1_22141,B03,2,Actin disruptors,Protein degradation,0.7697235345840454
+AZ-C,0.001000,Week3_25421,D09,1,Eg5 inhibitors,Eg5 inhibitors,0.9931429624557495
+DMSO,0.000000,Week3_25441,E11,2,DMSO,DMSO,0.5876096487045288
+DMSO,0.000000,Week7_34681,F11,3,DMSO,Kinase inhibitors,0.9904403686523438
+taxol,0.300000,Week5_29341,D11,3,Microtubule stabilizers,Microtubule stabilizers,0.8518024682998657
+taxol,0.300000,Week8_38203,C11,1,Microtubule stabilizers,Microtubule stabilizers,0.8791921734809875
+AZ-A,3.000000,Week1_22141,G05,2,Aurora kinase inhibitors,Aurora kinase inhibitors,0.9996466636657715
+DMSO,0.000000,Week2_24161,E11,3,DMSO,DMSO,0.9446219801902771
+taxol,0.300000,Week6_32121,G02,2,Microtubule stabilizers,Eg5 inhibitors,0.873928427696228
+PP-2,10.000000,Week8_38342,E04,2,Epithelial,Epithelial,0.9885580539703369
+DMSO,0.000000,Week9_39222,B02,3,DMSO,DMSO,0.9270458221435547
+DMSO,0.000000,Week6_31661,E11,2,DMSO,DMSO,0.9665399789810181
+AZ138,1.000000,Week10_40115,C06,2,Eg5 inhibitors,Eg5 inhibitors,0.9995689988136292
+PD-169316,3.000000,Week7_34661,F05,2,Kinase inhibitors,Kinase inhibitors,0.9547387957572937
+taxol,0.300000,Week9_39283,B11,2,Microtubule stabilizers,Eg5 inhibitors,0.4974798560142517
+taxol,0.300000,Week9_39301,C11,3,Microtubule stabilizers,Microtubule stabilizers,0.5179392099380493
+DMSO,0.000000,Week2_24361,D02,1,DMSO,Kinase inhibitors,0.5052331686019897
+DMSO,0.000000,Week2_24361,B02,1,DMSO,DMSO,0.8570414781570435
+cyclohexamide,15.000000,Week4_27821,B04,2,Protein synthesis,Protein synthesis,0.9080880880355835
+taxol,0.300000,Week9_39283,E02,2,Microtubule stabilizers,Microtubule stabilizers,0.43450993299484253
+taxol,0.300000,Week1_22401,C11,3,Microtubule stabilizers,Microtubule stabilizers,0.9378836750984192
+vincristine,0.300000,Week3_25441,B06,2,Microtubule destabilizers,Microtubule destabilizers,0.9950475692749023
+DMSO,0.000000,Week6_31641,G11,1,DMSO,DNA replication,0.7138639092445374
+anisomycin,0.300000,Week4_27521,B06,2,Protein synthesis,DMSO,0.9780208468437195
+AZ-A,30.000000,Week1_22161,G03,3,Aurora kinase inhibitors,Aurora kinase inhibitors,0.9917580485343933
+DMSO,0.000000,Week4_27521,G11,2,DMSO,DMSO,0.40886804461479187
+taxol,0.300000,Week3_25461,F02,3,Microtubule stabilizers,Microtubule stabilizers,0.5352091193199158
+mitoxantrone,0.003000,Week9_39282,F10,1,DNA replication,DNA replication,0.8805853128433228
+taxol,0.300000,Week8_38342,G02,2,Microtubule stabilizers,Microtubule stabilizers,0.33643996715545654
+AZ841,0.100000,Week3_25461,E08,3,Aurora kinase inhibitors,Aurora kinase inhibitors,0.955386757850647
+taxol,0.300000,Week6_32121,G02,2,Microtubule stabilizers,Microtubule stabilizers,0.5628510117530823
+AZ138,0.100000,Week10_40119,C08,3,Eg5 inhibitors,Eg5 inhibitors,0.9958590865135193
+vincristine,0.300000,Week3_25421,B06,1,Microtubule destabilizers,Microtubule destabilizers,0.9996055960655212
+taxol,0.300000,Week5_28961,E02,3,Microtubule stabilizers,Microtubule stabilizers,0.7509600520133972
+DMSO,0.000000,Week2_24121,C02,1,DMSO,DMSO,0.9896260499954224
+taxol,0.300000,Week9_39283,F02,2,Microtubule stabilizers,Eg5 inhibitors,0.8943781852722168
