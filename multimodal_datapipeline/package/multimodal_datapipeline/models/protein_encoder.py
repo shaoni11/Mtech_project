@@ -53,6 +53,10 @@ class ESM2ProteinEncoder(nn.Module if nn is not None else object):
                 parameter.requires_grad = False
 
     def forward(self, sequences: Sequence[str]) -> torch.Tensor:
+        return self.projection(self.pooled_embeddings(sequences))
+
+    def pooled_embeddings(self, sequences: Sequence[str]) -> torch.Tensor:
+        """Mean-pooled ESM-2 residue embeddings before the projection layer."""
         device = next(self.parameters()).device
         tokens = self.tokenizer(
             list(sequences),
@@ -71,8 +75,7 @@ class ESM2ProteinEncoder(nn.Module if nn is not None else object):
             residue_embeddings = residue_embeddings[:, 1:-1, :]
             mask = mask[:, 1:-1, :]
 
-        pooled = (residue_embeddings * mask).sum(dim=1) / mask.sum(dim=1).clamp_min(1.0)
-        return self.projection(pooled)
+        return (residue_embeddings * mask).sum(dim=1) / mask.sum(dim=1).clamp_min(1.0)
 
 
 ProteinEncoder = ESM2ProteinEncoder

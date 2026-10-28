@@ -8,6 +8,8 @@ flowchart TB
         AF["AlphaFold DB<br/>protein structures"]
         BBBC["BBBC021<br/>cellular phenotypic images + metadata"]
         WEB["Optional web table<br/>scraped metadata"]
+        DAVIS["Davis benchmark<br/>68 inhibitors x 442 kinases"]
+        UNIPROT["UniProt REST<br/>construct -> accession"]
     end
 
     %% Entrypoints
@@ -27,6 +29,7 @@ flowchart TB
         AF_MOD["alphafold.py<br/>PDB structure download"]
         BBBC_MOD["bbbc021.py<br/>metadata, ZIP download, extraction"]
         SCRAPE_MOD["scrape.py<br/>HTML table extraction"]
+        DAVIS_MOD["davis.py<br/>Kd matrix + UniProt mapping"]
     end
 
     %% Shared package helpers
@@ -42,6 +45,9 @@ flowchart TB
         AF_OUT["dataset_pipeline_output/alphafold/<br/>metadata.csv<br/>structures/*.pdb"]
         BBBC_OUT["dataset_pipeline_output/bbbc021/<br/>BBBC021 metadata CSVs<br/>download_manifest.csv<br/>images/<br/>zips/"]
         SCRAPE_OUT["dataset_pipeline_output/scrape/<br/>scraped_table.csv"]
+        DAVIS_OUT["dataset_pipeline_output/davis/<br/>davis_pairs.csv<br/>davis_target_uniprot.csv"]
+        LINK_OUT["dataset_pipeline_output/chembl/<br/>bbbc021_compound_activities.csv"]
+        EMB_OUT["data/interim/<br/>bbbc021_dinov2_embeddings.npz"]
     end
 
     %% Curated data layer
@@ -53,10 +59,11 @@ flowchart TB
 
     %% Model package
     subgraph M["Model Components"]
-        MOL["models/molecule_encoder.py<br/>SMILES / molecule features"]
-        PROT["models/protein_encoder.py<br/>protein sequence / structure features"]
-        IMG["models/image_encoder.py<br/>cell image features"]
-        FUSION["models/fusion.py<br/>concatenation fusion head"]
+        MOL["models/molecule_encoder.py<br/>fingerprint MLP / molecular graph GNN"]
+        PROT["models/protein_encoder.py + protein_structure_encoder.py<br/>ESM-2 / AlphaFold residue-graph GNN"]
+        IMG["DINOv2 phenotype profiles<br/>+ microscopy CNNs"]
+        FUSION["models/fusion.py<br/>concat / gated / cross-attention"]
+        EXPLAIN["interpretability.py<br/>atoms, residues, Grad-CAM"]
     end
 
     %% Experiments
@@ -81,6 +88,20 @@ flowchart TB
     AF --> CLI
     BBBC --> CLI
     WEB --> CLI
+    DAVIS --> CLI
+    UNIPROT --> CLI
+    CLI --> DAVIS_MOD --> DAVIS_OUT
+    CLI --> LINK_OUT
+    DAVIS_OUT --> AF_MOD
+    LINK_OUT --> AF_MOD
+    BBBC_OUT --> EMB_OUT
+    EMB_OUT --> B5
+    EMB_OUT --> B6
+    EMB_OUT --> B7
+    LINK_OUT --> B6
+    LINK_OUT --> B7
+    DAVIS_OUT --> B4
+    EXP --> EXPLAIN
     CLI --> PIPE
     CLI --> CYTO_OUT
 
@@ -146,5 +167,7 @@ flowchart TB
 3. The `cytoskeleton-chembl` mode downloads actin/tubulin ChEMBL activity records.
 4. Downloaded artifacts are written under `dataset_pipeline_output/`.
 5. Curated and trainable datasets are organized through `data/raw/`, `data/interim/`, and `data/processed/`.
+   The `davis` mode adds the Davis kinase benchmark; `bbbc021-chembl` links BBBC021 compounds to ChEMBL
+   proteins, which with the DINOv2 phenotype embeddings forms the aligned table for Baselines 6 and 7.
 6. Baseline workflows consume processed data and route it through molecule, protein, image, or fusion model components.
 7. Experiment outputs are stored under `results/`, while thesis-ready artifacts belong in `reports/`.

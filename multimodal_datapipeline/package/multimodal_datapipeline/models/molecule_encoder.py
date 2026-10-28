@@ -1,4 +1,4 @@
-"""Molecule encoder using RDKit Morgan fingerprints followed by an MLP."""
+"""Molecule encoders: Morgan fingerprint MLP and molecular graph GNN."""
 
 from __future__ import annotations
 
@@ -13,6 +13,8 @@ try:
 except ModuleNotFoundError:
     torch = None
     nn = None
+
+from multimodal_datapipeline.models.graph import Graph, GraphBatch, GraphEncoder, batch_graphs
 
 
 def _require_torch() -> None:
@@ -123,3 +125,106 @@ class MoleculeEncoder(nn.Module if nn is not None else object):
         device = next(self.parameters()).device
         fingerprints = self.featurize_smiles(smiles_batch, device=device)
         return self.forward(fingerprints)
+
+
+ATOM_SYMBOLS = ["C", "N", "O", "S", "F", "Cl", "Br", "I", "P", "B", "Si", "Se"]
+ATOM_DEGREES = [0, 1, 2, 3, 4, 5]
+FORMAL_CHARGES = [-2, -1, 0, 1, 2]
+TOTAL_HYDROGENS = [0, 1, 2, 3, 4]
+HYBRIDIZATIONS = ["SP", "SP2", "SP3", "SP3D", "SP3D2"]
+CHIRAL_TAGS = ["CHI_UNSPECIFIED", "CHI_TETRAHEDRAL_CW", "CHI_TETRAHEDRAL_CCW"]
+BOND_TYPES = ["SINGLE", "DOUBLE", "TRIPLE", "AROMATIC"]
+
+
+def _one_hot(value: object, choices: Sequence[object]) -> list[float]:
+    """One-hot over ``choices`` plus a trailing 'other' slot."""
+    encoding = [0.0] * (len(choices) + 1)
+    encoding[choices.index(value) if value in choices else len(choices)] = 1.0
+    return encoding
+
+
+class MoleculeGraphFeaturizer:
+    """Convert SMILES strings to atom/bond graphs for the molecular GNN."""
+
+    node_dim = (
+        len(ATOM_SYMBOLS) + 1
+        + len(ATOM_DEGREES) + 1
+        + len(FORMAL_CHARGES) + 1
+        + len(TOTAL_HYDROGENS) + 1
+        + len(HYBRIDIZATIONS) + 1
+        + len(CHIRAL_TAGS) + 1
+        + 2  # aromatic, in ring
+    )
+    edge_dim = len(BOND_TYPES) + 1 + 3  # bond type, conjugated, in ring, has stereo
+
+    def atom_features(self, atom) -> list[float]:
+        return (
+            _one_hot(atom.GetSymbol(), ATOM_SYMBOLS)
+            + _one_hot(atom.GetDegree(), ATOM_DEGREES)
+            + _one_hot(atom.GetFormalCharge(), FORMAL_CHARGES)
+            + _one_hot(atom.GetTotalNumHs(), TOTAL_HYDROGENS)
+            + _one_hot(str(atom.GetHybridization()), HYBRIDIZATIONS)
+            + _one_hot(str(atom.GetChiralTag()), CHIRAL_TAGS)
+            + [float(atom.GetIsAromatic()), float(atom.IsInRing())]
+        )
+
+    def bond_features(self, bond) -> list[float]:
+        return _one_hot(str(bond.GetBondType()), BOND_TYPES) + [
+            float(bond.GetIsConjugated()),
+            float(bond.IsInRing()),
+            float(str(bond.GetStereo()) != "STEREONONE"),
+        ]
+
+    def transform_one(self, smiles: str) -> Graph:
+        _require_torch()
+        Chem, _, _ = _require_rdkit()
+        mol = Chem.MolFromSmiles(smiles)
+        if mol is None:
+            raise ValueError(f"Invalid SMILES: {smiles}")
+
+        x = torch.tensor([self.atom_features(atom) for atom in mol.GetAtoms()], dtype=torch.float32)
+        sources, destinations, edge_features = [], [], []
+        for bond in mol.GetBonds():
+            begin, end = bond.GetBeginAtomIdx(), bond.GetEndAtomIdx()
+            features = self.bond_features(bond)
+            sources += [begin, end]
+            destinations += [end, begin]
+            edge_features += [features, features]
+
+        edge_index = torch.tensor([sources, destinations], dtype=torch.long).reshape(2, -1)
+        edge_attr = torch.tensor(edge_features, dtype=torch.float32).reshape(-1, self.edge_dim)
+        return Graph(x=x, edge_index=edge_index, edge_attr=edge_attr)
+
+    def transform(self, smiles_batch: Sequence[str]) -> list[Graph]:
+        return [self.transform_one(smiles) for smiles in smiles_batch]
+
+
+class MoleculeGNNEncoder(nn.Module if nn is not None else object):
+    """Molecular graph -> message-passing GNN -> mean pool -> embedding."""
+
+    def __init__(
+        self,
+        hidden_dim: int = 128,
+        embedding_dim: int = 256,
+        num_layers: int = 4,
+        dropout: float = 0.1,
+    ) -> None:
+        _require_torch()
+        super().__init__()
+        self.featurizer = MoleculeGraphFeaturizer()
+        self.encoder = GraphEncoder(
+            node_dim=MoleculeGraphFeaturizer.node_dim,
+            edge_dim=MoleculeGraphFeaturizer.edge_dim,
+            hidden_dim=hidden_dim,
+            embedding_dim=embedding_dim,
+            num_layers=num_layers,
+            dropout=dropout,
+        )
+
+    def forward(self, graphs: GraphBatch) -> torch.Tensor:
+        return self.encoder(graphs)
+
+    def forward_smiles(self, smiles_batch: Sequence[str]) -> torch.Tensor:
+        device = next(self.parameters()).device
+        graphs = batch_graphs(self.featurizer.transform(smiles_batch)).to(device)
+        return self.forward(graphs)

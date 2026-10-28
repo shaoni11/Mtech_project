@@ -1,0 +1,23 @@
+{
+  "output": "/Users/shaonichakravarty/Documents/IIIT_Dharwad/research_project/Mtech_project/multimodal_datapipeline/data/processed/baseline_4_davis.csv",
+  "activity_threshold_pkd": 7.0,
+  "rows": 29444,
+  "active_rows": 2458,
+  "drugs": 68,
+  "constructs": 433,
+  "uniprot_ids": 370,
+  "dropped_pairs": {
+    "target_not_mapped_to_uniprot": 612
+  },
+  "unmapped_constructs": [
+    "BLK",
+    "CDKL5",
+    "CLK3",
+    "EPHA6",
+    "LYN",
+    "PFCDPK1(Pfalciparum)",
+    "PFPK5(Pfalciparum)",
+    "PIM1",
+    "PKNB(Mtuberculosis)"
+  ]
+}

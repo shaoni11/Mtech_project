@@ -46,6 +46,11 @@ def _load_train_module(baseline_name: str) -> ModuleType:
     return module
 
 
+def load_baseline_module(baseline_name: str) -> ModuleType:
+    """Import a baseline's train.py so another workflow can reuse its components."""
+    return _load_train_module(baseline_name)
+
+
 def run_baseline(baseline_name: str) -> None:
     module = _load_train_module(baseline_name)
     main = getattr(module, "main", None)

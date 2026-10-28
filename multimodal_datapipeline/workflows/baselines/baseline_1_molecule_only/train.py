@@ -1,9 +1,22 @@
 #!/usr/bin/env python3
 """Molecule-only baseline for ChEMBL activity classification.
 
-This baseline intentionally uses only SMILES strings. It featurizes each SMILES
-with hashed character n-grams and trains a small logistic-regression classifier
-with NumPy SGD. No protein, image, or target-structure information is used.
+This baseline intentionally uses only SMILES strings. No protein, image, or
+target-structure information is used.
+
+Models (--model):
+    ngram_logreg     hashed character n-grams -> NumPy logistic regression (original baseline)
+    fingerprint_mlp  Morgan fingerprint MLP -> fusion head with only the molecule branch
+    gnn              molecular graph GNN -> fusion head with only the molecule branch
+
+The fingerprint_mlp and gnn models use the same molecule branch and head as
+Baseline 4. Note that this baseline averages each molecule's label over all
+targets; for a same-rows ablation of the protein branch use Baseline 4 with
+``--protein-encoder none``.
+
+Splits (--split):
+    random    stratified random molecules (optimistic)
+    scaffold  Bemis-Murcko scaffold groups; no test scaffold is seen in training
 
 By default it reads the curated molecule table produced by:
 workflows/baselines/baseline_1_molecule_only/curate_data.py
@@ -16,11 +29,28 @@ import csv
 import hashlib
 import json
 import math
-import random
-from collections import defaultdict
+import sys
 from pathlib import Path
 
 import numpy as np
+
+
+PROJECT_ROOT = Path(__file__).resolve().parents[3]
+PACKAGE_DIR = PROJECT_ROOT / "package"
+if str(PACKAGE_DIR) not in sys.path:
+    sys.path.insert(0, str(PACKAGE_DIR))
+
+from multimodal_datapipeline.utils.metrics import (  # noqa: E402
+    binary_classification_metrics as classification_metrics,
+    log_loss,
+    sigmoid,
+)
+from multimodal_datapipeline.utils.splits import (  # noqa: E402
+    group_split,
+    scaffold_groups,
+    split_overlap,
+    stratified_random_split,
+)
 
 
 DEFAULT_DATA = (
@@ -35,10 +65,6 @@ DEFAULT_OUT_DIR = Path(__file__).resolve().parents[3] / "results" / "molecule_on
 def stable_hash(text: str) -> int:
     digest = hashlib.blake2b(text.encode("utf-8"), digest_size=8).digest()
     return int.from_bytes(digest, byteorder="little", signed=False)
-
-
-def sigmoid(logit: np.ndarray) -> np.ndarray:
-    return 1.0 / (1.0 + np.exp(-np.clip(logit, -40.0, 40.0)))
 
 
 def featurize_smiles(smiles: str, dim: int, min_n: int = 2, max_n: int = 4) -> np.ndarray:
@@ -161,31 +187,24 @@ def load_examples(
     return examples
 
 
-def stratified_split(
-    labels: np.ndarray, test_size: float, val_size: float, seed: int
-) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
-    rng = random.Random(seed)
-    by_label: dict[int, list[int]] = defaultdict(list)
-    for idx, label in enumerate(labels.tolist()):
-        by_label[int(label)].append(idx)
-
-    train_idx: list[int] = []
-    val_idx: list[int] = []
-    test_idx: list[int] = []
-
-    for indices in by_label.values():
-        rng.shuffle(indices)
-        n_total = len(indices)
-        n_test = max(1, round(n_total * test_size))
-        n_val = max(1, round(n_total * val_size))
-        test_idx.extend(indices[:n_test])
-        val_idx.extend(indices[n_test : n_test + n_val])
-        train_idx.extend(indices[n_test + n_val :])
-
-    rng.shuffle(train_idx)
-    rng.shuffle(val_idx)
-    rng.shuffle(test_idx)
-    return np.array(train_idx), np.array(val_idx), np.array(test_idx)
+def make_split(
+    examples: list[dict[str, object]], labels: np.ndarray, args: argparse.Namespace
+) -> tuple[np.ndarray, np.ndarray, np.ndarray, dict[str, object]]:
+    smiles = [str(example["canonical_smiles"]) for example in examples]
+    scaffolds = scaffold_groups(smiles)
+    if args.split == "random":
+        train_idx, val_idx, test_idx = stratified_random_split(
+            labels.tolist(), args.test_size, args.val_size, args.seed
+        )
+    elif args.split == "scaffold":
+        train_idx, val_idx, test_idx = group_split(scaffolds, args.test_size, args.val_size, args.seed)
+    else:
+        raise ValueError(f"Unknown split: {args.split}")
+    diagnostics = {
+        "strategy": args.split,
+        "scaffolds": split_overlap(scaffolds, train_idx, val_idx, test_idx),
+    }
+    return train_idx, val_idx, test_idx, diagnostics
 
 
 def train_logistic_regression(
@@ -234,50 +253,141 @@ def train_logistic_regression(
     return weights, bias, history
 
 
-def log_loss(y_true: np.ndarray, probs: np.ndarray) -> float:
-    eps = 1e-7
-    clipped = np.clip(probs, eps, 1.0 - eps)
-    loss = -(y_true * np.log(clipped) + (1.0 - y_true) * np.log(1.0 - clipped))
-    return float(np.mean(loss))
+def select_device(name: str):
+    import torch
+
+    if name != "auto":
+        return torch.device(name)
+    if torch.cuda.is_available():
+        return torch.device("cuda")
+    if getattr(torch.backends, "mps", None) and torch.backends.mps.is_available():
+        return torch.device("mps")
+    return torch.device("cpu")
 
 
-def roc_auc_score(y_true: np.ndarray, probs: np.ndarray) -> float:
-    positives = int(np.sum(y_true == 1))
-    negatives = int(np.sum(y_true == 0))
-    if positives == 0 or negatives == 0:
-        return float("nan")
+def train_torch_model(
+    examples: list[dict[str, object]],
+    labels: np.ndarray,
+    splits: dict[str, np.ndarray],
+    args: argparse.Namespace,
+) -> tuple[dict[str, np.ndarray], list[dict[str, float]], str]:
+    """Train fingerprint_mlp or gnn; return predicted probabilities per split."""
+    import torch
+    from torch import nn
 
-    order = np.argsort(probs)
-    ranks = np.empty_like(order, dtype=np.float64)
-    ranks[order] = np.arange(1, len(probs) + 1)
-    pos_rank_sum = float(np.sum(ranks[y_true == 1]))
-    auc = (pos_rank_sum - positives * (positives + 1) / 2) / (positives * negatives)
-    return float(auc)
+    from multimodal_datapipeline.models.fusion import ConcatenationFusion
+    from multimodal_datapipeline.models.graph import batch_graphs
+    from multimodal_datapipeline.models.molecule_encoder import (
+        MoleculeFingerprintMLP,
+        MoleculeGNNEncoder,
+        MoleculeGraphFeaturizer,
+        MorganFingerprintConfig,
+        MorganFingerprintFeaturizer,
+    )
 
+    torch.manual_seed(args.seed)
+    device = select_device(args.device)
+    smiles = [str(example["canonical_smiles"]) for example in examples]
 
-def classification_metrics(y_true: np.ndarray, probs: np.ndarray) -> dict[str, float]:
-    y_pred = (probs >= 0.5).astype(np.int32)
-    tp = int(np.sum((y_true == 1) & (y_pred == 1)))
-    tn = int(np.sum((y_true == 0) & (y_pred == 0)))
-    fp = int(np.sum((y_true == 0) & (y_pred == 1)))
-    fn = int(np.sum((y_true == 1) & (y_pred == 0)))
+    if args.model == "fingerprint_mlp":
+        featurizer = MorganFingerprintFeaturizer(MorganFingerprintConfig(n_bits=args.feature_dim))
+        fingerprints = torch.from_numpy(featurizer.transform(smiles))
+        encoder = MoleculeFingerprintMLP(
+            input_dim=args.feature_dim,
+            hidden_dim=args.molecule_hidden_dim,
+            embedding_dim=args.embedding_dim,
+            dropout=args.dropout,
+        )
 
-    accuracy = (tp + tn) / max(1, len(y_true))
-    precision = tp / max(1, tp + fp)
-    recall = tp / max(1, tp + fn)
-    f1 = 2 * precision * recall / max(1e-12, precision + recall)
+        def batch_inputs(indices: np.ndarray):
+            return fingerprints[torch.from_numpy(indices)].to(device)
 
-    return {
-        "accuracy": float(accuracy),
-        "precision": float(precision),
-        "recall": float(recall),
-        "f1": float(f1),
-        "roc_auc": roc_auc_score(y_true, probs),
-        "tp": float(tp),
-        "tn": float(tn),
-        "fp": float(fp),
-        "fn": float(fn),
-    }
+    else:
+        featurizer = MoleculeGraphFeaturizer()
+        graphs = featurizer.transform(smiles)
+        encoder = MoleculeGNNEncoder(
+            hidden_dim=args.gnn_hidden_dim,
+            embedding_dim=args.embedding_dim,
+            num_layers=args.gnn_layers,
+            dropout=args.dropout,
+        )
+
+        def batch_inputs(indices: np.ndarray):
+            return batch_graphs([graphs[i] for i in indices.tolist()]).to(device)
+
+    class MoleculeOnlyClassifier(nn.Module):
+        def __init__(self) -> None:
+            super().__init__()
+            self.molecule_encoder = encoder
+            self.fusion = ConcatenationFusion(
+                molecule_dim=args.embedding_dim,
+                hidden_dim=args.fusion_hidden_dim,
+                output_dim=1,
+                dropout=args.dropout,
+                use_protein=False,
+                use_image=False,
+            )
+
+        def forward(self, molecule_input) -> torch.Tensor:
+            return self.fusion(molecule_embedding=self.molecule_encoder(molecule_input)).squeeze(-1)
+
+    model = MoleculeOnlyClassifier().to(device)
+    optimizer = torch.optim.AdamW(model.parameters(), lr=args.learning_rate, weight_decay=args.l2)
+    loss_fn = nn.BCEWithLogitsLoss()
+    label_tensor = torch.from_numpy(labels.astype(np.float32))
+
+    def predict(indices: np.ndarray) -> np.ndarray:
+        model.eval()
+        logits = []
+        with torch.no_grad():
+            for start in range(0, len(indices), args.batch_size):
+                logits.append(model(batch_inputs(indices[start : start + args.batch_size])).cpu())
+        return sigmoid(torch.cat(logits).numpy())
+
+    from multimodal_datapipeline.utils.training import BestEpochTracker
+
+    tracker = BestEpochTracker(patience=args.patience)
+    rng = np.random.default_rng(args.seed)
+    history = []
+    for epoch in range(1, args.epochs + 1):
+        model.train()
+        order = splits["train"][rng.permutation(len(splits["train"]))]
+        losses = []
+        for start in range(0, len(order), args.batch_size):
+            batch_idx = order[start : start + args.batch_size]
+            loss = loss_fn(model(batch_inputs(batch_idx)), label_tensor[batch_idx].to(device))
+            optimizer.zero_grad()
+            loss.backward()
+            optimizer.step()
+            losses.append(float(loss.detach().cpu()))
+
+        val_probs = predict(splits["val"])
+        val_metrics = classification_metrics(labels[splits["val"]], val_probs)
+        history.append(
+            {
+                "epoch": float(epoch),
+                "train_loss": float(np.mean(losses)),
+                "val_loss": log_loss(labels[splits["val"]].astype(np.float32), val_probs),
+                "val_accuracy": val_metrics["accuracy"],
+                "val_f1": val_metrics["f1"],
+                "val_roc_auc": val_metrics["roc_auc"],
+                "val_pr_auc": val_metrics["pr_auc"],
+            }
+        )
+        improved = tracker.update(epoch, val_metrics["roc_auc"], model)
+        print(
+            f"Epoch {epoch}/{args.epochs} train_loss={history[-1]['train_loss']:.4f} "
+            f"val_roc_auc={val_metrics['roc_auc']:.4f} val_pr_auc={val_metrics['pr_auc']:.4f}"
+            + (" *" if improved else ""),
+            flush=True,
+        )
+        if tracker.should_stop:
+            print(f"Early stopping: no val ROC-AUC gain for {args.patience} epochs", flush=True)
+            break
+
+    tracker.restore(model)
+    print(f"Restored best epoch {tracker.best_epoch} (val ROC-AUC {tracker.best_score:.4f})", flush=True)
+    return {name: predict(indices) for name, indices in splits.items()}, history, str(device)
 
 
 def write_predictions(path: Path, examples: list[dict[str, object]], indices: np.ndarray, probs: np.ndarray) -> None:
@@ -323,11 +433,37 @@ def build_arg_parser() -> argparse.ArgumentParser:
     parser.add_argument("--out-dir", type=Path, default=DEFAULT_OUT_DIR, help="Output directory.")
     parser.add_argument("--target", default=None, help="Optional target_chembl_id filter, e.g. CHEMBL203.")
     parser.add_argument("--activity-threshold", type=float, default=6.0, help="Active if mean pChEMBL >= threshold.")
-    parser.add_argument("--feature-dim", type=int, default=2048, help="Hashed SMILES feature dimension.")
+    parser.add_argument("--model", default="ngram_logreg", choices=["ngram_logreg", "fingerprint_mlp", "gnn"])
+    parser.add_argument("--split", default="random", choices=["random", "scaffold"])
+    parser.add_argument(
+        "--feature-dim",
+        type=int,
+        default=2048,
+        help="Hashed SMILES feature dimension (ngram_logreg) or Morgan fingerprint bits (fingerprint_mlp).",
+    )
     parser.add_argument("--epochs", type=int, default=30)
     parser.add_argument("--batch-size", type=int, default=256)
-    parser.add_argument("--learning-rate", type=float, default=0.2)
-    parser.add_argument("--l2", type=float, default=1e-4)
+    parser.add_argument(
+        "--learning-rate",
+        type=float,
+        default=None,
+        help="Defaults to 0.2 for ngram_logreg (SGD) and 1e-3 for fingerprint_mlp/gnn (AdamW).",
+    )
+    parser.add_argument("--l2", type=float, default=1e-4, help="L2 penalty / AdamW weight decay.")
+    parser.add_argument("--embedding-dim", type=int, default=256)
+    parser.add_argument("--molecule-hidden-dim", type=int, default=512)
+    parser.add_argument("--gnn-hidden-dim", type=int, default=128)
+    parser.add_argument("--gnn-layers", type=int, default=4)
+    parser.add_argument("--fusion-hidden-dim", type=int, default=512)
+    parser.add_argument("--dropout", type=float, default=0.2)
+    parser.add_argument("--device", default="auto", choices=["auto", "cpu", "cuda", "mps"])
+    parser.add_argument(
+        "--patience",
+        type=int,
+        default=0,
+        help="fingerprint_mlp/gnn: stop after this many epochs without val ROC-AUC gain (0 = off). "
+        "The best validation epoch is always restored.",
+    )
     parser.add_argument("--test-size", type=float, default=0.2)
     parser.add_argument("--val-size", type=float, default=0.1)
     parser.add_argument("--seed", type=int, default=42)
@@ -356,26 +492,43 @@ def main() -> None:
     if len(set(labels.tolist())) < 2:
         raise ValueError("Need both active and inactive molecules. Try another threshold or target filter.")
 
-    features = np.stack(
-        [featurize_smiles(str(example["canonical_smiles"]), args.feature_dim) for example in examples]
-    )
+    if args.learning_rate is None:
+        args.learning_rate = 0.2 if args.model == "ngram_logreg" else 1e-3
 
-    train_idx, val_idx, test_idx = stratified_split(labels, args.test_size, args.val_size, args.seed)
-    weights, bias, history = train_logistic_regression(
-        features[train_idx],
-        labels[train_idx].astype(np.float32),
-        features[val_idx],
-        labels[val_idx].astype(np.float32),
-        epochs=args.epochs,
-        batch_size=args.batch_size,
-        lr=args.learning_rate,
-        l2=args.l2,
-        seed=args.seed,
-    )
+    train_idx, val_idx, test_idx, split_diagnostics = make_split(examples, labels, args)
+    splits = {"train": train_idx, "val": val_idx, "test": test_idx}
+    print(f"Split: {args.split} train/val/test={len(train_idx)}/{len(val_idx)}/{len(test_idx)}")
+    print(f"Test scaffolds seen in train: {split_diagnostics['scaffolds']['test_seen_in_train']}")
+
+    device = "cpu"
+    if args.model == "ngram_logreg":
+        features = np.stack(
+            [featurize_smiles(str(example["canonical_smiles"]), args.feature_dim) for example in examples]
+        )
+        weights, bias, history = train_logistic_regression(
+            features[train_idx],
+            labels[train_idx].astype(np.float32),
+            features[val_idx],
+            labels[val_idx].astype(np.float32),
+            epochs=args.epochs,
+            batch_size=args.batch_size,
+            lr=args.learning_rate,
+            l2=args.l2,
+            seed=args.seed,
+        )
+        split_probs = {name: sigmoid(features[indices] @ weights + bias) for name, indices in splits.items()}
+        feature_name = f"hashed_smiles_char_ngrams_dim_{args.feature_dim}"
+        model_name = "logistic_regression_sgd"
+    else:
+        split_probs, history, device = train_torch_model(examples, labels, splits, args)
+        feature_name = (
+            f"morgan_fingerprint_r2_{args.feature_dim}_bits" if args.model == "fingerprint_mlp" else "molecular_graph"
+        )
+        model_name = f"{args.model}_molecule_encoder + molecule-only ConcatenationFusion head"
 
     split_metrics = {}
-    for split_name, indices in [("train", train_idx), ("val", val_idx), ("test", test_idx)]:
-        probs = sigmoid(features[indices] @ weights + bias)
+    for split_name, indices in splits.items():
+        probs = split_probs[split_name]
         split_metrics[split_name] = {
             "loss": log_loss(labels[indices].astype(np.float32), probs),
             **classification_metrics(labels[indices], probs),
@@ -390,11 +543,13 @@ def main() -> None:
         "input_type": "curated" if "curated_smiles" in set(csv.DictReader(args.data.open()).fieldnames or []) else "raw",
         "target_filter": args.target,
         "activity_threshold_pchembl": args.activity_threshold,
-        "feature": f"hashed_smiles_char_ngrams_dim_{args.feature_dim}",
-        "model": "logistic_regression_sgd",
+        "feature": feature_name,
+        "model": model_name,
+        "device": device,
         "n_unique_smiles": len(examples),
         "n_active": int(np.sum(labels == 1)),
         "n_inactive": int(np.sum(labels == 0)),
+        "split": split_diagnostics,
         "splits": split_metrics,
         "training_history": history,
         "args": vars(args) | {"data": str(args.data), "out_dir": str(args.out_dir)},
@@ -404,9 +559,8 @@ def main() -> None:
     with metrics_path.open("w") as handle:
         json.dump(metrics, handle, indent=2)
 
-    test_probs = sigmoid(features[test_idx] @ weights + bias)
     predictions_path = args.out_dir / "test_predictions.csv"
-    write_predictions(predictions_path, examples, test_idx, test_probs)
+    write_predictions(predictions_path, examples, test_idx, split_probs["test"])
 
     print("Molecule-only baseline complete")
     print(f"Examples: {len(examples)} unique SMILES")
@@ -414,6 +568,7 @@ def main() -> None:
     print(f"Test accuracy: {split_metrics['test']['accuracy']:.4f}")
     print(f"Test F1: {split_metrics['test']['f1']:.4f}")
     print(f"Test ROC-AUC: {split_metrics['test']['roc_auc']:.4f}")
+    print(f"Test PR-AUC: {split_metrics['test']['pr_auc']:.4f}")
     print(f"Wrote metrics: {metrics_path}")
     print(f"Wrote predictions: {predictions_path}")
 

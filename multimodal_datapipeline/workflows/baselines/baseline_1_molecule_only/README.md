@@ -33,6 +33,19 @@ source .venv/bin/activate
 python workflows/baselines/baseline_1_molecule_only/run.py
 ```
 
+Models and splits:
+
+```bash
+# original hashed-SMILES logistic regression, random split (default)
+python workflows/baselines/baseline_1_molecule_only/train.py
+# same molecule branch + head as Baseline 4, scaffold split
+python workflows/baselines/baseline_1_molecule_only/train.py --model fingerprint_mlp --split scaffold --out-dir results/baseline_1_fingerprint_scaffold
+python workflows/baselines/baseline_1_molecule_only/train.py --model gnn --split scaffold --out-dir results/baseline_1_gnn_scaffold
+```
+
+`--split scaffold` groups molecules by Bemis-Murcko scaffold so no test scaffold
+is seen in training. `metrics.json` records the split diagnostics under `split`.
+
 Default input:
 
 ```text

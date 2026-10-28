@@ -1,0 +1,65 @@
+{
+  "task": "molecule_image_moa_classification",
+  "unit": "treatment (compound, concentration) DMSO-centred mean DINOv2 profile",
+  "modalities": [
+    "molecule",
+    "image"
+  ],
+  "model": "gated",
+  "split": "loco",
+  "n_folds": 34,
+  "n_treatments": 84,
+  "n_compounds": 34,
+  "classes": [
+    "Actin disruptors",
+    "Aurora kinase inhibitors",
+    "Cholesterol-lowering",
+    "DNA damage",
+    "DNA replication",
+    "Eg5 inhibitors",
+    "Epithelial",
+    "Kinase inhibitors",
+    "Microtubule destabilizers",
+    "Microtubule stabilizers",
+    "Protein degradation",
+    "Protein synthesis"
+  ],
+  "treatment_level": {
+    "accuracy": 0.7738095238095238,
+    "macro_f1": 0.6780551596857066,
+    "macro_recall": 0.7049272486772488
+  },
+  "compound_level": {
+    "accuracy": 0.7352941176470589,
+    "macro_f1": 0.6506613756613756,
+    "macro_recall": 0.6666666666666666
+  },
+  "mean_gates": {
+    "molecule": 0.7505205078493982,
+    "image": 0.24947949223929927
+  },
+  "args": {
+    "embeddings": "/Users/shaonichakravarty/Documents/IIIT_Dharwad/research_project/Mtech_project/multimodal_datapipeline/data/interim/bbbc021_dinov2_embeddings.npz",
+    "metadata": "/Users/shaonichakravarty/Documents/IIIT_Dharwad/research_project/Mtech_project/multimodal_datapipeline/data/interim/bbbc021_image_metadata.csv",
+    "out_dir": "results/baseline_5/b5_molecule_image_mdrop",
+    "modalities": [
+      "molecule",
+      "image"
+    ],
+    "model": "gated",
+    "split": "loco",
+    "test_size": 0.25,
+    "fingerprint_bits": 2048,
+    "embedding_dim": 128,
+    "hidden_dim": 128,
+    "dropout": 0.3,
+    "epochs": 300,
+    "learning_rate": 0.001,
+    "weight_decay": 0.01,
+    "modality_dropout": 0.5,
+    "no_dmso_centering": false,
+    "include_compounds_without_smiles": false,
+    "seed": 42,
+    "device": "cpu"
+  }
+}

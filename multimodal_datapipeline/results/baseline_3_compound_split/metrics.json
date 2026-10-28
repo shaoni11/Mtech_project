@@ -1,0 +1,417 @@
+{
+  "task": "image_only_moa_classification",
+  "input_csv": "/Users/shaonichakravarty/Documents/IIIT_Dharwad/research_project/Mtech_project/multimodal_datapipeline/data/processed/baseline_3_image_only.csv",
+  "model": "small_cnn",
+  "dinov2_model_name": null,
+  "channels": [
+    "dapi_path",
+    "tubulin_path",
+    "actin_path"
+  ],
+  "image_size": 128,
+  "augment": false,
+  "cache_images": true,
+  "device": "cpu",
+  "n_rows": 2528,
+  "labels": {
+    "0": "Actin disruptors",
+    "1": "Aurora kinase inhibitors",
+    "2": "Cholesterol-lowering",
+    "3": "DNA damage",
+    "4": "DNA replication",
+    "5": "Eg5 inhibitors",
+    "6": "Epithelial",
+    "7": "Kinase inhibitors",
+    "8": "Microtubule destabilizers",
+    "9": "Microtubule stabilizers",
+    "10": "Protein degradation",
+    "11": "Protein synthesis"
+  },
+  "class_counts": {
+    "Actin disruptors": 60,
+    "Aurora kinase inhibitors": 144,
+    "Cholesterol-lowering": 72,
+    "DNA damage": 108,
+    "DNA replication": 96,
+    "Eg5 inhibitors": 144,
+    "Epithelial": 88,
+    "Kinase inhibitors": 40,
+    "Microtubule destabilizers": 168,
+    "Microtubule stabilizers": 1428,
+    "Protein degradation": 84,
+    "Protein synthesis": 96
+  },
+  "split": {
+    "strategy": "compound",
+    "exclude_dmso": true,
+    "row_split_classes": [],
+    "compounds": {
+      "train_unique": 16,
+      "val_unique": 10,
+      "test_unique": 12,
+      "val_seen_in_train": 0,
+      "test_seen_in_train": 0
+    },
+    "weeks": {
+      "train_unique": 10,
+      "val_unique": 7,
+      "test_unique": 6,
+      "val_seen_in_train": 7,
+      "test_seen_in_train": 6
+    },
+    "plates": {
+      "train_unique": 55,
+      "val_unique": 25,
+      "test_unique": 23,
+      "val_seen_in_train": 25,
+      "test_seen_in_train": 23
+    },
+    "test_compounds": [
+      "ALLN",
+      "AZ-U",
+      "AZ138",
+      "AZ841",
+      "alsterpaullone",
+      "cyclohexamide",
+      "cytochalasin D",
+      "demecolcine",
+      "docetaxel",
+      "mitomycin C",
+      "mitoxantrone",
+      "simvastatin"
+    ],
+    "test_weeks": [
+      "Week10",
+      "Week2",
+      "Week3",
+      "Week4",
+      "Week7",
+      "Week9"
+    ],
+    "class_counts": {
+      "train": {
+        "Actin disruptors": 24,
+        "Aurora kinase inhibitors": 72,
+        "Cholesterol-lowering": 36,
+        "DNA damage": 24,
+        "DNA replication": 48,
+        "Eg5 inhibitors": 84,
+        "Epithelial": 36,
+        "Kinase inhibitors": 16,
+        "Microtubule destabilizers": 36,
+        "Microtubule stabilizers": 1356,
+        "Protein degradation": 48,
+        "Protein synthesis": 24
+      },
+      "val": {
+        "Actin disruptors": 24,
+        "Aurora kinase inhibitors": 36,
+        "DNA damage": 36,
+        "DNA replication": 24,
+        "Epithelial": 16,
+        "Kinase inhibitors": 8,
+        "Microtubule destabilizers": 84,
+        "Microtubule stabilizers": 36,
+        "Protein degradation": 12,
+        "Protein synthesis": 36
+      },
+      "test": {
+        "Actin disruptors": 12,
+        "Aurora kinase inhibitors": 36,
+        "Cholesterol-lowering": 36,
+        "DNA damage": 48,
+        "DNA replication": 24,
+        "Eg5 inhibitors": 60,
+        "Epithelial": 36,
+        "Kinase inhibitors": 16,
+        "Microtubule destabilizers": 48,
+        "Microtubule stabilizers": 36,
+        "Protein degradation": 24,
+        "Protein synthesis": 36
+      }
+    }
+  },
+  "split_sizes": {
+    "train": 1804,
+    "val": 312,
+    "test": 412
+  },
+  "model_selection": {
+    "best_epoch": 12,
+    "best_val_score": 0.5767675861214978,
+    "epochs_run": 20
+  },
+  "train": {
+    "accuracy": 0.8713968957871396,
+    "macro_precision": 0.7615405094424946,
+    "macro_recall": 0.9009392412323828,
+    "macro_f1": 0.793853260598398,
+    "n_classes_evaluated": 12.0,
+    "n_classes_total": 12.0,
+    "loss": 0.34195649447496484
+  },
+  "val": {
+    "accuracy": 0.5705128205128205,
+    "macro_precision": 0.6697724185775656,
+    "macro_recall": 0.5825892857142857,
+    "macro_f1": 0.5767675861214978,
+    "n_classes_evaluated": 12.0,
+    "n_classes_total": 12.0,
+    "loss": 2.594396871328354
+  },
+  "test": {
+    "accuracy": 0.6941747572815534,
+    "macro_precision": 0.6371962649240462,
+    "macro_recall": 0.6427083333333333,
+    "macro_f1": 0.6273992188399599,
+    "n_classes_evaluated": 12.0,
+    "n_classes_total": 12.0,
+    "loss": 1.7849097137267773
+  },
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 2.1792498784782612,
+      "val_accuracy": 0.34615384615384615,
+      "val_macro_precision": 0.22479984333738434,
+      "val_macro_recall": 0.3083333333333333,
+      "val_macro_f1": 0.21314104602252595,
+      "val_n_classes_evaluated": 10.0,
+      "val_n_classes_total": 12.0,
+      "val_loss": 1.953805935382843
+    },
+    {
+      "epoch": 2,
+      "train_loss": 1.6253573707247202,
+      "val_accuracy": 0.40384615384615385,
+      "val_macro_precision": 0.24125520141886367,
+      "val_macro_recall": 0.29241071428571425,
+      "val_macro_f1": 0.22892742667084823,
+      "val_n_classes_evaluated": 12.0,
+      "val_n_classes_total": 12.0,
+      "val_loss": 2.188376271724701
+    },
+    {
+      "epoch": 3,
+      "train_loss": 1.313064181699162,
+      "val_accuracy": 0.4358974358974359,
+      "val_macro_precision": 0.34648415974104046,
+      "val_macro_recall": 0.42071759259259256,
+      "val_macro_f1": 0.3492990092321344,
+      "val_n_classes_evaluated": 12.0,
+      "val_n_classes_total": 12.0,
+      "val_loss": 1.943997609615326
+    },
+    {
+      "epoch": 4,
+      "train_loss": 1.1450351603263247,
+      "val_accuracy": 0.34294871794871795,
+      "val_macro_precision": 0.4139399131777181,
+      "val_macro_recall": 0.32523148148148145,
+      "val_macro_f1": 0.2823414111590031,
+      "val_n_classes_evaluated": 12.0,
+      "val_n_classes_total": 12.0,
+      "val_loss": 3.2762188732624056
+    },
+    {
+      "epoch": 5,
+      "train_loss": 1.016776424198024,
+      "val_accuracy": 0.3974358974358974,
+      "val_macro_precision": 0.3673051819377278,
+      "val_macro_recall": 0.3993055555555556,
+      "val_macro_f1": 0.3226635536129174,
+      "val_n_classes_evaluated": 12.0,
+      "val_n_classes_total": 12.0,
+      "val_loss": 2.7700412273406982
+    },
+    {
+      "epoch": 6,
+      "train_loss": 0.8966997000759682,
+      "val_accuracy": 0.3782051282051282,
+      "val_macro_precision": 0.5260330487590213,
+      "val_macro_recall": 0.42633928571428575,
+      "val_macro_f1": 0.4422243680148001,
+      "val_n_classes_evaluated": 12.0,
+      "val_n_classes_total": 12.0,
+      "val_loss": 2.4865641832351684
+    },
+    {
+      "epoch": 7,
+      "train_loss": 0.7703441459916335,
+      "val_accuracy": 0.4519230769230769,
+      "val_macro_precision": 0.33523261499687124,
+      "val_macro_recall": 0.3974041005291005,
+      "val_macro_f1": 0.32733052608192287,
+      "val_n_classes_evaluated": 12.0,
+      "val_n_classes_total": 12.0,
+      "val_loss": 2.710834676027298
+    },
+    {
+      "epoch": 8,
+      "train_loss": 0.7362039451182416,
+      "val_accuracy": 0.4935897435897436,
+      "val_macro_precision": 0.5431685151432492,
+      "val_macro_recall": 0.47883597883597884,
+      "val_macro_f1": 0.47386823291931274,
+      "val_n_classes_evaluated": 12.0,
+      "val_n_classes_total": 12.0,
+      "val_loss": 2.0739644348621367
+    },
+    {
+      "epoch": 9,
+      "train_loss": 0.6331681488493902,
+      "val_accuracy": 0.4935897435897436,
+      "val_macro_precision": 0.46046294777638064,
+      "val_macro_recall": 0.45709325396825395,
+      "val_macro_f1": 0.4025451413709617,
+      "val_n_classes_evaluated": 12.0,
+      "val_n_classes_total": 12.0,
+      "val_loss": 2.3508312106132507
+    },
+    {
+      "epoch": 10,
+      "train_loss": 0.5438559450275076,
+      "val_accuracy": 0.4198717948717949,
+      "val_macro_precision": 0.5113147530982199,
+      "val_macro_recall": 0.3854993386243386,
+      "val_macro_f1": 0.40382581832649245,
+      "val_n_classes_evaluated": 12.0,
+      "val_n_classes_total": 12.0,
+      "val_loss": 2.2213229119777678
+    },
+    {
+      "epoch": 11,
+      "train_loss": 0.5134527932819539,
+      "val_accuracy": 0.5,
+      "val_macro_precision": 0.6832770764588947,
+      "val_macro_recall": 0.5371572871572872,
+      "val_macro_f1": 0.5364504245156859,
+      "val_n_classes_evaluated": 11.0,
+      "val_n_classes_total": 12.0,
+      "val_loss": 2.0537457525730134
+    },
+    {
+      "epoch": 12,
+      "train_loss": 0.41264441210479863,
+      "val_accuracy": 0.5705128205128205,
+      "val_macro_precision": 0.6697724185775656,
+      "val_macro_recall": 0.5825892857142857,
+      "val_macro_f1": 0.5767675861214978,
+      "val_n_classes_evaluated": 12.0,
+      "val_n_classes_total": 12.0,
+      "val_loss": 2.594396871328354
+    },
+    {
+      "epoch": 13,
+      "train_loss": 0.3780939807802175,
+      "val_accuracy": 0.2403846153846154,
+      "val_macro_precision": 0.41403065814579393,
+      "val_macro_recall": 0.29150132275132273,
+      "val_macro_f1": 0.24784243054858116,
+      "val_n_classes_evaluated": 12.0,
+      "val_n_classes_total": 12.0,
+      "val_loss": 4.196865332126618
+    },
+    {
+      "epoch": 14,
+      "train_loss": 0.3851078979143527,
+      "val_accuracy": 0.5224358974358975,
+      "val_macro_precision": 0.5161929786929788,
+      "val_macro_recall": 0.46858465608465605,
+      "val_macro_f1": 0.4556324892115449,
+      "val_n_classes_evaluated": 12.0,
+      "val_n_classes_total": 12.0,
+      "val_loss": 2.6255901753902435
+    },
+    {
+      "epoch": 15,
+      "train_loss": 0.33203442953526974,
+      "val_accuracy": 0.44551282051282054,
+      "val_macro_precision": 0.5037247811755934,
+      "val_macro_recall": 0.4392361111111111,
+      "val_macro_f1": 0.3999825403587694,
+      "val_n_classes_evaluated": 12.0,
+      "val_n_classes_total": 12.0,
+      "val_loss": 2.0702750444412232
+    },
+    {
+      "epoch": 16,
+      "train_loss": 0.29496381975776326,
+      "val_accuracy": 0.5833333333333334,
+      "val_macro_precision": 0.6296855450749091,
+      "val_macro_recall": 0.5708498677248678,
+      "val_macro_f1": 0.5625943932199916,
+      "val_n_classes_evaluated": 12.0,
+      "val_n_classes_total": 12.0,
+      "val_loss": 1.8408723056316376
+    },
+    {
+      "epoch": 17,
+      "train_loss": 0.2859166585799076,
+      "val_accuracy": 0.46153846153846156,
+      "val_macro_precision": 0.5590077584499491,
+      "val_macro_recall": 0.4957837301587302,
+      "val_macro_f1": 0.4499168788448071,
+      "val_n_classes_evaluated": 12.0,
+      "val_n_classes_total": 12.0,
+      "val_loss": 2.3414019882678985
+    },
+    {
+      "epoch": 18,
+      "train_loss": 0.2957833140956617,
+      "val_accuracy": 0.5448717948717948,
+      "val_macro_precision": 0.6447745822745823,
+      "val_macro_recall": 0.5475363756613757,
+      "val_macro_f1": 0.5504504993940057,
+      "val_n_classes_evaluated": 12.0,
+      "val_n_classes_total": 12.0,
+      "val_loss": 1.7668189257383347
+    },
+    {
+      "epoch": 19,
+      "train_loss": 0.26717400179961615,
+      "val_accuracy": 0.5256410256410257,
+      "val_macro_precision": 0.6024223461723461,
+      "val_macro_recall": 0.5343088624338624,
+      "val_macro_f1": 0.522053637652346,
+      "val_n_classes_evaluated": 12.0,
+      "val_n_classes_total": 12.0,
+      "val_loss": 2.16613107919693
+    },
+    {
+      "epoch": 20,
+      "train_loss": 0.26526107033302565,
+      "val_accuracy": 0.41346153846153844,
+      "val_macro_precision": 0.5906461383876608,
+      "val_macro_recall": 0.43105158730158727,
+      "val_macro_f1": 0.40172818635841234,
+      "val_n_classes_evaluated": 12.0,
+      "val_n_classes_total": 12.0,
+      "val_loss": 2.3201600193977354
+    }
+  ],
+  "args": {
+    "data": "/Users/shaonichakravarty/Documents/IIIT_Dharwad/research_project/Mtech_project/multimodal_datapipeline/data/processed/baseline_3_image_only.csv",
+    "out_dir": "results/baseline_3_compound_split",
+    "image_size": 128,
+    "epochs": 30,
+    "batch_size": 16,
+    "learning_rate": 0.001,
+    "weight_decay": 0.0001,
+    "dropout": 0.25,
+    "model": "small_cnn",
+    "dinov2_model_name": "facebook/dinov2-small",
+    "augment": false,
+    "cache_images": true,
+    "log_every": 5,
+    "save_model": true,
+    "split": "compound",
+    "exclude_dmso": true,
+    "patience": 8,
+    "test_size": 0.2,
+    "val_size": 0.1,
+    "seed": 42,
+    "num_workers": 0,
+    "device": "cpu"
+  }
+}

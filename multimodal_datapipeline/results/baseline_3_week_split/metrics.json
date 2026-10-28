@@ -1,0 +1,290 @@
+{
+  "task": "image_only_moa_classification",
+  "input_csv": "/Users/shaonichakravarty/Documents/IIIT_Dharwad/research_project/Mtech_project/multimodal_datapipeline/data/processed/baseline_3_image_only.csv",
+  "model": "small_cnn",
+  "dinov2_model_name": null,
+  "channels": [
+    "dapi_path",
+    "tubulin_path",
+    "actin_path"
+  ],
+  "image_size": 128,
+  "augment": false,
+  "cache_images": true,
+  "device": "cpu",
+  "n_rows": 3848,
+  "labels": {
+    "0": "Actin disruptors",
+    "1": "Aurora kinase inhibitors",
+    "2": "Cholesterol-lowering",
+    "3": "DMSO",
+    "4": "DNA damage",
+    "5": "DNA replication",
+    "6": "Eg5 inhibitors",
+    "7": "Epithelial",
+    "8": "Kinase inhibitors",
+    "9": "Microtubule destabilizers",
+    "10": "Microtubule stabilizers",
+    "11": "Protein degradation",
+    "12": "Protein synthesis"
+  },
+  "class_counts": {
+    "Actin disruptors": 60,
+    "Aurora kinase inhibitors": 144,
+    "Cholesterol-lowering": 72,
+    "DNA damage": 108,
+    "DNA replication": 96,
+    "Eg5 inhibitors": 144,
+    "Epithelial": 88,
+    "Kinase inhibitors": 40,
+    "Microtubule destabilizers": 168,
+    "Microtubule stabilizers": 1428,
+    "Protein degradation": 84,
+    "Protein synthesis": 96,
+    "DMSO": 1320
+  },
+  "split": {
+    "strategy": "week",
+    "exclude_dmso": false,
+    "compounds": {
+      "train_unique": 25,
+      "val_unique": 8,
+      "test_unique": 10,
+      "val_seen_in_train": 2,
+      "test_seen_in_train": 2
+    },
+    "weeks": {
+      "train_unique": 7,
+      "val_unique": 1,
+      "test_unique": 2,
+      "val_seen_in_train": 0,
+      "test_seen_in_train": 0
+    },
+    "plates": {
+      "train_unique": 37,
+      "val_unique": 6,
+      "test_unique": 12,
+      "val_seen_in_train": 0,
+      "test_seen_in_train": 0
+    },
+    "test_compounds": [
+      "ALLN",
+      "DMSO",
+      "MG-132",
+      "cytochalasin D",
+      "floxuridine",
+      "methotrexate",
+      "mevinolin/lovastatin",
+      "mitoxantrone",
+      "simvastatin",
+      "taxol"
+    ],
+    "test_weeks": [
+      "Week2",
+      "Week9"
+    ],
+    "class_counts": {
+      "train": {
+        "Aurora kinase inhibitors": 72,
+        "DMSO": 888,
+        "DNA damage": 108,
+        "DNA replication": 36,
+        "Eg5 inhibitors": 144,
+        "Epithelial": 88,
+        "Kinase inhibitors": 40,
+        "Microtubule destabilizers": 132,
+        "Microtubule stabilizers": 924,
+        "Protein degradation": 36,
+        "Protein synthesis": 96
+      },
+      "val": {
+        "Actin disruptors": 48,
+        "Aurora kinase inhibitors": 72,
+        "DMSO": 144,
+        "Microtubule destabilizers": 36,
+        "Microtubule stabilizers": 216
+      },
+      "test": {
+        "Actin disruptors": 12,
+        "Cholesterol-lowering": 72,
+        "DMSO": 288,
+        "DNA replication": 60,
+        "Microtubule stabilizers": 288,
+        "Protein degradation": 48
+      }
+    }
+  },
+  "split_sizes": {
+    "train": 2564,
+    "val": 516,
+    "test": 768
+  },
+  "model_selection": {
+    "best_epoch": 2,
+    "best_val_score": 0.37739165220858,
+    "epochs_run": 10
+  },
+  "train": {
+    "accuracy": 0.7932917316692668,
+    "macro_precision": 0.7281402189504699,
+    "macro_recall": 0.7137308057762604,
+    "macro_f1": 0.6249342106887347,
+    "n_classes_evaluated": 11.0,
+    "n_classes_total": 13.0,
+    "loss": 0.7506330781471655
+  },
+  "val": {
+    "accuracy": 0.8158914728682171,
+    "macro_precision": 0.4236008758309427,
+    "macro_recall": 0.35622427983539096,
+    "macro_f1": 0.37739165220858,
+    "n_classes_evaluated": 9.0,
+    "n_classes_total": 13.0,
+    "loss": 6.998998485957131
+  },
+  "test": {
+    "accuracy": 0.66796875,
+    "macro_precision": 0.20872812633376014,
+    "macro_recall": 0.1935185185185185,
+    "macro_f1": 0.19926846629587233,
+    "n_classes_evaluated": 12.0,
+    "n_classes_total": 13.0,
+    "loss": 9.814270911117395
+  },
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 1.4313592199953447,
+      "val_accuracy": 0.6686046511627907,
+      "val_macro_precision": 0.37008217008217004,
+      "val_macro_recall": 0.22592592592592592,
+      "val_macro_f1": 0.25318719931255046,
+      "val_n_classes_evaluated": 10.0,
+      "val_n_classes_total": 13.0,
+      "val_loss": 5.059060681046861
+    },
+    {
+      "epoch": 2,
+      "train_loss": 0.8695211671524167,
+      "val_accuracy": 0.8158914728682171,
+      "val_macro_precision": 0.4236008758309427,
+      "val_macro_recall": 0.35622427983539096,
+      "val_macro_f1": 0.37739165220858,
+      "val_n_classes_evaluated": 9.0,
+      "val_n_classes_total": 13.0,
+      "val_loss": 6.998998485957131
+    },
+    {
+      "epoch": 3,
+      "train_loss": 0.715238767473594,
+      "val_accuracy": 0.7538759689922481,
+      "val_macro_precision": 0.38711236895702916,
+      "val_macro_recall": 0.30300925925925926,
+      "val_macro_f1": 0.33087937585046195,
+      "val_n_classes_evaluated": 10.0,
+      "val_n_classes_total": 13.0,
+      "val_loss": 8.967887099493634
+    },
+    {
+      "epoch": 4,
+      "train_loss": 0.5197243894109075,
+      "val_accuracy": 0.5077519379844961,
+      "val_macro_precision": 0.28449197860962566,
+      "val_macro_recall": 0.2215909090909091,
+      "val_macro_f1": 0.19943877298518844,
+      "val_n_classes_evaluated": 11.0,
+      "val_n_classes_total": 13.0,
+      "val_loss": 10.246016003868796
+    },
+    {
+      "epoch": 5,
+      "train_loss": 0.46856857021773085,
+      "val_accuracy": 0.8624031007751938,
+      "val_macro_precision": 0.3415871758581806,
+      "val_macro_recall": 0.31712962962962965,
+      "val_macro_f1": 0.322239934714545,
+      "val_n_classes_evaluated": 11.0,
+      "val_n_classes_total": 13.0,
+      "val_loss": 6.576724679406845
+    },
+    {
+      "epoch": 6,
+      "train_loss": 0.44393370365319046,
+      "val_accuracy": 0.8197674418604651,
+      "val_macro_precision": 0.41377960407956516,
+      "val_macro_recall": 0.34516460905349794,
+      "val_macro_f1": 0.35165232306061345,
+      "val_n_classes_evaluated": 9.0,
+      "val_n_classes_total": 13.0,
+      "val_loss": 8.663255782402826
+    },
+    {
+      "epoch": 7,
+      "train_loss": 0.42187593921278577,
+      "val_accuracy": 0.7344961240310077,
+      "val_macro_precision": 0.37438424324981334,
+      "val_macro_recall": 0.3159722222222222,
+      "val_macro_f1": 0.3392379031744662,
+      "val_n_classes_evaluated": 10.0,
+      "val_n_classes_total": 13.0,
+      "val_loss": 8.902756979068121
+    },
+    {
+      "epoch": 8,
+      "train_loss": 0.31278368064798184,
+      "val_accuracy": 0.75,
+      "val_macro_precision": 0.4527456361925225,
+      "val_macro_recall": 0.34403935185185186,
+      "val_macro_f1": 0.3479050743217172,
+      "val_n_classes_evaluated": 8.0,
+      "val_n_classes_total": 13.0,
+      "val_loss": 7.30996196288051
+    },
+    {
+      "epoch": 9,
+      "train_loss": 0.29764697152357666,
+      "val_accuracy": 0.7693798449612403,
+      "val_macro_precision": 0.3761491628614916,
+      "val_macro_recall": 0.28703703703703703,
+      "val_macro_f1": 0.28756895769204743,
+      "val_n_classes_evaluated": 10.0,
+      "val_n_classes_total": 13.0,
+      "val_loss": 10.740121791082801
+    },
+    {
+      "epoch": 10,
+      "train_loss": 0.29427496024540495,
+      "val_accuracy": 0.6841085271317829,
+      "val_macro_precision": 0.3138733576013872,
+      "val_macro_recall": 0.24247685185185186,
+      "val_macro_f1": 0.26183827347699556,
+      "val_n_classes_evaluated": 12.0,
+      "val_n_classes_total": 13.0,
+      "val_loss": 6.846175686653816
+    }
+  ],
+  "args": {
+    "data": "/Users/shaonichakravarty/Documents/IIIT_Dharwad/research_project/Mtech_project/multimodal_datapipeline/data/processed/baseline_3_image_only.csv",
+    "out_dir": "results/baseline_3_week_split",
+    "image_size": 128,
+    "epochs": 30,
+    "batch_size": 16,
+    "learning_rate": 0.001,
+    "weight_decay": 0.0001,
+    "dropout": 0.25,
+    "model": "small_cnn",
+    "dinov2_model_name": "facebook/dinov2-small",
+    "augment": false,
+    "cache_images": true,
+    "log_every": 5,
+    "save_model": true,
+    "split": "week",
+    "exclude_dmso": false,
+    "patience": 8,
+    "test_size": 0.2,
+    "val_size": 0.1,
+    "seed": 42,
+    "num_workers": 0,
+    "device": "cpu"
+  }
+}

@@ -23,12 +23,6 @@ moa_label
 metadata fields
 ```
 
-Recommended next script:
-
-```text
-train_image_only_baseline.py
-```
-
 The default Baseline 3 experiment uses `small_cnn` because the current BBBC021
 table is small. `dinov2_linear` is available as a transfer-learning variant when
 the Hugging Face model weights are installed or cached locally.
@@ -78,6 +72,24 @@ python workflows/baselines/baseline_3_image_only/train.py --model small_cnn
 python workflows/baselines/baseline_3_image_only/train.py --model small_cnn --augment
 python workflows/baselines/baseline_3_image_only/train.py --model dinov2_linear
 ```
+
+Realistic splits (`--split`):
+
+```text
+random    stratified random images (default; optimistic)
+compound  hold out whole compounds inside every MoA class (standard BBBC021 protocol)
+week      hold out whole acquisition weeks (cross-batch robustness)
+```
+
+```bash
+python workflows/baselines/baseline_3_image_only/train.py --split compound --exclude-dmso --out-dir results/baseline_3_compound_split
+python workflows/baselines/baseline_3_image_only/train.py --split week --out-dir results/baseline_3_week_split
+python workflows/baselines/baseline_3_image_only/run_experiments.py --split compound --exclude-dmso --include-dinov2 --out-dir results/baseline_3_compound_split_suite
+```
+
+DMSO is a single compound, so with `--split compound` and without `--exclude-dmso`
+its images are split randomly; this is recorded as `split.row_split_classes`.
+Macro metrics average over the classes present in a split.
 
 Run the comparison suite:
 

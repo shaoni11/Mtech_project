@@ -29,6 +29,8 @@ def build_arg_parser() -> argparse.ArgumentParser:
     parser.add_argument("--image-size", type=int, default=128)
     parser.add_argument("--device", default="auto", choices=["auto", "cpu", "cuda", "mps"])
     parser.add_argument("--seed", type=int, default=42)
+    parser.add_argument("--split", default="random", choices=["random", "compound", "week"])
+    parser.add_argument("--exclude-dmso", action="store_true")
     parser.add_argument("--include-dinov2", action="store_true")
     parser.add_argument("--cache-images", action="store_true")
     parser.add_argument("--save-models", action="store_true")
@@ -51,7 +53,11 @@ def experiment_commands(args: argparse.Namespace) -> list[tuple[str, list[str]]]
         args.device,
         "--seed",
         str(args.seed),
+        "--split",
+        args.split,
     ]
+    if args.exclude_dmso:
+        base.append("--exclude-dmso")
     if args.save_models:
         base.append("--save-model")
     if args.cache_images:

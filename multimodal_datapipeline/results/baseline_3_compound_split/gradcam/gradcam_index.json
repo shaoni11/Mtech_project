@@ -1,0 +1,102 @@
+[
+  {
+    "moa": "Aurora kinase inhibitors",
+    "compound": "AZ841",
+    "file": "Aurora_kinase_inhibitors_1.png"
+  },
+  {
+    "moa": "Aurora kinase inhibitors",
+    "compound": "AZ841",
+    "file": "Aurora_kinase_inhibitors_2.png"
+  },
+  {
+    "moa": "Cholesterol-lowering",
+    "compound": "simvastatin",
+    "file": "Cholesterol_lowering_1.png"
+  },
+  {
+    "moa": "Cholesterol-lowering",
+    "compound": "simvastatin",
+    "file": "Cholesterol_lowering_2.png"
+  },
+  {
+    "moa": "DNA damage",
+    "compound": "mitomycin C",
+    "file": "DNA_damage_1.png"
+  },
+  {
+    "moa": "DNA damage",
+    "compound": "mitomycin C",
+    "file": "DNA_damage_2.png"
+  },
+  {
+    "moa": "DNA replication",
+    "compound": "mitoxantrone",
+    "file": "DNA_replication_1.png"
+  },
+  {
+    "moa": "DNA replication",
+    "compound": "mitoxantrone",
+    "file": "DNA_replication_2.png"
+  },
+  {
+    "moa": "Eg5 inhibitors",
+    "compound": "AZ138",
+    "file": "Eg5_inhibitors_1.png"
+  },
+  {
+    "moa": "Eg5 inhibitors",
+    "compound": "AZ138",
+    "file": "Eg5_inhibitors_2.png"
+  },
+  {
+    "moa": "Epithelial",
+    "compound": "AZ-U",
+    "file": "Epithelial_1.png"
+  },
+  {
+    "moa": "Epithelial",
+    "compound": "AZ-U",
+    "file": "Epithelial_2.png"
+  },
+  {
+    "moa": "Kinase inhibitors",
+    "compound": "alsterpaullone",
+    "file": "Kinase_inhibitors_1.png"
+  },
+  {
+    "moa": "Kinase inhibitors",
+    "compound": "alsterpaullone",
+    "file": "Kinase_inhibitors_2.png"
+  },
+  {
+    "moa": "Microtubule stabilizers",
+    "compound": "docetaxel",
+    "file": "Microtubule_stabilizers_1.png"
+  },
+  {
+    "moa": "Microtubule stabilizers",
+    "compound": "docetaxel",
+    "file": "Microtubule_stabilizers_2.png"
+  },
+  {
+    "moa": "Protein degradation",
+    "compound": "ALLN",
+    "file": "Protein_degradation_1.png"
+  },
+  {
+    "moa": "Protein degradation",
+    "compound": "ALLN",
+    "file": "Protein_degradation_2.png"
+  },
+  {
+    "moa": "Protein synthesis",
+    "compound": "cyclohexamide",
+    "file": "Protein_synthesis_1.png"
+  },
+  {
+    "moa": "Protein synthesis",
+    "compound": "cyclohexamide",
+    "file": "Protein_synthesis_2.png"
+  }
+]

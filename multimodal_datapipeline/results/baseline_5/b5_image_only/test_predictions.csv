@@ -1,0 +1,85 @@
+fold,compound,concentration,true_moa,predicted_moa,confidence,gate_image
+ALLN,ALLN,100.000000,Protein degradation,Protein degradation,0.9992316961288452,1.0
+ALLN,ALLN,3.000000,Protein degradation,Protein degradation,0.9841936230659485,1.0
+AZ138,AZ138,0.030000,Eg5 inhibitors,Microtubule destabilizers,0.4268433451652527,1.0
+AZ138,AZ138,0.100000,Eg5 inhibitors,Microtubule stabilizers,0.41498610377311707,1.0
+AZ138,AZ138,0.300000,Eg5 inhibitors,Kinase inhibitors,0.4720786511898041,1.0
+AZ138,AZ138,1.000000,Eg5 inhibitors,Microtubule stabilizers,0.4599403738975525,1.0
+AZ138,AZ138,3.000000,Eg5 inhibitors,Actin disruptors,0.43910276889801025,1.0
+AZ258,AZ258,0.100000,Aurora kinase inhibitors,Aurora kinase inhibitors,0.7054730653762817,1.0
+AZ258,AZ258,0.300000,Aurora kinase inhibitors,Aurora kinase inhibitors,0.9606265425682068,1.0
+AZ258,AZ258,1.000000,Aurora kinase inhibitors,Aurora kinase inhibitors,0.992836058139801,1.0
+AZ841,AZ841,0.100000,Aurora kinase inhibitors,Aurora kinase inhibitors,0.9982269406318665,1.0
+AZ841,AZ841,0.300000,Aurora kinase inhibitors,Aurora kinase inhibitors,0.9991462230682373,1.0
+AZ841,AZ841,1.000000,Aurora kinase inhibitors,Aurora kinase inhibitors,0.9986039996147156,1.0
+MG-132,MG-132,0.100000,Protein degradation,Protein degradation,0.9973562955856323,1.0
+MG-132,MG-132,3.000000,Protein degradation,Protein degradation,0.9986594915390015,1.0
+PD-169316,PD-169316,10.000000,Kinase inhibitors,Kinase inhibitors,0.9994810223579407,1.0
+PD-169316,PD-169316,3.000000,Kinase inhibitors,Kinase inhibitors,0.9992572665214539,1.0
+PP-2,PP-2,10.000000,Epithelial,Protein degradation,0.822364091873169,1.0
+PP-2,PP-2,3.000000,Epithelial,Protein degradation,0.5831526517868042,1.0
+alsterpaullone,alsterpaullone,1.000000,Kinase inhibitors,Kinase inhibitors,0.9992427825927734,1.0
+alsterpaullone,alsterpaullone,3.000000,Kinase inhibitors,Kinase inhibitors,0.9996460676193237,1.0
+anisomycin,anisomycin,0.300000,Protein synthesis,Protein synthesis,0.9996711015701294,1.0
+anisomycin,anisomycin,1.000000,Protein synthesis,Protein synthesis,0.9998094439506531,1.0
+bryostatin,bryostatin,0.300000,Kinase inhibitors,Kinase inhibitors,0.9831830263137817,1.0
+camptothecin,camptothecin,0.003000,DNA replication,DNA replication,0.9993900060653687,1.0
+camptothecin,camptothecin,0.010000,DNA replication,DNA replication,0.9994487166404724,1.0
+camptothecin,camptothecin,0.030000,DNA replication,DNA replication,0.9982331991195679,1.0
+chlorambucil,chlorambucil,10.000000,DNA damage,DNA damage,0.9996981620788574,1.0
+cisplatin,cisplatin,10.000000,DNA damage,DNA damage,0.9389702677726746,1.0
+colchicine,colchicine,0.030000,Microtubule destabilizers,DNA damage,0.9160754084587097,1.0
+cyclohexamide,cyclohexamide,15.000000,Protein synthesis,Protein synthesis,0.9998525381088257,1.0
+cyclohexamide,cyclohexamide,5.000000,Protein synthesis,Protein synthesis,0.9997935891151428,1.0
+cyclohexamide,cyclohexamide,50.000000,Protein synthesis,Protein synthesis,0.999840497970581,1.0
+cytochalasin B,cytochalasin B,10.000000,Actin disruptors,Actin disruptors,0.998163640499115,1.0
+cytochalasin B,cytochalasin B,30.000000,Actin disruptors,Actin disruptors,0.9984536170959473,1.0
+cytochalasin D,cytochalasin D,0.300000,Actin disruptors,Actin disruptors,0.9987921118736267,1.0
+demecolcine,demecolcine,0.300000,Microtubule destabilizers,Microtubule destabilizers,0.9999382495880127,1.0
+demecolcine,demecolcine,1.000000,Microtubule destabilizers,Microtubule destabilizers,0.9999364614486694,1.0
+demecolcine,demecolcine,10.000000,Microtubule destabilizers,Microtubule destabilizers,0.9999274015426636,1.0
+demecolcine,demecolcine,3.000000,Microtubule destabilizers,Microtubule destabilizers,0.9999483823776245,1.0
+docetaxel,docetaxel,0.030000,Microtubule stabilizers,Microtubule stabilizers,0.9692862033843994,1.0
+docetaxel,docetaxel,0.100000,Microtubule stabilizers,Microtubule stabilizers,0.986617386341095,1.0
+docetaxel,docetaxel,0.300000,Microtubule stabilizers,Microtubule stabilizers,0.9961121678352356,1.0
+emetine,emetine,0.100000,Protein synthesis,Protein synthesis,0.9990880489349365,1.0
+emetine,emetine,0.300000,Protein synthesis,Protein synthesis,0.9959931373596191,1.0
+emetine,emetine,1.000000,Protein synthesis,Protein synthesis,0.9987518787384033,1.0
+epothilone B,epothilone B,0.100000,Microtubule stabilizers,Microtubule destabilizers,0.9757840037345886,1.0
+epothilone B,epothilone B,0.300000,Microtubule stabilizers,Microtubule destabilizers,0.9975542426109314,1.0
+epothilone B,epothilone B,1.000000,Microtubule stabilizers,Microtubule stabilizers,0.5051299929618835,1.0
+etoposide,etoposide,1.000000,DNA damage,DNA damage,0.9360904693603516,1.0
+etoposide,etoposide,10.000000,DNA damage,DNA damage,0.910828173160553,1.0
+etoposide,etoposide,3.000000,DNA damage,Aurora kinase inhibitors,0.9619523286819458,1.0
+floxuridine,floxuridine,10.000000,DNA replication,DNA replication,0.9989663362503052,1.0
+floxuridine,floxuridine,30.000000,DNA replication,DNA replication,0.9979730248451233,1.0
+lactacystin,lactacystin,10.000000,Protein degradation,Protein degradation,0.9923662543296814,1.0
+latrunculin B,latrunculin B,1.000000,Actin disruptors,Microtubule stabilizers,0.8748660683631897,1.0
+latrunculin B,latrunculin B,3.000000,Actin disruptors,Actin disruptors,0.9976575374603271,1.0
+methotrexate,methotrexate,10.000000,DNA replication,Aurora kinase inhibitors,0.7543908357620239,1.0
+mevinolin/lovastatin,mevinolin/lovastatin,1.500000,Cholesterol-lowering,Cholesterol-lowering,0.9995400905609131,1.0
+mevinolin/lovastatin,mevinolin/lovastatin,15.000000,Cholesterol-lowering,Cholesterol-lowering,0.9479101896286011,1.0
+mevinolin/lovastatin,mevinolin/lovastatin,5.000000,Cholesterol-lowering,Cholesterol-lowering,0.9997027516365051,1.0
+mitomycin C,mitomycin C,0.100000,DNA damage,DNA damage,0.8970154523849487,1.0
+mitomycin C,mitomycin C,0.300000,DNA damage,DNA damage,0.8517375588417053,1.0
+mitomycin C,mitomycin C,1.000000,DNA damage,DNA damage,0.9809049367904663,1.0
+mitomycin C,mitomycin C,3.000000,DNA damage,DNA damage,0.9983686804771423,1.0
+mitoxantrone,mitoxantrone,0.003000,DNA replication,DNA replication,0.7708759903907776,1.0
+mitoxantrone,mitoxantrone,0.010000,DNA replication,DNA replication,0.8009433150291443,1.0
+nocodazole,nocodazole,1.000000,Microtubule destabilizers,Microtubule destabilizers,0.5296919345855713,1.0
+nocodazole,nocodazole,3.000000,Microtubule destabilizers,Protein degradation,0.45858854055404663,1.0
+proteasome inhibitor I,proteasome inhibitor I,0.100000,Protein degradation,DNA damage,0.6817762851715088,1.0
+proteasome inhibitor I,proteasome inhibitor I,3.000000,Protein degradation,Protein degradation,0.9820258021354675,1.0
+simvastatin,simvastatin,2.000000,Cholesterol-lowering,Cholesterol-lowering,0.9602299332618713,1.0
+simvastatin,simvastatin,20.000000,Cholesterol-lowering,Cholesterol-lowering,0.9996143579483032,1.0
+simvastatin,simvastatin,6.000000,Cholesterol-lowering,Cholesterol-lowering,0.999423623085022,1.0
+taxol,taxol,0.300000,Microtubule stabilizers,Microtubule stabilizers,0.5203250646591187,1.0
+taxol,taxol,1.000000,Microtubule stabilizers,Microtubule stabilizers,0.9502627849578857,1.0
+taxol,taxol,3.000000,Microtubule stabilizers,Microtubule stabilizers,0.9825838208198547,1.0
+vincristine,vincristine,0.003000,Microtubule destabilizers,Microtubule destabilizers,0.9973337650299072,1.0
+vincristine,vincristine,0.010000,Microtubule destabilizers,Microtubule destabilizers,0.9998430013656616,1.0
+vincristine,vincristine,0.030000,Microtubule destabilizers,Microtubule destabilizers,0.9992271661758423,1.0
+vincristine,vincristine,0.100000,Microtubule destabilizers,Microtubule destabilizers,0.9998636245727539,1.0
+vincristine,vincristine,0.300000,Microtubule destabilizers,Microtubule destabilizers,0.999816358089447,1.0
+vincristine,vincristine,1.000000,Microtubule destabilizers,Microtubule destabilizers,0.9999452829360962,1.0
+vincristine,vincristine,3.000000,Microtubule destabilizers,Microtubule destabilizers,0.9998914003372192,1.0

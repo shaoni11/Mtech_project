@@ -50,10 +50,15 @@ This project is organized to support a staged M.Tech workflow:
 ## Package Subfolders
 
 `package/multimodal_datapipeline/models/`
-- Ligand, protein, image, and fusion model components.
+- Molecule (fingerprint MLP, graph GNN), protein (ESM-2, AlphaFold residue-graph GNN), image (DINOv2)
+  encoders and fusion heads (concatenation, gated, cross-attention).
 
 `package/multimodal_datapipeline/utils/`
-- Shared IO, filesystem, and baseline launcher helpers.
+- Shared IO, filesystem, baseline launcher, split (scaffold / cold-target / held-out compound / week),
+  metric, training (best-epoch selection) and microscopy-profile helpers.
+
+`package/multimodal_datapipeline/interpretability.py`
+- Atom, residue and Grad-CAM attributions used by `workflows/interpretability/`.
 
 ## Current entrypoint
 
@@ -74,6 +79,19 @@ Run the cytoskeleton ChEMBL acquisition with:
 
 ```bash
 python3 data/acquire_data.py cytoskeleton-chembl
+```
+
+Other acquisition subcommands:
+
+```bash
+python3 data/acquire_data.py davis            # Davis kinase benchmark + UniProt mapping + AlphaFold
+python3 data/acquire_data.py bbbc021-chembl   # ChEMBL binding data for BBBC021 compounds + AlphaFold
+```
+
+Phenotype embeddings for all BBBC021 images (used by Baselines 5-7):
+
+```bash
+python3 workflows/baselines/baseline_3_image_only/extract_image_embeddings.py
 ```
 
 Run baseline training through console entrypoints:

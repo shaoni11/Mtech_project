@@ -11,6 +11,11 @@ Each example contains three microscopy channels:
 
 This baseline intentionally uses only image inputs and predicts the mechanism of
 action label from BBBC021.
+
+Splits (--split):
+    random    stratified random images (optimistic: same compound/well in train and test)
+    compound  whole compounds held out inside every MoA class (standard BBBC021 protocol)
+    week      whole acquisition weeks held out (batch-effect / cross-batch robustness)
 """
 
 from __future__ import annotations
@@ -32,6 +37,13 @@ from torch.utils.data import DataLoader, Dataset
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[3]
+PACKAGE_DIR = PROJECT_ROOT / "package"
+if str(PACKAGE_DIR) not in sys.path:
+    sys.path.insert(0, str(PACKAGE_DIR))
+
+from multimodal_datapipeline.utils.splits import group_split, split_overlap, stratified_group_split  # noqa: E402
+from multimodal_datapipeline.utils.training import BestEpochTracker  # noqa: E402
+
 DEFAULT_DATA = PROJECT_ROOT / "data" / "processed" / "baseline_3_image_only.csv"
 DEFAULT_OUT_DIR = PROJECT_ROOT / "results" / "baseline_3_image_only"
 
@@ -39,7 +51,7 @@ DEFAULT_OUT_DIR = PROJECT_ROOT / "results" / "baseline_3_image_only"
 CHANNEL_COLUMNS = ["dapi_path", "tubulin_path", "actin_path"]
 
 
-def read_rows(path: Path) -> list[dict[str, str]]:
+def read_rows(path: Path, exclude_dmso: bool = False) -> list[dict[str, str]]:
     with path.open(newline="") as handle:
         rows = list(csv.DictReader(handle))
 
@@ -61,6 +73,8 @@ def read_rows(path: Path) -> list[dict[str, str]]:
         for row in rows
         if row["moa"] and all(row.get(column) and Path(row[column]).exists() for column in CHANNEL_COLUMNS)
     ]
+    if exclude_dmso:
+        usable = [row for row in usable if row["moa"] != "DMSO"]
     if len(usable) < 10:
         raise ValueError(f"Need at least 10 usable image rows, found {len(usable)}")
     if len({row["moa"] for row in usable}) < 2:
@@ -105,6 +119,59 @@ def stratified_split(
     for split_rows in splits.values():
         rng.shuffle(split_rows)
     return splits
+
+
+def row_week(row: dict[str, str]) -> str:
+    return row["plate"].split("_", 1)[0]
+
+
+def make_splits(
+    rows: list[dict[str, str]],
+    label_to_id: dict[str, int],
+    args: argparse.Namespace,
+) -> tuple[dict[str, list[dict[str, str]]], dict[str, object]]:
+    diagnostics: dict[str, object] = {"strategy": args.split, "exclude_dmso": args.exclude_dmso}
+    if args.split == "random":
+        splits = stratified_split(rows, label_to_id, args.test_size, args.val_size, args.seed)
+    else:
+        if args.split == "compound":
+            (train_idx, val_idx, test_idx), row_split_labels = stratified_group_split(
+                [row["compound"] for row in rows],
+                [row["moa"] for row in rows],
+                args.test_size,
+                args.val_size,
+                args.seed,
+            )
+            # Single-compound classes (DMSO) cannot hold out an unseen compound.
+            diagnostics["row_split_classes"] = row_split_labels
+        elif args.split == "week":
+            train_idx, val_idx, test_idx = group_split(
+                [row_week(row) for row in rows], args.test_size, args.val_size, args.seed, balanced=False
+            )
+        else:
+            raise ValueError(f"Unknown split: {args.split}")
+        splits = {
+            "train": [rows[i] for i in train_idx.tolist()],
+            "val": [rows[i] for i in val_idx.tolist()],
+            "test": [rows[i] for i in test_idx.tolist()],
+        }
+
+    index_by_name = {}
+    position = {id(row): i for i, row in enumerate(rows)}
+    for name, split_rows in splits.items():
+        index_by_name[name] = np.array([position[id(row)] for row in split_rows], dtype=np.int64)
+    for key, values in [
+        ("compounds", [row["compound"] for row in rows]),
+        ("weeks", [row_week(row) for row in rows]),
+        ("plates", [row["plate"] for row in rows]),
+    ]:
+        diagnostics[key] = split_overlap(values, index_by_name["train"], index_by_name["val"], index_by_name["test"])
+    diagnostics["test_compounds"] = sorted({row["compound"] for row in splits["test"]})
+    diagnostics["test_weeks"] = sorted({row_week(row) for row in splits["test"]})
+    diagnostics["class_counts"] = {
+        name: dict(sorted(Counter(row["moa"] for row in split_rows).items())) for name, split_rows in splits.items()
+    }
+    return splits, diagnostics
 
 
 def load_channel(path: str, image_size: int) -> np.ndarray:
@@ -171,6 +238,7 @@ class BBBC021ImageDataset(Dataset):
             "label": self.label_to_id[row["moa"]],
             "moa": row["moa"],
             "compound": row["compound"],
+            **{column: row[column] for column in CHANNEL_COLUMNS},
             "concentration": row["concentration"],
             "plate": row["plate"],
             "well": row["well"],
@@ -344,7 +412,10 @@ def classification_metrics(
     per_class_recall = []
     per_class_precision = []
 
-    for class_id in range(num_classes):
+    # Macro-average over classes that occur in this split (as sklearn does), so a
+    # class absent from a held-out split does not count as a zero score.
+    evaluated_classes = sorted(set(y_true) | set(y_pred))
+    for class_id in evaluated_classes:
         tp = sum(true == class_id and pred == class_id for true, pred in zip(y_true, y_pred))
         fp = sum(true != class_id and pred == class_id for true, pred in zip(y_true, y_pred))
         fn = sum(true == class_id and pred != class_id for true, pred in zip(y_true, y_pred))
@@ -355,11 +426,14 @@ def classification_metrics(
         per_class_recall.append(recall)
         per_class_f1.append(f1)
 
+    n_evaluated = max(1, len(evaluated_classes))
     return {
         "accuracy": correct / max(1, total),
-        "macro_precision": float(sum(per_class_precision) / num_classes),
-        "macro_recall": float(sum(per_class_recall) / num_classes),
-        "macro_f1": float(sum(per_class_f1) / num_classes),
+        "macro_precision": float(sum(per_class_precision) / n_evaluated),
+        "macro_recall": float(sum(per_class_recall) / n_evaluated),
+        "macro_f1": float(sum(per_class_f1) / n_evaluated),
+        "n_classes_evaluated": float(len(evaluated_classes)),
+        "n_classes_total": float(num_classes),
     }
 
 
@@ -398,6 +472,7 @@ def evaluate(
                 output_rows.append(
                     {
                         "compound": item["compound"],
+                        **{column: item[column] for column in CHANNEL_COLUMNS},
                         "concentration": item["concentration"],
                         "plate": item["plate"],
                         "well": item["well"],
@@ -429,6 +504,14 @@ def build_arg_parser() -> argparse.ArgumentParser:
     parser.add_argument("--cache-images", action="store_true")
     parser.add_argument("--log-every", type=int, default=1)
     parser.add_argument("--save-model", action="store_true")
+    parser.add_argument("--split", default="random", choices=["random", "compound", "week"])
+    parser.add_argument("--exclude-dmso", action="store_true", help="Drop DMSO control images.")
+    parser.add_argument(
+        "--patience",
+        type=int,
+        default=0,
+        help="Stop after this many epochs without val macro-F1 gain (0 = off). The best epoch is always restored.",
+    )
     parser.add_argument("--test-size", type=float, default=0.2)
     parser.add_argument("--val-size", type=float, default=0.1)
     parser.add_argument("--seed", type=int, default=42)
@@ -460,6 +543,7 @@ def write_predictions(path: Path, rows: list[dict[str, object]]) -> None:
                 "true_moa",
                 "predicted_moa",
                 "confidence",
+                *CHANNEL_COLUMNS,
             ],
         )
         writer.writeheader()
@@ -473,9 +557,16 @@ def main() -> None:
     torch.manual_seed(args.seed)
     args.out_dir.mkdir(parents=True, exist_ok=True)
 
-    rows = read_rows(args.data)
+    rows = read_rows(args.data, exclude_dmso=args.exclude_dmso)
     label_to_id, id_to_label = make_label_maps(rows)
-    splits = stratified_split(rows, label_to_id, args.test_size, args.val_size, args.seed)
+    splits, split_diagnostics = make_splits(rows, label_to_id, args)
+    print(
+        f"Split: {args.split} train/val/test="
+        f"{len(splits['train'])}/{len(splits['val'])}/{len(splits['test'])} "
+        f"test compounds seen in train={split_diagnostics['compounds']['test_seen_in_train']} "
+        f"test weeks seen in train={split_diagnostics['weeks']['test_seen_in_train']}",
+        flush=True,
+    )
 
     device = select_device(args.device)
     model = build_model(
@@ -510,6 +601,7 @@ def main() -> None:
         weight_decay=args.weight_decay,
     )
 
+    tracker = BestEpochTracker(patience=args.patience)
     history = []
     for epoch in range(1, args.epochs + 1):
         model.train()
@@ -532,6 +624,7 @@ def main() -> None:
             **{f"val_{key}": value for key, value in val_metrics.items()},
         }
         history.append(epoch_metrics)
+        tracker.update(epoch, val_metrics["macro_f1"], model)
         if args.log_every and (epoch == 1 or epoch == args.epochs or epoch % args.log_every == 0):
             print(
                 "Epoch "
@@ -542,6 +635,12 @@ def main() -> None:
                 flush=True,
             )
 
+        if tracker.should_stop:
+            print(f"Early stopping: no val macro-F1 gain for {args.patience} epochs", flush=True)
+            break
+
+    tracker.restore(model)
+    print(f"Restored best epoch {tracker.best_epoch} (val macro-F1 {tracker.best_score:.4f})", flush=True)
     train_metrics, _ = evaluate(model, loaders["train"], loss_fn, device, id_to_label)
     val_metrics, _ = evaluate(model, loaders["val"], loss_fn, device, id_to_label)
     test_metrics, test_predictions = evaluate(model, loaders["test"], loss_fn, device, id_to_label)
@@ -559,7 +658,9 @@ def main() -> None:
         "n_rows": len(rows),
         "labels": id_to_label,
         "class_counts": dict(Counter(row["moa"] for row in rows)),
+        "split": split_diagnostics,
         "split_sizes": {name: len(split_rows) for name, split_rows in splits.items()},
+        "model_selection": tracker.summary() | {"epochs_run": len(history)},
         "train": train_metrics,
         "val": val_metrics,
         "test": test_metrics,

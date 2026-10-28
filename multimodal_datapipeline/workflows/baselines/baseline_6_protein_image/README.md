@@ -3,26 +3,15 @@
 Flow:
 
 ```text
-protein sequence -> protein encoder \
-                                    -> fusion -> prediction
-cell image -> image encoder --------/
+protein (ESM-2 or AlphaFold structure GNN) \
+                                            -> fusion -> active / inactive
+compound phenotype (DINOv2 profile) -------/
 ```
 
-Current model components:
-
-```text
-package/multimodal_datapipeline/models/protein_encoder.py
-package/multimodal_datapipeline/models/image_encoder.py
-package/multimodal_datapipeline/models/fusion.py
-```
-
-Recommended next script:
-
-```text
-train_protein_image_baseline.py
-```
-
-This is exploratory until image records can be mapped to targets or target-like labels. Keep it optional unless the dataset alignment supports it.
+Uses the aligned table built for Baseline 7
+(`data/processed/baseline_7_molecule_protein_image.csv`): BBBC021 compound ->
+ChEMBL binding activity -> human protein -> AlphaFold structure. `train.py` runs the
+Baseline 7 trainer with `--modalities protein,image`; every Baseline 7 option works.
 
 Commands:
 
@@ -30,4 +19,5 @@ Commands:
 python workflows/baselines/baseline_6_protein_image/curate_data.py
 python workflows/baselines/baseline_6_protein_image/validate_inputs.py
 python workflows/baselines/baseline_6_protein_image/train.py
+python workflows/baselines/baseline_6_protein_image/train.py --protein-encoder structure_gnn --out-dir results/baseline_6_structure
 ```

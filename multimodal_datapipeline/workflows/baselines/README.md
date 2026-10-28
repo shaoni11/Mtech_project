@@ -13,5 +13,14 @@ Current layout:
 - `baseline_6_protein_image/`: protein + image fusion
 - `baseline_7_molecule_protein_image/`: full proposed multimodal model
 
-Baseline 1 is currently the only runnable baseline. The remaining folders define
-the planned structure for the next results.
+All seven baselines are runnable:
+
+- 1-4 on ChEMBL kinases (and Baseline 4 on the Davis benchmark),
+- 3 and 5 on BBBC021 MoA (5 adds the molecule to the image phenotype),
+- 6 and 7 on the aligned BBBC021-compound / ChEMBL-protein / image table.
+
+Model explanations live in `workflows/interpretability/`.
+
+Realistic splits are shared through `package/multimodal_datapipeline/utils/splits.py`:
+scaffold (Baselines 1 and 4), cold target (Baseline 4), held-out compound and
+held-out week (Baseline 3).
